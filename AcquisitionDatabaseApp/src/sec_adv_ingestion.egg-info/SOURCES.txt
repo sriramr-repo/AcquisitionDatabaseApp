@@ -1,0 +1,8 @@
+pyproject.toml
+src/sec_adv_ingestion.egg-info/PKG-INFO
+src/sec_adv_ingestion.egg-info/SOURCES.txt
+src/sec_adv_ingestion.egg-info/dependency_links.txt
+src/sec_adv_ingestion.egg-info/requires.txt
+src/sec_adv_ingestion.egg-info/top_level.txt
+tests/test_download.py
+tests/test_metadata.py

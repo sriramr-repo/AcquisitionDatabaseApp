@@ -1,0 +1,73 @@
+{
+  "entities": {
+    "Firm": {
+      "source_table": "bronze_raw_IA_SEC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026",
+      "primary_key": "firm_id",
+      "mappings": {
+        "firm_id": "Organization CRD#",
+        "sec_number": "SEC#",
+        "cik_number": "CIK#",
+        "name": "Legal Name",
+        "primary_business_name": "Primary Business Name",
+        "additional_crd_numbers": "Additional CRD Number",
+        "total_additional_crd_numbers": "Total number of additional CRD numbers",
+        "firm_type": "Firm Type",
+        "umbrella_registration": "Umbrella Registration",
+        "total_relying_advisers": "Total number of relying advisers",
+        "total_cik_numbers": "Total number of CIK numbers",
+        "total_website_addresses": "Total Number of Website Addresses",
+        "total_books_and_records_locations": "Total Number of Books and Records Locations",
+        "acquired_firm_sec_number": "Acquired Firm SEC#",
+        "sec_region": "SEC Region",
+        "website_address": "Website Address",
+        "total_aum": "5.G.(3) - Total amount of Parallel Assets",
+        "discretionary_aum": "",
+        "non_discretionary_aum": "",
+        "other_regulatory_aum": "",
+        "private_fund_count": "Count of Private Funds - 7B(1)",
+        "hedge_fund_count": "Total number of Hedge funds",
+        "pe_fund_count": "Total number of PE funds",
+        "real_estate_fund_count": "Total number of Real Estate funds",
+        "vc_fund_count": "Total number of VC funds",
+        "liquidity_fund_count": "Total number of Liquidity funds",
+        "disciplinary_event_count": "Count of 11A(1) disclosures",
+        "civil_action_count": "Count of 11A(2) disclosures",
+        "bonding_requirement_count": "Count of 11B(1) disclosures",
+        "other_regulatory_event_count": "Count of 11B(2) disclosures",
+        "financial_condition_event_count": "Count of 11C(1) disclosures",
+        "affiliation_change_count": "Count of 11C(2) disclosures",
+        "public_company_control_person_count": "Count of Control person Public Reporting Company",
+        "ia_affiliate_count": "Count of IA Affiliates",
+        "ia_bd_affiliate_count": "Count of IA/BD Affiliates",
+        "bd_affiliate_count": "Count of BD Affiliates",
+        "sec_current_status": "SEC Current Status",
+        "sec_status_effective_date": "SEC Status Effective Date",
+        "jurisdiction_notice_filed_effective_date": "Jurisdiction Notice Filed-Effective Date",
+        "latest_adv_filing_date": "Latest ADV Filing Date",
+        "form_version": "Form Version"
+      }
+    },
+    "FirmOffice": {
+      "types": ["Main Office", "Mail Office", "Location of Books and Records"],
+      "common_mappings": {
+        "street_address_1": "Street Address 1",
+        "street_address_2": "Street Address 2",
+        "city": "City",
+        "state": "State",
+        "country": "Country",
+        "postal_code": "Postal Code",
+        "is_private_residence": "Private Residence Flag",
+        "telephone": "Telephone Number",
+        "facsimile": "Facsimile Number"
+      }
+    },
+    "FirmAcquiredFirm": {
+      "mappings": {
+        "parent_firm_id": "Organization CRD#",
+        "acquired_name": "Acquired Firm",
+        "acquired_sec_number": "Acquired Firm SEC#",
+        "acquired_crd_number": "Acquired Firm CRD#"
+      }
+    }
+  }
+}

@@ -1,0 +1,3046 @@
+{
+  "analysis": {
+    "table_name": "bronze_raw_IA_SEC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026",
+    "total_rows": 16935,
+    "distinct_crd": 16935,
+    "null_crd_count": 0,
+    "column_count": 448,
+    "categories": {
+      "misc": [
+        "SEC Region",
+        "Website Address",
+        "Acquired Firm",
+        "Acquired Firm CRD#",
+        "12A",
+        "12B(1)",
+        "12B(2)",
+        "12C(1)",
+        "12C(2)"
+      ],
+      "firm_ident": [
+        "Organization CRD#",
+        "Additional CRD Number",
+        "SEC#",
+        "CIK#",
+        "Primary Business Name",
+        "Legal Name",
+        "Acquired Firm SEC#"
+      ],
+      "firm_metadata": [
+        "Total number of additional CRD numbers",
+        "Firm Type",
+        "Umbrella Registration",
+        "Total number of relying advisers",
+        "Total number of CIK numbers",
+        "Total Number of Website Addresses",
+        "Total Number of Books and Records Locations"
+      ],
+      "office": [
+        "Main Office Street Address 1",
+        "Main Office Street Address 2",
+        "Main Office City",
+        "Main Office State",
+        "Main Office Country",
+        "Main Office Postal Code",
+        "Main Office Private Residence Flag",
+        "Main Office Telephone Number",
+        "Main Office Facsimile Number",
+        "Mail Office Street Address 1",
+        "Mail Office Street Address 2",
+        "Mail Office City",
+        "Mail Office State",
+        "Mail Office Country",
+        "Mail Office Postal Code",
+        "Mail Office Private Residence Flag",
+        "Location of Books and Records Street Address 1",
+        "Location of Books and Records Street Address 2",
+        "Location of Books and Records City",
+        "Location of Books and Records State",
+        "Location of Books and Records Country",
+        "Location of Books and Records Postal Code"
+      ],
+      "aggregates": [
+        "Total number of offices, other than your Principal Office and place of business",
+        "Total Number of Acquired Firms",
+        "5.G.(3) - Total number of RICs or BDCs",
+        "5.G.(3) - Total amount of Parallel Assets",
+        "5.I.(2) - Total number of wrap fee programs",
+        "Count of IA Affiliates",
+        "Count of IA/BD Affiliates",
+        "Count of BD Affiliates",
+        "Any PFs a Master",
+        "Any Hedge Funds",
+        "Total number of Hedge funds",
+        "Any Liquidity Funds",
+        "Total number of Liquidity funds",
+        "Any PE Funds",
+        "Total number of PE funds",
+        "Any Real Estate Funds",
+        "Total number of Real Estate funds",
+        "Any Securitized Funds",
+        "Total number of Securitized funds",
+        "Any VC Funds",
+        "Total number of VC funds",
+        "Any Other Funds",
+        "Total number of Other funds",
+        "Total Gross Assets of Private Funds",
+        "Total Custody Amount"
+      ],
+      "registration": [
+        "SEC Current Status",
+        "SEC Status Effective Date",
+        "Jurisdiction Notice Filed-Effective Date",
+        "Latest ADV Filing Date",
+        "Form Version"
+      ],
+      "form_section_1": [
+        "1I",
+        "1L",
+        "1M",
+        "1N",
+        "1O",
+        "1O - If yes, approx. amount of assets",
+        "1P"
+      ],
+      "form_section_2_3_4": [
+        "2A(1)",
+        "2A(2)",
+        "2A(4)",
+        "2A(5)",
+        "2A(6)",
+        "2A(7)",
+        "2A(8)",
+        "2A(9)",
+        "2A(10)",
+        "2A(11)",
+        "2A(12)",
+        "2A(13)",
+        "3A",
+        "3A-Other",
+        "3B",
+        "3C-State",
+        "3C-Country",
+        "4A",
+        "4B"
+      ],
+      "business_activities": [
+        "5A",
+        "5B(1)",
+        "5B(2)",
+        "5B(3)",
+        "5B(4)",
+        "5B(5)",
+        "5B(6)",
+        "5C(1)",
+        "5C(1)-If more than 100, how many",
+        "5C(2)",
+        "5D(1)(a)",
+        "5D(1)(b)",
+        "5D(1)(c)",
+        "5D(1)(d)",
+        "5D(1)(e)",
+        "5D(1)(f)",
+        "5D(1)(g)",
+        "5D(1)(h)",
+        "5D(1)(i)",
+        "5D(1)(j)",
+        "5D(1)(k)",
+        "5D(1)(l)",
+        "5D(1)(m)",
+        "5D(1)(m)-Other",
+        "5D(2)(a)",
+        "5D(2)(b)",
+        "5D(2)(c)",
+        "5D(2)(d)",
+        "5D(2)(e)",
+        "5D(2)(f)",
+        "5D(2)(g)",
+        "5D(2)(h)",
+        "5D(2)(i)",
+        "5D(2)(j)",
+        "5D(2)(k)",
+        "5D(2)(l)",
+        "5D(2)(m)",
+        "5D(2)(m)-Other",
+        "5D(a)(1)",
+        "5D(a)(2)",
+        "5D(a)(3)",
+        "5D(b)(1)",
+        "5D(b)(2)",
+        "5D(b)(3)",
+        "5D(c)(1)",
+        "5D(c)(2)",
+        "5D(c)(3)",
+        "5D(d)(1)",
+        "5D(d)(3)",
+        "5D(e)(1)",
+        "5D(e)(3)",
+        "5D(f)(1)",
+        "5D(f)(3)",
+        "5D(g)(1)",
+        "5D(g)(2)",
+        "5D(g)(3)",
+        "5D(h)(1)",
+        "5D(h)(2)",
+        "5D(h)(3)",
+        "5D(i)(1)",
+        "5D(i)(2)",
+        "5D(i)(3)",
+        "5D(j)(1)",
+        "5D(j)(2)",
+        "5D(j)(3)",
+        "5D(k)(1)",
+        "5D(k)(2)",
+        "5D(k)(3)",
+        "5D(l)(1)",
+        "5D(l)(2)",
+        "5D(l)(3)",
+        "5D(m)(1)",
+        "5D(m)(2)",
+        "5D(m)(3)",
+        "5D(n)(1)",
+        "5D(n)(2)",
+        "5D(n)(3)",
+        "5D(n)(3) - Other",
+        "5E(1)",
+        "5E(2)",
+        "5E(3)",
+        "5E(4)",
+        "5E(5)",
+        "5E(6)",
+        "5E(7)",
+        "5E(7)-Other",
+        "5F(1)",
+        "5F(2)(a)",
+        "5F(2)(b)",
+        "5F(2)(c)",
+        "5F(2)(d)",
+        "5F(2)(e)",
+        "5F(2)(f)",
+        "5F(3)",
+        "5G(1)",
+        "5G(2)",
+        "5G(3)",
+        "5G(4)",
+        "5G(5)",
+        "5G(6)",
+        "5G(7)",
+        "5G(8)",
+        "5G(9)",
+        "5G(10)",
+        "5G(11)",
+        "5G(12)",
+        "5G(12)-Other",
+        "5H",
+        "5H-If more than 500, how many",
+        "5I(1)",
+        "5I(2)(a)",
+        "5I(2)(b)",
+        "5I(2)(c)",
+        "5J(1)",
+        "5J(2)",
+        "5K(1)",
+        "5K(2)",
+        "5K(3)",
+        "5K(4)",
+        "5L(1)(a)",
+        "5L(1)(b)",
+        "5L(1)(c)",
+        "5L(1)(d)",
+        "5L(1)(e)",
+        "5L(2)",
+        "5L(3)",
+        "5L(4)"
+      ],
+      "unclassified": [
+        "5.K.(1)(a)(i) midyear percentage",
+        "5.K.(1)(a)(ii) midyear percentage",
+        "5.K.(1)(a)(iii) midyear percentage",
+        "5.K.(1)(a)(iv) midyear percentage",
+        "5.K.(1)(a)(v) midyear percentage",
+        "5.K.(1)(a)(vi) midyear percentage",
+        "5.K.(1)(a)(vii) midyear percentage",
+        "5.K.(1)(a)(viii) midyear percentage",
+        "5.K.(1)(a)(ix) midyear percentage",
+        "5.K.(1)(a)(x) midyear percentage",
+        "5.K.(1)(a)(xi) midyear percentage",
+        "5.K.(1)(a)(xii) midyear percentage",
+        "5.K.(1)(a)(i) end year percentage",
+        "5.K.(1)(a)(ii) end year percentage",
+        "5.K.(1)(a)(iii) end year percentage",
+        "5.K.(1)(a)(iv) end year percentage",
+        "5.K.(1)(a)(v) end year percentage",
+        "5.K.(1)(a)(vi) end year percentage",
+        "5.K.(1)(a)(vii) end year percentage",
+        "5.K.(1)(a)(viii) end year percentage",
+        "5.K.(1)(a)(ix) end year percentage",
+        "5.K.(1)(a)(x) end year percentage",
+        "5.K.(1)(a)(xi) end year percentage",
+        "5.K.(1)(a)(xii) end year percentage",
+        "5.K.(1)(a)(xii)  - Other description",
+        "5.K.(1)(b)(i) end year percentage",
+        "5.K.(1)(b)(ii) end year percentage",
+        "5.K.(1)(b)(iii) end year percentage",
+        "5.K.(1)(b)(iv) end year percentage",
+        "5.K.(1)(b)(v) end year percentage",
+        "5.K.(1)(b)(vi) end year percentage",
+        "5.K.(1)(b)(vii) end year percentage",
+        "5.K.(1)(b)(viii) end year percentage",
+        "5.K.(1)(b)(ix) end year percentage",
+        "5.K.(1)(b)(x) end year percentage",
+        "5.K.(1)(b)(xi) end year percentage",
+        "5.K.(1)(b)(xii) end year percentage",
+        "5.K.(1)(b)(xii)  - Other description",
+        "5.K.(2)(a)(i)(1) less 10",
+        "5.K.(2)(a)(i)(1) 10-149",
+        "5.K.(2)(a)(i)(1) over 150",
+        "5.K.(2)(a)(i)(2) less 10",
+        "5.K.(2)(a)(i)(2) 10-149",
+        "5.K.(2)(a)(i)(2) over 150",
+        "5.K.(2)(a)(i)(3)(a) less 10 percentage ",
+        "5.K.(2)(a)(i)(3)(b) less 10 percentage ",
+        "5.K.(2)(a)(i)(3)(c) less 10 percentage ",
+        "5.K.(2)(a)(i)(3)(d) less 10 percentage ",
+        "5.K.(2)(a)(i)(3)(e) less10 percentage ",
+        "5.K.(2)(a)(i)(3)(f) less 10 percentage ",
+        "5.K.(2)(a)(i)(3)(a) 10-149 percentage ",
+        "5.K.(2)(a)(i)(3)(b) 10-149 percentage ",
+        "5.K.(2)(a)(i)(3)(c) 10-149 percentage ",
+        "5.K.(2)(a)(i)(3)(d) 10-149 percentage ",
+        "5.K.(2)(a)(i)(3)(e) 10-149 percentage ",
+        "5.K.(2)(a)(i)(3)(f) 10-149 percentage ",
+        "5.K.(2)(a)(i)(3)(a) over 150 percentage ",
+        "5.K.(2)(a)(i)(3)(b) over 150 percentage ",
+        "5.K.(2)(a)(i)(3)(c) over 150 percentage ",
+        "5.K.(2)(a)(i)(3)(d) over 150 percentage ",
+        "5.K.(2)(a)(i)(3)(e) over 150 percentage ",
+        "5.K.(2)(a)(i)(3)(f) over 150 percentage ",
+        "5.K.(2)(a)(ii)(1) less 10",
+        "5.K.(2)(a)(ii)(1) 10-149",
+        "5.K.(2)(a)(ii)(1) over 150",
+        "5.K.(2)(a)(ii)(2) less 10",
+        "5.K.(2)(a)(ii)(2) 10-149",
+        "5.K.(2)(a)(ii)(2) over 150",
+        "5.K.(2)(a)(ii)(3)(a) less 10 percentage ",
+        "5.K.(2)(a)(ii)(3)(b) less 10 percentage ",
+        "5.K.(2)(a)(ii)(3)(c) less 10 percentage ",
+        "5.K.(2)(a)(ii)(3)(d) less 10 percentage ",
+        "5.K.(2)(a)(ii)(3)(e) less10 percentage ",
+        "5.K.(2)(a)(ii)(3)(f) less 10 percentage ",
+        "5.K.(2)(a)(ii)(3)(a) 10-149 percentage ",
+        "5.K.(2)(a)(ii)(3)(b) 10-149 percentage ",
+        "5.K.(2)(a)(ii)(3)(c) 10-149 percentage ",
+        "5.K.(2)(a)(ii)(3)(d) 10-149 percentage ",
+        "5.K.(2)(a)(ii)(3)(e) 10-149 percentage ",
+        "5.K.(2)(a)(ii)(3)(f) 10-149 percentage ",
+        "5.K.(2)(a)(ii)(3)(a) over 150 percentage ",
+        "5.K.(2)(a)(ii)(3)(b) over 150 percentage ",
+        "5.K.(2)(a)(ii)(3)(c) over 150 percentage ",
+        "5.K.(2)(a)(ii)(3)(d) over 150 percentage ",
+        "5.K.(2)(a)(ii)(3)(e) over 150 percentage ",
+        "5.K.(2)(a)(ii)(3)(f) over 150 percentage ",
+        "5.K.(2)(b)(1) less 10",
+        "5.K.(2)(b)(1) 10-149",
+        "5.K.(2)(b)(1) over150",
+        "5.K.(2)(b)(2) less 10",
+        "5.K.(2)(b)(2) 10-149",
+        "5.K.(2)(b)(2) over150",
+        "Control/Controlled by Related Person",
+        "11"
+      ],
+      "fees": [
+        "6A(1)",
+        "6A(2)",
+        "6A(3)",
+        "6A(4)",
+        "6A(5)",
+        "6A(6)",
+        "6A(7)",
+        "6A(8)",
+        "6A(9)",
+        "6A(10)",
+        "6A(11)",
+        "6A(12)",
+        "6A(13)",
+        "6A(14)",
+        "6A(14)-Other",
+        "6B(1)",
+        "6B(2)",
+        "6B(3)"
+      ],
+      "affiliates_private_funds": [
+        "7A(1)",
+        "7A(2)",
+        "7A(3)",
+        "7A(4)",
+        "7A(5)",
+        "7A(6)",
+        "7A(7)",
+        "7A(8)",
+        "7A(9)",
+        "7A(10)",
+        "7A(11)",
+        "7A(12)",
+        "7A(13)",
+        "7A(14)",
+        "7A(15)",
+        "7A(16)",
+        "7B",
+        "Count of Private Funds - 7B(1)",
+        "Count of Private Funds - 7B(2)"
+      ],
+      "control_persons": [
+        "Under Common Control",
+        "Share Supervised Persons",
+        "Share Location",
+        "10A",
+        "Count of Control person Public Reporting Company"
+      ],
+      "participation_transactions": [
+        "8A(1)",
+        "8A(2)",
+        "8A(3)",
+        "8B(1)",
+        "8B(2)",
+        "8B(3)",
+        "8C(1)",
+        "8C(2)",
+        "8C(3)",
+        "8C(4)",
+        "8D",
+        "8E",
+        "8F",
+        "8G(1)",
+        "8G(2)",
+        "8H",
+        "8H(1)",
+        "8H(2)",
+        "8I"
+      ],
+      "custody_audit": [
+        "9A(1)(a)",
+        "9A(1)(b)",
+        "9A(2)(a)",
+        "9A(2)(b)",
+        "9B(1)(a)",
+        "9B(1)(b)",
+        "9B(2)(a)",
+        "9B(2)(b)",
+        "9C(1)",
+        "9C(2)",
+        "9C(3)",
+        "9C(4)",
+        "9C Unqual Opinion",
+        "9D(1)",
+        "9D(2)",
+        "9E",
+        "9F"
+      ],
+      "disclosures": [
+        "11A(1)",
+        "Count of 11A(1) disclosures",
+        "11A(2)",
+        "Count of 11A(2) disclosures",
+        "11B(1)",
+        "Count of 11B(1) disclosures",
+        "11B(2)",
+        "Count of 11B(2) disclosures",
+        "11C(1)",
+        "Count of 11C(1) disclosures",
+        "11C(2)",
+        "Count of 11C(2) disclosures",
+        "11C(3)",
+        "Count of 11C(3) disclosures",
+        "11C(4)",
+        "Count of 11C(4) disclosures",
+        "11C(5)",
+        "Count of 11C(5) disclosures",
+        "11D(1)",
+        "Count of 11D(1) disclosures",
+        "11D(2)",
+        "Count of 11D(2) disclosures",
+        "11D(3)",
+        "Count of 11D(3) disclosures",
+        "11D(4)",
+        "Count of 11D(4) disclosures",
+        "11D(5)",
+        "Count of 11D(5) disclosures",
+        "11E(1)",
+        "Count of 11E(1) disclosures",
+        "11E(2)",
+        "Count of 11E(2) disclosures",
+        "11E(3)",
+        "Count of 11E(3) disclosures",
+        "11E(4)",
+        "Count of 11E(4) disclosures",
+        "11F",
+        "Count of 11F disclosures",
+        "11G",
+        "Count of 11G disclosures",
+        "11H(1)(a)",
+        "Count of 11H(1)(a) disclosures",
+        "11H(1)(b)",
+        "Count of 11H(1)(b) disclosures",
+        "11H(1)(c)",
+        "Count of 11H(1)(c) disclosures",
+        "11H(2)",
+        "Count of 11H(2) disclosures"
+      ]
+    },
+    "column_details": [
+      {
+        "name": "SEC Region",
+        "type": "VARCHAR",
+        "category": "misc"
+      },
+      {
+        "name": "Organization CRD#",
+        "type": "VARCHAR",
+        "category": "firm_ident"
+      },
+      {
+        "name": "Additional CRD Number",
+        "type": "VARCHAR",
+        "category": "firm_ident"
+      },
+      {
+        "name": "Total number of additional CRD numbers",
+        "type": "VARCHAR",
+        "category": "firm_metadata"
+      },
+      {
+        "name": "SEC#",
+        "type": "VARCHAR",
+        "category": "firm_ident"
+      },
+      {
+        "name": "Firm Type",
+        "type": "VARCHAR",
+        "category": "firm_metadata"
+      },
+      {
+        "name": "Umbrella Registration",
+        "type": "VARCHAR",
+        "category": "firm_metadata"
+      },
+      {
+        "name": "Total number of relying advisers",
+        "type": "VARCHAR",
+        "category": "firm_metadata"
+      },
+      {
+        "name": "CIK#",
+        "type": "VARCHAR",
+        "category": "firm_ident"
+      },
+      {
+        "name": "Total number of CIK numbers",
+        "type": "VARCHAR",
+        "category": "firm_metadata"
+      },
+      {
+        "name": "Primary Business Name",
+        "type": "VARCHAR",
+        "category": "firm_ident"
+      },
+      {
+        "name": "Legal Name",
+        "type": "VARCHAR",
+        "category": "firm_ident"
+      },
+      {
+        "name": "Main Office Street Address 1",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Main Office Street Address 2",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Main Office City",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Main Office State",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Main Office Country",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Main Office Postal Code",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Main Office Private Residence Flag",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Main Office Telephone Number",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Main Office Facsimile Number",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Total number of offices, other than your Principal Office and place of business",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Mail Office Street Address 1",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Mail Office Street Address 2",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Mail Office City",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Mail Office State",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Mail Office Country",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Mail Office Postal Code",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Mail Office Private Residence Flag",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "SEC Current Status",
+        "type": "VARCHAR",
+        "category": "registration"
+      },
+      {
+        "name": "SEC Status Effective Date",
+        "type": "VARCHAR",
+        "category": "registration"
+      },
+      {
+        "name": "Jurisdiction Notice Filed-Effective Date",
+        "type": "VARCHAR",
+        "category": "registration"
+      },
+      {
+        "name": "Latest ADV Filing Date",
+        "type": "VARCHAR",
+        "category": "registration"
+      },
+      {
+        "name": "Form Version",
+        "type": "VARCHAR",
+        "category": "registration"
+      },
+      {
+        "name": "1I",
+        "type": "VARCHAR",
+        "category": "form_section_1"
+      },
+      {
+        "name": "Website Address",
+        "type": "VARCHAR",
+        "category": "misc"
+      },
+      {
+        "name": "Total Number of Website Addresses",
+        "type": "VARCHAR",
+        "category": "firm_metadata"
+      },
+      {
+        "name": "1L",
+        "type": "VARCHAR",
+        "category": "form_section_1"
+      },
+      {
+        "name": "Location of Books and Records Street Address 1",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Location of Books and Records Street Address 2",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Location of Books and Records City",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Location of Books and Records State",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Location of Books and Records Country",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Location of Books and Records Postal Code",
+        "type": "VARCHAR",
+        "category": "office"
+      },
+      {
+        "name": "Total Number of Books and Records Locations",
+        "type": "VARCHAR",
+        "category": "firm_metadata"
+      },
+      {
+        "name": "1M",
+        "type": "VARCHAR",
+        "category": "form_section_1"
+      },
+      {
+        "name": "1N",
+        "type": "VARCHAR",
+        "category": "form_section_1"
+      },
+      {
+        "name": "1O",
+        "type": "VARCHAR",
+        "category": "form_section_1"
+      },
+      {
+        "name": "1O - If yes, approx. amount of assets",
+        "type": "VARCHAR",
+        "category": "form_section_1"
+      },
+      {
+        "name": "1P",
+        "type": "VARCHAR",
+        "category": "form_section_1"
+      },
+      {
+        "name": "2A(1)",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "2A(2)",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "2A(4)",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "2A(5)",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "2A(6)",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "2A(7)",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "2A(8)",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "2A(9)",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "2A(10)",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "2A(11)",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "2A(12)",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "2A(13)",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "3A",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "3A-Other",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "3B",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "3C-State",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "3C-Country",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "4A",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "Acquired Firm",
+        "type": "VARCHAR",
+        "category": "misc"
+      },
+      {
+        "name": "Acquired Firm SEC#",
+        "type": "VARCHAR",
+        "category": "firm_ident"
+      },
+      {
+        "name": "Acquired Firm CRD#",
+        "type": "VARCHAR",
+        "category": "misc"
+      },
+      {
+        "name": "Total Number of Acquired Firms",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "4B",
+        "type": "VARCHAR",
+        "category": "form_section_2_3_4"
+      },
+      {
+        "name": "5A",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5B(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5B(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5B(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5B(4)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5B(5)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5B(6)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5C(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5C(1)-If more than 100, how many",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5C(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(a)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(b)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(c)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(d)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(e)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(f)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(g)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(h)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(i)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(j)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(k)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(l)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(m)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(1)(m)-Other",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(a)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(b)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(c)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(d)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(e)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(f)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(g)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(h)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(i)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(j)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(k)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(l)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(m)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(2)(m)-Other",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(a)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(a)(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(a)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(b)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(b)(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(b)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(c)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(c)(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(c)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(d)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(d)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(e)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(e)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(f)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(f)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(g)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(g)(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(g)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(h)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(h)(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(h)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(i)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(i)(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(i)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(j)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(j)(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(j)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(k)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(k)(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(k)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(l)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(l)(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(l)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(m)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(m)(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(m)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(n)(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(n)(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(n)(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5D(n)(3) - Other",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5E(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5E(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5E(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5E(4)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5E(5)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5E(6)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5E(7)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5E(7)-Other",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5F(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5F(2)(a)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5F(2)(b)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5F(2)(c)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5F(2)(d)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5F(2)(e)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5F(2)(f)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5F(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5G(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5G(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5G(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5.G.(3) - Total number of RICs or BDCs",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "5.G.(3) - Total amount of Parallel Assets",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "5G(4)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5G(5)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5G(6)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5G(7)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5G(8)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5G(9)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5G(10)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5G(11)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5G(12)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5G(12)-Other",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5H",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5H-If more than 500, how many",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5I(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5I(2)(a)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5I(2)(b)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5I(2)(c)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5.I.(2) - Total number of wrap fee programs",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "5J(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5J(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5K(1)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5.K.(1)(a)(i) midyear percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(ii) midyear percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(iii) midyear percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(iv) midyear percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(v) midyear percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(vi) midyear percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(vii) midyear percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(viii) midyear percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(ix) midyear percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(x) midyear percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(xi) midyear percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(xii) midyear percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(i) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(ii) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(iii) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(iv) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(v) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(vi) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(vii) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(viii) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(ix) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(x) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(xi) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(xii) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(a)(xii)  - Other description",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(b)(i) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(b)(ii) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(b)(iii) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(b)(iv) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(b)(v) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(b)(vi) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(b)(vii) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(b)(viii) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(b)(ix) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(b)(x) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(b)(xi) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(b)(xii) end year percentage",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(1)(b)(xii)  - Other description",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5K(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5K(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(1) less 10",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(1) 10-149",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(1) over 150",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(2) less 10",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(2) 10-149",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(2) over 150",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(a) less 10 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(b) less 10 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(c) less 10 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(d) less 10 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(e) less10 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(f) less 10 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(a) 10-149 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(b) 10-149 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(c) 10-149 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(d) 10-149 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(e) 10-149 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(f) 10-149 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(a) over 150 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(b) over 150 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(c) over 150 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(d) over 150 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(e) over 150 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(f) over 150 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(1) less 10",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(1) 10-149",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(1) over 150",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(2) less 10",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(2) 10-149",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(2) over 150",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(a) less 10 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(b) less 10 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(c) less 10 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(d) less 10 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(e) less10 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(f) less 10 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(a) 10-149 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(b) 10-149 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(c) 10-149 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(d) 10-149 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(e) 10-149 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(f) 10-149 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(a) over 150 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(b) over 150 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(c) over 150 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(d) over 150 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(e) over 150 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(f) over 150 percentage ",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(b)(1) less 10",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(b)(1) 10-149",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(b)(1) over150",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(b)(2) less 10",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(b)(2) 10-149",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5.K.(2)(b)(2) over150",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "5K(4)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5L(1)(a)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5L(1)(b)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5L(1)(c)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5L(1)(d)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5L(1)(e)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5L(2)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5L(3)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "5L(4)",
+        "type": "VARCHAR",
+        "category": "business_activities"
+      },
+      {
+        "name": "6A(1)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(2)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(3)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(4)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(5)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(6)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(7)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(8)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(9)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(10)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(11)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(12)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(13)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(14)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6A(14)-Other",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6B(1)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6B(2)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "6B(3)",
+        "type": "VARCHAR",
+        "category": "fees"
+      },
+      {
+        "name": "7A(1)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(2)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(3)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(4)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(5)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(6)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(7)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(8)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(9)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(10)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(11)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(12)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(13)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(14)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(15)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "7A(16)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "Count of IA Affiliates",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Count of IA/BD Affiliates",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Count of BD Affiliates",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Control/Controlled by Related Person",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "Under Common Control",
+        "type": "VARCHAR",
+        "category": "control_persons"
+      },
+      {
+        "name": "Share Supervised Persons",
+        "type": "VARCHAR",
+        "category": "control_persons"
+      },
+      {
+        "name": "Share Location",
+        "type": "VARCHAR",
+        "category": "control_persons"
+      },
+      {
+        "name": "7B",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "Count of Private Funds - 7B(1)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "Any PFs a Master",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Any Hedge Funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Total number of Hedge funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Any Liquidity Funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Total number of Liquidity funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Any PE Funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Total number of PE funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Any Real Estate Funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Total number of Real Estate funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Any Securitized Funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Total number of Securitized funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Any VC Funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Total number of VC funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Any Other Funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Total number of Other funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Total Gross Assets of Private Funds",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "Count of Private Funds - 7B(2)",
+        "type": "VARCHAR",
+        "category": "affiliates_private_funds"
+      },
+      {
+        "name": "8A(1)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8A(2)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8A(3)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8B(1)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8B(2)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8B(3)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8C(1)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8C(2)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8C(3)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8C(4)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8D",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8E",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8F",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8G(1)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8G(2)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8H",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8H(1)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8H(2)",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "8I",
+        "type": "VARCHAR",
+        "category": "participation_transactions"
+      },
+      {
+        "name": "9A(1)(a)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9A(1)(b)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9A(2)(a)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9A(2)(b)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9B(1)(a)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9B(1)(b)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9B(2)(a)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9B(2)(b)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "Total Custody Amount",
+        "type": "VARCHAR",
+        "category": "aggregates"
+      },
+      {
+        "name": "9C(1)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9C(2)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9C(3)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9C(4)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9C Unqual Opinion",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9D(1)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9D(2)",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9E",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "9F",
+        "type": "VARCHAR",
+        "category": "custody_audit"
+      },
+      {
+        "name": "10A",
+        "type": "VARCHAR",
+        "category": "control_persons"
+      },
+      {
+        "name": "Count of Control person Public Reporting Company",
+        "type": "VARCHAR",
+        "category": "control_persons"
+      },
+      {
+        "name": "11",
+        "type": "VARCHAR",
+        "category": "unclassified"
+      },
+      {
+        "name": "11A(1)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11A(1) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11A(2)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11A(2) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11B(1)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11B(1) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11B(2)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11B(2) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11C(1)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11C(1) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11C(2)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11C(2) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11C(3)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11C(3) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11C(4)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11C(4) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11C(5)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11C(5) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11D(1)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11D(1) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11D(2)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11D(2) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11D(3)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11D(3) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11D(4)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11D(4) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11D(5)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11D(5) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11E(1)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11E(1) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11E(2)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11E(2) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11E(3)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11E(3) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11E(4)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11E(4) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11F",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11F disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11G",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11G disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11H(1)(a)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11H(1)(a) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11H(1)(b)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11H(1)(b) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11H(1)(c)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11H(1)(c) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "11H(2)",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "Count of 11H(2) disclosures",
+        "type": "VARCHAR",
+        "category": "disclosures"
+      },
+      {
+        "name": "12A",
+        "type": "VARCHAR",
+        "category": "misc"
+      },
+      {
+        "name": "12B(1)",
+        "type": "VARCHAR",
+        "category": "misc"
+      },
+      {
+        "name": "12B(2)",
+        "type": "VARCHAR",
+        "category": "misc"
+      },
+      {
+        "name": "12C(1)",
+        "type": "VARCHAR",
+        "category": "misc"
+      },
+      {
+        "name": "12C(2)",
+        "type": "VARCHAR",
+        "category": "misc"
+      }
+    ],
+    "sample_values": {
+      "Organization CRD#": [
+        "38",
+        "231",
+        "463",
+        "1047",
+        "3394"
+      ],
+      "SEC#": [
+        "801-13057",
+        "801-49498",
+        "801-66673",
+        "801-57963",
+        "801-132181"
+      ],
+      "Primary Business Name": [
+        "JANNEY MONTGOMERY SCOTT LLC",
+        "PRINCIPAL SECURITIES, INC.",
+        "WILLIAM BLAIR & COMPANY L.L.C.",
+        "RELEVANT WEALTH ADVISORS, LLC",
+        "STEPHENS"
+      ],
+      "SEC Current Status": [
+        "120-Day Approval",
+        "Approved"
+      ]
+    }
+  },
+  "suggested_entities": [
+    {
+      "entity": "Firm",
+      "description": "Registered Investment Adviser firm",
+      "attributes": [
+        "Organization CRD#",
+        "Additional CRD Number",
+        "SEC#",
+        "CIK#",
+        "Primary Business Name",
+        "Legal Name",
+        "Acquired Firm SEC#",
+        "Total number of additional CRD numbers",
+        "Firm Type",
+        "Umbrella Registration",
+        "Total number of relying advisers",
+        "Total number of CIK numbers",
+        "Total Number of Website Addresses",
+        "Total Number of Books and Records Locations"
+      ],
+      "primary_key_candidate": "Organization CRD#",
+      "foreign_keys": []
+    },
+    {
+      "entity": "Office",
+      "description": "Physical or mailing offices of the firm",
+      "attributes": [
+        "Main Office Street Address 1",
+        "Main Office Street Address 2",
+        "Main Office City",
+        "Main Office State",
+        "Main Office Country",
+        "Main Office Postal Code",
+        "Main Office Private Residence Flag",
+        "Main Office Telephone Number",
+        "Main Office Facsimile Number",
+        "Mail Office Street Address 1",
+        "Mail Office Street Address 2",
+        "Mail Office City",
+        "Mail Office State",
+        "Mail Office Country",
+        "Mail Office Postal Code",
+        "Mail Office Private Residence Flag",
+        "Location of Books and Records Street Address 1",
+        "Location of Books and Records Street Address 2",
+        "Location of Books and Records City",
+        "Location of Books and Records State",
+        "Location of Books and Records Country",
+        "Location of Books and Records Postal Code"
+      ],
+      "primary_key_candidate": null,
+      "foreign_keys": [
+        "Organization CRD#"
+      ]
+    },
+    {
+      "entity": "Registration",
+      "description": "SEC registration status and filing timeline",
+      "attributes": [
+        "SEC Current Status",
+        "SEC Status Effective Date",
+        "Jurisdiction Notice Filed-Effective Date",
+        "Latest ADV Filing Date",
+        "Form Version"
+      ],
+      "primary_key_candidate": null,
+      "foreign_keys": [
+        "Organization CRD#"
+      ]
+    },
+    {
+      "entity": "BusinessActivity",
+      "description": "Types of advisory services, client composition, assets under management",
+      "attributes": [
+        "5A",
+        "5B(1)",
+        "5B(2)",
+        "5B(3)",
+        "5B(4)",
+        "5B(5)",
+        "5B(6)",
+        "5C(1)",
+        "5C(1)-If more than 100, how many",
+        "5C(2)",
+        "5D(1)(a)",
+        "5D(1)(b)",
+        "5D(1)(c)",
+        "5D(1)(d)",
+        "5D(1)(e)",
+        "5D(1)(f)",
+        "5D(1)(g)",
+        "5D(1)(h)",
+        "5D(1)(i)",
+        "5D(1)(j)",
+        "5D(1)(k)",
+        "5D(1)(l)",
+        "5D(1)(m)",
+        "5D(1)(m)-Other",
+        "5D(2)(a)",
+        "5D(2)(b)",
+        "5D(2)(c)",
+        "5D(2)(d)",
+        "5D(2)(e)",
+        "5D(2)(f)",
+        "5D(2)(g)",
+        "5D(2)(h)",
+        "5D(2)(i)",
+        "5D(2)(j)",
+        "5D(2)(k)",
+        "5D(2)(l)",
+        "5D(2)(m)",
+        "5D(2)(m)-Other",
+        "5D(a)(1)",
+        "5D(a)(2)",
+        "5D(a)(3)",
+        "5D(b)(1)",
+        "5D(b)(2)",
+        "5D(b)(3)",
+        "5D(c)(1)",
+        "5D(c)(2)",
+        "5D(c)(3)",
+        "5D(d)(1)",
+        "5D(d)(3)",
+        "5D(e)(1)",
+        "5D(e)(3)",
+        "5D(f)(1)",
+        "5D(f)(3)",
+        "5D(g)(1)",
+        "5D(g)(2)",
+        "5D(g)(3)",
+        "5D(h)(1)",
+        "5D(h)(2)",
+        "5D(h)(3)",
+        "5D(i)(1)",
+        "5D(i)(2)",
+        "5D(i)(3)",
+        "5D(j)(1)",
+        "5D(j)(2)",
+        "5D(j)(3)",
+        "5D(k)(1)",
+        "5D(k)(2)",
+        "5D(k)(3)",
+        "5D(l)(1)",
+        "5D(l)(2)",
+        "5D(l)(3)",
+        "5D(m)(1)",
+        "5D(m)(2)",
+        "5D(m)(3)",
+        "5D(n)(1)",
+        "5D(n)(2)",
+        "5D(n)(3)",
+        "5D(n)(3) - Other",
+        "5E(1)",
+        "5E(2)",
+        "5E(3)",
+        "5E(4)",
+        "5E(5)",
+        "5E(6)",
+        "5E(7)",
+        "5E(7)-Other",
+        "5F(1)",
+        "5F(2)(a)",
+        "5F(2)(b)",
+        "5F(2)(c)",
+        "5F(2)(d)",
+        "5F(2)(e)",
+        "5F(2)(f)",
+        "5F(3)",
+        "5G(1)",
+        "5G(2)",
+        "5G(3)",
+        "5G(4)",
+        "5G(5)",
+        "5G(6)",
+        "5G(7)",
+        "5G(8)",
+        "5G(9)",
+        "5G(10)",
+        "5G(11)",
+        "5G(12)",
+        "5G(12)-Other",
+        "5H",
+        "5H-If more than 500, how many",
+        "5I(1)",
+        "5I(2)(a)",
+        "5I(2)(b)",
+        "5I(2)(c)",
+        "5J(1)",
+        "5J(2)",
+        "5K(1)",
+        "5K(2)",
+        "5K(3)",
+        "5K(4)",
+        "5L(1)(a)",
+        "5L(1)(b)",
+        "5L(1)(c)",
+        "5L(1)(d)",
+        "5L(1)(e)",
+        "5L(2)",
+        "5L(3)",
+        "5L(4)"
+      ],
+      "primary_key_candidate": null,
+      "foreign_keys": [
+        "Organization CRD#"
+      ]
+    },
+    {
+      "entity": "PrivateFund",
+      "description": "Private fund information (hedge, PE, real estate, etc.)",
+      "attributes": [
+        "7A(1)",
+        "7A(2)",
+        "7A(3)",
+        "7A(4)",
+        "7A(5)",
+        "7A(6)",
+        "7A(7)",
+        "7A(8)",
+        "7A(9)",
+        "7A(10)",
+        "7A(11)",
+        "7A(12)",
+        "7A(13)",
+        "7A(14)",
+        "7A(15)",
+        "7A(16)",
+        "7B",
+        "Count of Private Funds - 7B(1)",
+        "Count of Private Funds - 7B(2)"
+      ],
+      "primary_key_candidate": null,
+      "foreign_keys": [
+        "Organization CRD#"
+      ]
+    },
+    {
+      "entity": "Disclosure",
+      "description": "Regulatory disclosures (disciplinary events, financial, etc.)",
+      "attributes": [
+        "11A(1)",
+        "11A(2)",
+        "11B(1)",
+        "11B(2)",
+        "11C(1)",
+        "11C(2)",
+        "11C(3)",
+        "11C(4)",
+        "11C(5)",
+        "11D(1)",
+        "11D(2)",
+        "11D(3)",
+        "11D(4)",
+        "11D(5)",
+        "11E(1)",
+        "11E(2)",
+        "11E(3)",
+        "11E(4)",
+        "11F",
+        "11G",
+        "11H(1)(a)",
+        "11H(1)(b)",
+        "11H(1)(c)",
+        "11H(2)"
+      ],
+      "primary_key_candidate": null,
+      "foreign_keys": [
+        "Organization CRD#"
+      ]
+    },
+    {
+      "entity": "ControlPerson",
+      "description": "Persons controlling the advisory firm",
+      "attributes": [
+        "Under Common Control",
+        "Share Supervised Persons",
+        "Share Location",
+        "10A",
+        "Count of Control person Public Reporting Company"
+      ],
+      "primary_key_candidate": null,
+      "foreign_keys": [
+        "Organization CRD#"
+      ]
+    }
+  ]
+}

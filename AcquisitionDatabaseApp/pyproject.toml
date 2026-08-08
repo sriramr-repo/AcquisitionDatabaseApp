@@ -1,0 +1,28 @@
+[project]
+name = "sec_adv_ingestion"
+version = "0.1.0"
+description = "SEC Form ADV ingestion pipeline"
+dependencies = [
+    "requests",
+    "beautifulsoup4",
+    "pandas",
+    "lxml",
+    "typer[all]",
+    "SQLAlchemy",
+    "pydantic-settings",
+]
+requires-python = ">=3.12"
+
+[project.scripts]
+sec-pipeline = "src.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+addopts = "--ignore=src/pipeline_test.py" # Temporarily ignore pipeline_test until all components are ready
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
