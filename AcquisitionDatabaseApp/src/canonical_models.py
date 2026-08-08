@@ -179,22 +179,3 @@ class FirmAcquiredFirm(BaseModel):
         if isinstance(v, float) and v != v:  # Check for NaN
             return None
         return v
-
-class Registration(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    firm_id: str
-    sec_current_status: Optional[str] = None
-    sec_status_effective_date: Optional[datetime] = None
-    jurisdiction_notice_filed_effective_date: Optional[datetime] = None
-    latest_adv_filing_date: Optional[datetime] = None
-    form_version: Optional[str] = None
-
-class Owner(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    firm_id: str
-    legal_name: str
-    title_or_status: Optional[str] = None
-    ownership_code: Optional[str] = None
-    control_person: Optional[bool] = None
-    public_reporting_company: Optional[bool] = None
-    crd_number: Optional[str] = None

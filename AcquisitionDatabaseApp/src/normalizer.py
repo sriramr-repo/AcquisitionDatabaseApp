@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional
 import pandas as pd
 from pydantic import BaseModel
-from canonical_models import Firm, FirmOffice, FirmAcquiredFirm, OfficeType
+from src.canonical_models import Firm, FirmOffice, FirmAcquiredFirm, OfficeType
 
 class Normalizer:
     def __init__(self, dataset_version: str, mapping_spec_path: str = "data/mapping_specification.json"):
@@ -52,7 +52,7 @@ class Normalizer:
         for prefix in office_spec["types"]:
             o_type = type_map.get(prefix)
             if not o_type: continue
-            addr1 = row.get(f"{prefix} {office_spec["common_mappings"]["street_address_1"]}")
+            addr1 = row.get(f"{prefix} Street Address")
             if not addr1: continue
             office_data = {"firm_id": firm_id, "office_type": o_type}
             for target, suffix in office_spec["common_mappings"].items():

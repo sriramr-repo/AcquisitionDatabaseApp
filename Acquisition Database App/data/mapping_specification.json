@@ -1,0 +1,23 @@
+{
+  "entities": {
+    "Firm": {
+      "source_table": "bronze_raw_IA_SEC_...",
+      "primary_key": "firm_id",
+      "mappings": {
+        "firm_id": "Organization CRD#",
+        "name": "Legal Name",
+        "total_aum": "Total AUM",
+        "private_fund_count": "Private Fund Count"
+        // ... (13 others)
+      }
+    },
+    "FirmOffice": {
+      "types": ["Main Office", "Mail Office", "Location of Books and Records"],
+      "common_mappings": {
+        "street_address_1": "Street Address 1",
+        "city": "City"
+        // ... (5 others)
+      }
+    }
+  }
+}
