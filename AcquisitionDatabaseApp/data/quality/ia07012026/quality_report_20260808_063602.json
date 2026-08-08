@@ -1,0 +1,44 @@
+{
+  "dataset_version": "ia07012026",
+  "validation_timestamp": "2026-08-08T06:36:02.112755",
+  "checks": {
+    "check_missing_primary_keys": {
+      "passed": true,
+      "issues": []
+    },
+    "check_duplicate_firms": {
+      "passed": true,
+      "issues": []
+    },
+    "check_duplicate_offices": {
+      "passed": true,
+      "issues": []
+    },
+    "check_broken_relationships": {
+      "passed": true,
+      "issues": []
+    },
+    "check_orphan_records": {
+      "passed": true,
+      "issues": [],
+      "severity": "warning"
+    },
+    "check_unexpected_nulls": {
+      "passed": false,
+      "issues": [
+        "1358 MAIN offices with NULL street_address_1",
+        "1358 MAIN offices with NULL city",
+        "2245 MAIN offices with NULL state"
+      ]
+    },
+    "check_normalization_validation": {
+      "passed": true,
+      "issues": []
+    }
+  },
+  "summary": {
+    "total_checks": 7,
+    "passed": 6,
+    "failed": 1
+  }
+}

@@ -1,9 +1,57 @@
 import typer
 from typing import Optional
-from pipeline import run_pipeline
-from metadata import list_datasets, get_current_dataset
+from src.pipeline import run_pipeline
+from src.metadata import list_datasets, get_current_dataset
 
 app = typer.Typer()
+
+@app.command()
+def dashboard():
+    """Launch operational dashboard (CLI only)."""
+    import pandas as pd
+    from pathlib import Path
+    from rich.console import Console
+    from rich.table import Table
+    from rich import box
+    
+    console = Console()
+    table = Table(title="Pipeline Dashboard", box=box.ROUNDED)
+    table.add_column("Metric", style="cyan")
+    table.add_column("Value", style="green")
+    
+    # Parse logs
+    log_path = Path("data/logs/pipeline.log")
+    if log_path.exists():
+        logs = [l.strip().split(' | ') for l in log_path.read_text().splitlines() if ' | ' in l]
+        df = pd.DataFrame(logs, columns=['ts', 'lvl', 'msg'])
+        
+        # Extract metrics from log messages
+        exec_logs = df[df['msg'].str.startswith('EXEC|', na=False)]
+        if not exec_logs.empty:
+            avg_time = exec_logs['msg'].str.extract(r'(\d+\.\d+)s')[0].astype(float).mean()
+            table.add_row("Last Execution", str(len(exec_logs)))
+            table.add_row("Avg Duration", f"{avg_time:.2f}s")
+            table.add_row("Success Rate", f"{len(exec_logs[exec_logs['msg'].str.contains('SUCCESS')]) / len(exec_logs) * 100:.1f}%")
+        
+        # Resource stats
+        try:
+            from src.telemetry import get_stats
+            stats = get_stats()
+            table.add_row("CPU Usage", f"{stats['cpu']}%")
+            table.add_row("Memory Usage", f"{stats['mem']}%")
+        except:
+            pass
+        
+        # Dataset count
+        from src.metadata import list_datasets
+        datasets = list_datasets()
+        table.add_row("Datasets Loaded", str(len(datasets)))
+        if datasets:
+            table.add_row("Latest Dataset", datasets[0]['dataset_version'])
+    else:
+        table.add_row("Status", "No logs found")
+    
+    console.print(table)
 
 @app.command()
 def download_data():
@@ -38,6 +86,39 @@ def show_current():
         typer.echo(f"Current dataset: {current['dataset_version']}")
     else:
         typer.echo("No dataset ingested yet.")
+
+@app.command()
+def health_check():
+    """Run health checks."""
+    import psutil
+    from pathlib import Path
+    from datetime import datetime
+    
+    checks = []
+    
+    # Disk space
+    disk = psutil.disk_usage('/')
+    checks.append(f"Disk: {disk.percent}% used")
+    
+    # Memory
+    mem = psutil.virtual_memory()
+    checks.append(f"Memory: {mem.percent}% used")
+    
+    # CPU
+    cpu = psutil.cpu_percent(interval=1)
+    checks.append(f"CPU: {cpu}%")
+    
+    # Database exists
+    db_path = Path("data/analytics.duckdb")
+    checks.append(f"Database: {'✓' if db_path.exists() else '✗'}")
+    
+    # Latest log timestamp
+    log_path = Path("data/logs/pipeline.log")
+    if log_path.exists():
+        mtime = datetime.fromtimestamp(log_path.stat().st_mtime)
+        checks.append(f"Last Log: {mtime.strftime('%Y-%m-%d %H:%M')}")
+    
+    typer.echo("\n".join(checks))
 
 if __name__ == "__main__":
     app()

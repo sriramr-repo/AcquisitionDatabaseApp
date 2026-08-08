@@ -1,8 +1,8 @@
 import pandas as pd
 from pathlib import Path
 from typing import Dict
-from config import settings
-from storage import StorageManager, PathResolver
+from src.config import settings
+from src.storage import StorageManager, PathResolver
 
 class GoldBuilder:
     """Computes acquisition scores and builds Gold layer."""
@@ -18,7 +18,6 @@ class GoldBuilder:
         firms = conn.execute(f"SELECT * FROM {firm_table}").df()
         
         # Scoring logic
-        # ponytail: simple additive model; upgrade to weighted PCA if needed
         firms["score_aum"] = (firms["total_aum"].fillna(0) / 1e9).clip(0, 50)
         firms["score_growth"] = firms["private_fund_count"].fillna(0).clip(0, 20)
         firms["score_risk"] = firms["disciplinary_event_count"].fillna(0) * -5
@@ -30,7 +29,6 @@ class GoldBuilder:
         ).rank(pct=True)
 
         # PCA scoring fallback
-        # ponytail: weighted PCA if simple rank fails to differentiate
         if firms["acquisition_score"].std() < 0.01 and len(firms) > 10:
             try:
                 from sklearn.decomposition import PCA
@@ -54,6 +52,3 @@ class GoldBuilder:
         
         conn.close()
         return firms
-
-# asset: simple rank-based score for prioritization
-# → skipped: complex NLP on business descriptions, add when signal-to-noise is low.
