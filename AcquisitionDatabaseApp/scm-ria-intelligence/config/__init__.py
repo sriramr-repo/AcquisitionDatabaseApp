@@ -1,0 +1,1 @@
+"""Configuration module for SCM RIA Acquisition Intelligence Platform."""

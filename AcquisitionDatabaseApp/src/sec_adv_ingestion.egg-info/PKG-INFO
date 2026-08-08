@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: sec_adv_ingestion
+Version: 0.1.0
+Summary: SEC Form ADV ingestion pipeline
+Requires-Python: >=3.12
+Requires-Dist: requests
+Requires-Dist: beautifulsoup4
+Requires-Dist: pandas
+Requires-Dist: lxml
+Requires-Dist: typer[all]
+Requires-Dist: SQLAlchemy
+Requires-Dist: pydantic-settings
