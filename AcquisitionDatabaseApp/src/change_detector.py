@@ -50,7 +50,7 @@ class ChangeDetector:
                 old_row = old_common.loc[record_id]
                 new_row = new_common.loc[record_id]
                 changes = {}
-                for col in old_df.columns:
+                for col in old_common.columns:
                     old_val = str(old_row[col]) if pd.notna(old_row[col]) else None
                     new_val = str(new_row[col]) if pd.notna(new_row[col]) else None
                     if old_val != new_val:
@@ -94,4 +94,3 @@ class ChangeDetector:
 
 # ponytail: simple diff on PK; upgrade to record_hash-based tracking when monthly loads run
 # → skipped: SCD Type 2 history table, add when production monthly automation starts
-</contents>
