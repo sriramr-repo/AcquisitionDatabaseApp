@@ -151,6 +151,7 @@ class StorageManager:
                 "INSERT INTO artifacts (dataset_version, artifact_type, file_path) VALUES (?, ?, ?)",
                 (dataset_version, artifact_type, str(path))
             )
+            conn.commit()
 
     def archive_dataset(self, dataset_name: str):
         """Archive dataset to archive layer using resolver paths."""
