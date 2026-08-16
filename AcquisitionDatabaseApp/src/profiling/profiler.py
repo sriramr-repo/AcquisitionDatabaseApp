@@ -11,7 +11,7 @@ class DatasetProfiler:
     """Orchestrates multiple profilers for a dataset."""
     
     def __init__(self, storage_manager=None):
-        from storage import StorageManager
+        from src.storage import StorageManager
         self.storage = storage_manager or StorageManager()
         self.schema_profiler = SchemaProfiler(self.storage)
         self.quality_profiler = QualityProfiler(self.storage)
@@ -67,7 +67,7 @@ class ProfileService:
     """Service interface for profiling operations."""
     
     def __init__(self, storage_manager=None):
-        from storage import StorageManager
+        from src.storage import StorageManager
         self.storage = storage_manager or StorageManager()
         self.dataset_profiler = DatasetProfiler(self.storage)
     

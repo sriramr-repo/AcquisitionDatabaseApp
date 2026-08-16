@@ -24,7 +24,7 @@ class BaseProfiler(ABC):
     """Base class for all profilers."""
     
     def __init__(self, storage_manager=None):
-        from storage import StorageManager
+        from src.storage import StorageManager
         self.storage = storage_manager or StorageManager()
     
     @abstractmethod
