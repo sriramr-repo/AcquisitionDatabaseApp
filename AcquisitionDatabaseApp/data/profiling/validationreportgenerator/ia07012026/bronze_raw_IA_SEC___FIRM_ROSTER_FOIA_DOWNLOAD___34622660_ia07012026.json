@@ -1,0 +1,32 @@
+{
+  "profiler_type": "validation",
+  "table_name": "bronze_raw_IA_SEC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026",
+  "results": {
+    "table_name": "bronze_raw_IA_SEC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026",
+    "validation_status": "passed",
+    "rules_checked": [
+      {
+        "name": "null_threshold",
+        "status": "failed"
+      },
+      {
+        "name": "quality_score",
+        "status": "passed"
+      },
+      {
+        "name": "data_presence",
+        "status": "passed"
+      }
+    ],
+    "warnings": [],
+    "errors": [
+      "Rule null_threshold failed"
+    ],
+    "summary": {
+      "total_rules": 3,
+      "passed": 2,
+      "failed": 1,
+      "warnings": 0
+    }
+  }
+}

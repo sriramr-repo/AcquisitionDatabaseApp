@@ -1,0 +1,2255 @@
+{
+  "profiler_type": "quality",
+  "table_name": "bronze_raw_IA_SEC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026",
+  "results": {
+    "total_rows": 16935,
+    "column_quality": [
+      {
+        "name": "SEC Region",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Region\"\n\nLINE 1: ..._FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE SEC Region IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Organization CRD#",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"CRD\"\n\nLINE 1: ...TER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Organization CRD# IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Additional CRD Number",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"CRD\"\n\nLINE 1: ...OSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Additional CRD Number IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total number of additional CRD numbers",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total number of additional CRD numbers IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "SEC#",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"#\"\n\nLINE 1: ...__FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE SEC# IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Firm Type",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Type\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Firm Type IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Umbrella Registration",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Registration\"\n\nLINE 1: ..._ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Umbrella Registration IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total number of relying advisers",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total number of relying advisers IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "CIK#",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"#\"\n\nLINE 1: ...__FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE CIK# IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total number of CIK numbers",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total number of CIK numbers IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Primary Business Name",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Primary\"\n\nLINE 1: ...EC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Primary Business Name IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Legal Name",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Name\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Legal Name IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Main Office Street Address 1",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Main Office Street Address 1 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Main Office Street Address 2",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Main Office Street Address 2 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Main Office City",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Main Office City IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Main Office State",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Main Office State IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Main Office Country",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Main Office Country IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Main Office Postal Code",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Main Office Postal Code IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Main Office Private Residence Flag",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Main Office Private Residence Flag IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Main Office Telephone Number",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Main Office Telephone Number IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Main Office Facsimile Number",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Main Office Facsimile Number IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total number of offices, other than your Principal Office and place of business",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total number of offices, other than your Principal Office and...\n                                                                      ^"
+      },
+      {
+        "name": "Mail Office Street Address 1",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Mail Office Street Address 1 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Mail Office Street Address 2",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Mail Office Street Address 2 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Mail Office City",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Mail Office City IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Mail Office State",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Mail Office State IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Mail Office Country",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Mail Office Country IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Mail Office Postal Code",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Mail Office Postal Code IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Mail Office Private Residence Flag",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Office\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Mail Office Private Residence Flag IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "SEC Current Status",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Current\"\n\nLINE 1: ..._FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE SEC Current Status IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "SEC Status Effective Date",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Status\"\n\nLINE 1: ..._FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE SEC Status Effective Date IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Jurisdiction Notice Filed-Effective Date",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Notice\"\n\nLINE 1: ...TER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Jurisdiction Notice Filed-Effective Date IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Latest ADV Filing Date",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"ADV\"\n\nLINE 1: ...RM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Latest ADV Filing Date IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Form Version",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Version\"\n\nLINE 1: ...FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Form Version IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "1I",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"I\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 1I IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Website Address",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Address\"\n\nLINE 1: ...M_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Website Address IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total Number of Website Addresses",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total Number of Website Addresses IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "1L",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"L\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 1L IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Location of Books and Records Street Address 1",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ..._ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Location of Books and Records Street Address 1 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Location of Books and Records Street Address 2",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ..._ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Location of Books and Records Street Address 2 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Location of Books and Records City",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ..._ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Location of Books and Records City IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Location of Books and Records State",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ..._ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Location of Books and Records State IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Location of Books and Records Country",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ..._ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Location of Books and Records Country IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Location of Books and Records Postal Code",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ..._ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Location of Books and Records Postal Code IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total Number of Books and Records Locations",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total Number of Books and Records Locations IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "1M",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"M\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 1M IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "1N",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"N\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 1N IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "1O",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"O\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 1O IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "1O - If yes, approx. amount of assets",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"O\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 1O - If yes, approx. amount of assets IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "1P",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"P\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 1P IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "2A(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 2A(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "2A(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 2A(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "2A(4)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 2A(4) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "2A(5)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 2A(5) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "2A(6)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 2A(6) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "2A(7)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 2A(7) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "2A(8)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 2A(8) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "2A(9)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 2A(9) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "2A(10)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 2A(10) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "2A(11)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 2A(11) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "2A(12)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 2A(12) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "2A(13)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 2A(13) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "3A",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 3A IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "3A-Other",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 3A-Other IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "3B",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 3B IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "3C-State",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 3C-State IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "3C-Country",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 3C-Country IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "4A",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 4A IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Acquired Firm",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Firm\"\n\nLINE 1: ..._ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Acquired Firm IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Acquired Firm SEC#",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Firm\"\n\nLINE 1: ..._ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Acquired Firm SEC# IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Acquired Firm CRD#",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Firm\"\n\nLINE 1: ..._ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Acquired Firm CRD# IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total Number of Acquired Firms",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total Number of Acquired Firms IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "4B",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 4B IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5A",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5A IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5B(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5B(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5B(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5B(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5B(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5B(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5B(4)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5B(4) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5B(5)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5B(5) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5B(6)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5B(6) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5C(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5C(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5C(1)-If more than 100, how many",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5C(1)-If more than 100, how many IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5C(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5C(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(a)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(a) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(b)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(b) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(c)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(c) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(d)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(d) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(e)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(e) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(f)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(f) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(g)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(g) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(h)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(h) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(i)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(i) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(j)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(j) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(k)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(k) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(l)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(l) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(m)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(m) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(1)(m)-Other",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(1)(m)-Other IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(a)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(a) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(b)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(b) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(c)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(c) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(d)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(d) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(e)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(e) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(f)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(f) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(g)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(g) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(h)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(h) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(i)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(i) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(j)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(j) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(k)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(k) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(l)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(l) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(m)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(m) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(2)(m)-Other",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(2)(m)-Other IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(a)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(a)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(a)(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(a)(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(a)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(a)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(b)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(b)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(b)(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(b)(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(b)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(b)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(c)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(c)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(c)(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(c)(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(c)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(c)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(d)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(d)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(d)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(d)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(e)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(e)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(e)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(e)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(f)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(f)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(f)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(f)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(g)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(g)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(g)(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(g)(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(g)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(g)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(h)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(h)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(h)(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(h)(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(h)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(h)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(i)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(i)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(i)(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(i)(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(i)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(i)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(j)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(j)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(j)(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(j)(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(j)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(j)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(k)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(k)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(k)(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(k)(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(k)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(k)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(l)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(l)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(l)(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(l)(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(l)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(l)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(m)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(m)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(m)(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(m)(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(m)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(m)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(n)(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(n)(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(n)(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(n)(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(n)(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(n)(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5D(n)(3) - Other",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5D(n)(3) - Other IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5E(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5E(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5E(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5E(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5E(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5E(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5E(4)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5E(4) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5E(5)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5E(5) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5E(6)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5E(6) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5E(7)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5E(7) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5E(7)-Other",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5E(7)-Other IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5F(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"F\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5F(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5F(2)(a)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"F\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5F(2)(a) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5F(2)(b)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"F\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5F(2)(b) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5F(2)(c)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"F\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5F(2)(c) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5F(2)(d)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"F\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5F(2)(d) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5F(2)(e)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"F\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5F(2)(e) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5F(2)(f)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"F\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5F(2)(f) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5F(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"F\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5F(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5G(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5G(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5G(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5G(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5G(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5G(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.G.(3) - Total number of RICs or BDCs",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.G.(3) - Total number of RICs or BDCs IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.G.(3) - Total amount of Parallel Assets",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.G.(3) - Total amount of Parallel Assets IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5G(4)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5G(4) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5G(5)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5G(5) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5G(6)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5G(6) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5G(7)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5G(7) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5G(8)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5G(8) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5G(9)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5G(9) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5G(10)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5G(10) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5G(11)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5G(11) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5G(12)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5G(12) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5G(12)-Other",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5G(12)-Other IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5H",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"H\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5H IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5H-If more than 500, how many",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"H\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5H-If more than 500, how many IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5I(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"I\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5I(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5I(2)(a)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"I\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5I(2)(a) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5I(2)(b)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"I\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5I(2)(b) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5I(2)(c)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"I\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5I(2)(c) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.I.(2) - Total number of wrap fee programs",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"I\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.I.(2) - Total number of wrap fee programs IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5J(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"J\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5J(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5J(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"J\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5J(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5K(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5K(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(i) midyear percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(i) midyear percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(ii) midyear percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(ii) midyear percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(iii) midyear percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(iii) midyear percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(iv) midyear percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(iv) midyear percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(v) midyear percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(v) midyear percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(vi) midyear percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(vi) midyear percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(vii) midyear percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(vii) midyear percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(viii) midyear percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(viii) midyear percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(ix) midyear percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(ix) midyear percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(x) midyear percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(x) midyear percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(xi) midyear percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(xi) midyear percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(xii) midyear percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(xii) midyear percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(i) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(i) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(ii) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(ii) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(iii) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(iii) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(iv) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(iv) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(v) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(v) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(vi) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(vi) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(vii) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(vii) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(viii) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(viii) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(ix) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(ix) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(x) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(x) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(xi) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(xi) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(xii) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(xii) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(a)(xii)  - Other description",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(a)(xii)  - Other description IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(b)(i) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(b)(i) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(b)(ii) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(b)(ii) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(b)(iii) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(b)(iii) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(b)(iv) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(b)(iv) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(b)(v) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(b)(v) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(b)(vi) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(b)(vi) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(b)(vii) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(b)(vii) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(b)(viii) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(b)(viii) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(b)(ix) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(b)(ix) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(b)(x) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(b)(x) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(b)(xi) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(b)(xi) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(b)(xii) end year percentage",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(b)(xii) end year percentage IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(1)(b)(xii)  - Other description",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(1)(b)(xii)  - Other description IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5K(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5K(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5K(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5K(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(1) less 10",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(1) less 10 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(1) 10-149",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(1) 10-149 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(1) over 150",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(1) over 150 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(2) less 10",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(2) less 10 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(2) 10-149",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(2) 10-149 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(2) over 150",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(2) over 150 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(a) less 10 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(a) less 10 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(b) less 10 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(b) less 10 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(c) less 10 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(c) less 10 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(d) less 10 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(d) less 10 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(e) less10 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(e) less10 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(f) less 10 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(f) less 10 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(a) 10-149 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(a) 10-149 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(b) 10-149 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(b) 10-149 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(c) 10-149 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(c) 10-149 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(d) 10-149 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(d) 10-149 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(e) 10-149 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(e) 10-149 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(f) 10-149 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(f) 10-149 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(a) over 150 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(a) over 150 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(b) over 150 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(b) over 150 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(c) over 150 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(c) over 150 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(d) over 150 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(d) over 150 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(e) over 150 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(e) over 150 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(f) over 150 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(i)(3)(f) over 150 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(1) less 10",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(1) less 10 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(1) 10-149",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(1) 10-149 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(1) over 150",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(1) over 150 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(2) less 10",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(2) less 10 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(2) 10-149",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(2) 10-149 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(2) over 150",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(2) over 150 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(a) less 10 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(a) less 10 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(b) less 10 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(b) less 10 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(c) less 10 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(c) less 10 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(d) less 10 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(d) less 10 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(e) less10 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(e) less10 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(f) less 10 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(f) less 10 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(a) 10-149 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(a) 10-149 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(b) 10-149 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(b) 10-149 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(c) 10-149 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(c) 10-149 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(d) 10-149 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(d) 10-149 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(e) 10-149 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(e) 10-149 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(f) 10-149 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(f) 10-149 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(a) over 150 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(a) over 150 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(b) over 150 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(b) over 150 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(c) over 150 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(c) over 150 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(d) over 150 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(d) over 150 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(e) over 150 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(e) over 150 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(f) over 150 percentage ",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(a)(ii)(3)(f) over 150 percentage  IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(b)(1) less 10",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(b)(1) less 10 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(b)(1) 10-149",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(b)(1) 10-149 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(b)(1) over150",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(b)(1) over150 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(b)(2) less 10",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(b)(2) less 10 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(b)(2) 10-149",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(b)(2) 10-149 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5.K.(2)(b)(2) over150",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5.K.(2)(b)(2) over150 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5K(4)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"K\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5K(4) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5L(1)(a)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"L\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5L(1)(a) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5L(1)(b)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"L\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5L(1)(b) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5L(1)(c)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"L\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5L(1)(c) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5L(1)(d)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"L\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5L(1)(d) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5L(1)(e)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"L\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5L(1)(e) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5L(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"L\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5L(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5L(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"L\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5L(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "5L(4)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"L\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 5L(4) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(4)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(4) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(5)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(5) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(6)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(6) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(7)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(7) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(8)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(8) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(9)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(9) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(10)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(10) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(11)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(11) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(12)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(12) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(13)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(13) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(14)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(14) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6A(14)-Other",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6A(14)-Other IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6B(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6B(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6B(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6B(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "6B(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 6B(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(4)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(4) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(5)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(5) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(6)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(6) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(7)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(7) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(8)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(8) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(9)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(9) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(10)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(10) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(11)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(11) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(12)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(12) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(13)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(13) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(14)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(14) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(15)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(15) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7A(16)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7A(16) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of IA Affiliates",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of IA Affiliates IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of IA/BD Affiliates",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of IA/BD Affiliates IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of BD Affiliates",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of BD Affiliates IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Control/Controlled by Related Person",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"by\"\n\nLINE 1: ...IA_DOWNLOAD___34622660_ia07012026 WHERE Control/Controlled by Related Person IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Under Common Control",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Common\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Under Common Control IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Share Supervised Persons",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Supervised\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Share Supervised Persons IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Share Location",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Location\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Share Location IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "7B",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 7B IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of Private Funds - 7B(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of Private Funds - 7B(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Any PFs a Master",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Any\"\n\nLINE 1: ...EC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Any PFs a Master IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Any Hedge Funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Any\"\n\nLINE 1: ...EC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Any Hedge Funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total number of Hedge funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total number of Hedge funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Any Liquidity Funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Any\"\n\nLINE 1: ...EC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Any Liquidity Funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total number of Liquidity funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total number of Liquidity funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Any PE Funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Any\"\n\nLINE 1: ...EC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Any PE Funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total number of PE funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total number of PE funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Any Real Estate Funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Any\"\n\nLINE 1: ...EC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Any Real Estate Funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total number of Real Estate funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total number of Real Estate funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Any Securitized Funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Any\"\n\nLINE 1: ...EC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Any Securitized Funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total number of Securitized funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total number of Securitized funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Any VC Funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Any\"\n\nLINE 1: ...EC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Any VC Funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total number of VC funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total number of VC funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Any Other Funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Any\"\n\nLINE 1: ...EC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Any Other Funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total number of Other funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"number\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total number of Other funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total Gross Assets of Private Funds",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Gross\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total Gross Assets of Private Funds IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of Private Funds - 7B(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of Private Funds - 7B(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8A(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8A(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8A(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8A(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8A(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8A(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8B(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8B(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8B(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8B(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8B(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8B(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8C(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8C(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8C(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8C(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8C(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8C(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8C(4)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8C(4) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8D",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8D IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8E",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8E IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8F",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"F\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8F IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8G(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8G(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8G(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8G(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8H",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"H\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8H IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8H(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"H\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8H(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8H(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"H\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8H(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "8I",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"I\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 8I IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9A(1)(a)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9A(1)(a) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9A(1)(b)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9A(1)(b) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9A(2)(a)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9A(2)(a) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9A(2)(b)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9A(2)(b) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9B(1)(a)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9B(1)(a) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9B(1)(b)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9B(1)(b) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9B(2)(a)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9B(2)(a) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9B(2)(b)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9B(2)(b) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Total Custody Amount",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"Custody\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Total Custody Amount IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9C(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9C(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9C(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9C(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9C(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9C(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9C(4)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9C(4) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9C Unqual Opinion",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9C Unqual Opinion IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9D(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9D(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9D(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9D(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9E",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9E IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "9F",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"F\"\n\nLINE 1: ...C___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 9F IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "10A",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 10A IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of Control person Public Reporting Company",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of Control person Public Reporting Company IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11",
+        "type": "VARCHAR",
+        "error": "Binder Error: No function matches the given name and argument types 'trim(INTEGER_LITERAL)'. You might need to add explicit type casts.\n\tCandidate functions:\n\ttrim(VARCHAR) -> VARCHAR\n\ttrim(VARCHAR, VARCHAR) -> VARCHAR\n\n\nLINE 1: ...EC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE TRIM(11) = '' OR 11 IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11A(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11A(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11A(1) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11A(1) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11A(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11A(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11A(2) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11A(2) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11B(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11B(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11B(1) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11B(1) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11B(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11B(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11B(2) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11B(2) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11C(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11C(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11C(1) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11C(1) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11C(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11C(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11C(2) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11C(2) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11C(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11C(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11C(3) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11C(3) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11C(4)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11C(4) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11C(4) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11C(4) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11C(5)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11C(5) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11C(5) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11C(5) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11D(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11D(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11D(1) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11D(1) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11D(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11D(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11D(2) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11D(2) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11D(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11D(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11D(3) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11D(3) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11D(4)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11D(4) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11D(4) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11D(4) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11D(5)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"D\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11D(5) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11D(5) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11D(5) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11E(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11E(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11E(1) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11E(1) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11E(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11E(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11E(2) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11E(2) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11E(3)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11E(3) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11E(3) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11E(3) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11E(4)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"E\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11E(4) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11E(4) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11E(4) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11F",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"F\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11F IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11F disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11F disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11G",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"G\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11G IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11G disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11G disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11H(1)(a)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"H\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11H(1)(a) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11H(1)(a) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11H(1)(a) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11H(1)(b)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"H\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11H(1)(b) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11H(1)(b) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11H(1)(b) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11H(1)(c)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"H\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11H(1)(c) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11H(1)(c) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11H(1)(c) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "11H(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"H\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 11H(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "Count of 11H(2) disclosures",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"of\"\n\nLINE 1: ...IRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE Count of 11H(2) disclosures IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "12A",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"A\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 12A IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "12B(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 12B(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "12B(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"B\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 12B(2) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "12C(1)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 12C(1) IS NULL\n                                                                      ^"
+      },
+      {
+        "name": "12C(2)",
+        "type": "VARCHAR",
+        "error": "Parser Error: syntax error at or near \"C\"\n\nLINE 1: ...___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 WHERE 12C(2) IS NULL\n                                                                      ^"
+      }
+    ],
+    "total_cells": 0,
+    "null_cells": 0,
+    "non_null_cells": 0,
+    "null_percentage": 0,
+    "estimated_duplicate_rows": 0,
+    "quality_score": 70.0
+  }
+}

@@ -19,7 +19,7 @@ class SchemaProfiler(BaseProfiler):
             
             # Get sample values for pattern detection
             sample = conn.execute(
-                f"SELECT {col_name} FROM {table_name} WHERE {col_name} IS NOT NULL LIMIT 100"
+                f"SELECT \"{col_name}\" FROM {table_name} WHERE \"{col_name}\" IS NOT NULL LIMIT 100"
             ).fetchall()
             sample_values = [str(r[0]) for r in sample]
             
@@ -28,7 +28,7 @@ class SchemaProfiler(BaseProfiler):
             
             # Get null count
             null_count = conn.execute(
-                f"SELECT COUNT(*) FROM {table_name} WHERE {col_name} IS NULL"
+                f'SELECT COUNT(*) FROM {table_name} WHERE "{col_name}" IS NULL'
             ).fetchone()[0]
             
             total_count = conn.execute(f"SELECT COUNT(*) FROM {table_name}").fetchone()[0]

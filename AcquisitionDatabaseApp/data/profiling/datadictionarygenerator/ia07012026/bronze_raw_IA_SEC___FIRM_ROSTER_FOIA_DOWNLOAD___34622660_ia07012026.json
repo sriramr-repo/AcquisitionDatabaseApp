@@ -1,0 +1,7698 @@
+{
+  "profiler_type": "dictionary",
+  "table_name": "bronze_raw_IA_SEC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026",
+  "results": {
+    "table_name": "bronze_raw_IA_SEC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026",
+    "description": "Table bronze_raw_IA_SEC___FIRM_ROSTER_FOIA_DOWNLOAD___34622660_ia07012026 containing 16935 records with 448 fields",
+    "fields": [
+      {
+        "name": "SEC Region",
+        "type": "VARCHAR",
+        "description": "SEC Region (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "SFRO",
+          "NYRO",
+          "NYRO",
+          "SFRO",
+          "NYRO"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Organization CRD#",
+        "type": "VARCHAR",
+        "description": "Organization CRD# (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "38",
+          "70",
+          "79",
+          "199",
+          "231"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Additional CRD Number",
+        "type": "VARCHAR",
+        "description": "Additional CRD Number (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "105541",
+          "105991",
+          "109127",
+          "110057",
+          "323605"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Total number of additional CRD numbers",
+        "type": "VARCHAR",
+        "description": "Total number of additional CRD numbers (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "1",
+          "1",
+          "1",
+          "1",
+          "2"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "SEC#",
+        "type": "VARCHAR",
+        "description": "SEC# (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "801-57838",
+          "801-56943",
+          "801-3702",
+          "801-45761",
+          "801-54739"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Firm Type",
+        "type": "VARCHAR",
+        "description": "Firm Type (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Registered",
+          "Registered",
+          "Registered",
+          "Registered",
+          "Registered"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Umbrella Registration",
+        "type": "VARCHAR",
+        "description": "Umbrella Registration (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Total number of relying advisers",
+        "type": "VARCHAR",
+        "description": "Total number of relying advisers (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "9",
+          "19",
+          "8",
+          "4",
+          "1"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "CIK#",
+        "type": "VARCHAR",
+        "description": "CIK# (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "9319",
+          "1362244",
+          "27182",
+          "277871",
+          "53903"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Total number of CIK numbers",
+        "type": "VARCHAR",
+        "description": "Total number of CIK numbers (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "1",
+          "2",
+          "1",
+          "1",
+          "4"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Primary Business Name",
+        "type": "VARCHAR",
+        "description": "Primary Business Name (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "AMERICAN INVESTORS CO",
+          "BCG SECURITIES, INC.",
+          "J.P. MORGAN SECURITIES LLC",
+          "D.A. DAVIDSON & CO.",
+          "BNY MELLON SECURITIES CORPORATION"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Legal Name",
+        "type": "VARCHAR",
+        "description": "Legal Name (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "L.S.Y., INC",
+          "BCG SECURITIES, INC.",
+          "J.P. MORGAN SECURITIES LLC",
+          "D.A. DAVIDSON & CO.",
+          "BNY MELLON SECURITIES CORPORATION"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Main Office Street Address 1",
+        "type": "VARCHAR",
+        "description": "Main Office Street Address 1 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "12667 ALCOSTA BLVD., SUITE 160",
+          "51 HADDONFIELD ROAD",
+          "270 PARK AVENUE",
+          "8 THIRD STREET NORTH",
+          "240 GREENWICH STREET"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Main Office Street Address 2",
+        "type": "VARCHAR",
+        "description": "Main Office Street Address 2 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "SUITE 210",
+          "9TH FLOOR EAST",
+          "22ND FLOOR",
+          "18TH FLOOR",
+          "SUITE 300"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Main Office City",
+        "type": "VARCHAR",
+        "description": "Main Office City (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "SAN RAMON",
+          "CHERRY HILL",
+          "NEW YORK",
+          "GREAT FALLS",
+          "NEW YORK"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Main Office State",
+        "type": "VARCHAR",
+        "description": "Main Office State (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "CA",
+          "NJ",
+          "NY",
+          "MT",
+          "NY"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Main Office Country",
+        "type": "VARCHAR",
+        "description": "Main Office Country (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "United States",
+          "United States",
+          "United States",
+          "United States",
+          "United States"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Main Office Postal Code",
+        "type": "VARCHAR",
+        "description": "Main Office Postal Code (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "94583",
+          "08002",
+          "10017",
+          "59401",
+          "10286-0001"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Main Office Private Residence Flag",
+        "type": "VARCHAR",
+        "description": "Main Office Private Residence Flag (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Main Office Telephone Number",
+        "type": "VARCHAR",
+        "description": "Main Office Telephone Number (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "925-866-2882",
+          "856-393-1950",
+          "800-999-2000",
+          "406-727-4200",
+          "2129226273"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Main Office Facsimile Number",
+        "type": "VARCHAR",
+        "description": "Main Office Facsimile Number (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "925-866-8989",
+          "856-824-1475",
+          "406-791-7380",
+          "314-515-9700",
+          "802-229-7244"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Total number of offices, other than your Principal Office and place of business",
+        "type": "VARCHAR",
+        "description": "Total number of offices, other than your Principal Office and place of business (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "12",
+          "0",
+          "3566",
+          "100",
+          "5"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Mail Office Street Address 1",
+        "type": "VARCHAR",
+        "description": "Mail Office Street Address 1 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "PO BOX 1307",
+          "51 HADDONFIELD ROAD",
+          "1111 POLARIS PARKWAY, FLOOR 3F",
+          "P.O. BOX 5015",
+          "38 FOUNTAIN SQUARE"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Mail Office Street Address 2",
+        "type": "VARCHAR",
+        "description": "Mail Office Street Address 2 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "SUITE 210",
+          "ATTN: HEATHER EMMERT",
+          "MD 1090XB",
+          "250 H STREET",
+          "NC1-028-29-04"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Mail Office City",
+        "type": "VARCHAR",
+        "description": "Mail Office City (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "SAN RAMON",
+          "CHERRY HILL",
+          "COLUMBUS",
+          "GREAT FALLS",
+          "CINCINNATI"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Mail Office State",
+        "type": "VARCHAR",
+        "description": "Mail Office State (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "CA",
+          "NJ",
+          "OH",
+          "MT",
+          "OH"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Mail Office Country",
+        "type": "VARCHAR",
+        "description": "Mail Office Country (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "United States",
+          "United States",
+          "United States",
+          "United States",
+          "United States"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Mail Office Postal Code",
+        "type": "VARCHAR",
+        "description": "Mail Office Postal Code (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "94583",
+          "08002",
+          "43240",
+          "59403",
+          "45263"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Mail Office Private Residence Flag",
+        "type": "VARCHAR",
+        "description": "Mail Office Private Residence Flag (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "SEC Current Status",
+        "type": "VARCHAR",
+        "description": "SEC Current Status (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Approved",
+          "Approved",
+          "Approved",
+          "Approved",
+          "Approved"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "SEC Status Effective Date",
+        "type": "VARCHAR",
+        "description": "SEC Status Effective Date (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "08/22/2000",
+          "11/04/1999",
+          "04/03/1965",
+          "02/08/1994",
+          "07/24/1997"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Jurisdiction Notice Filed-Effective Date",
+        "type": "VARCHAR",
+        "description": "Jurisdiction Notice Filed-Effective Date (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "AZ-07/19/2004, CA-07/08/1997, CO-02/22/2017, FL-09/22/2006, IL-04/25/2022, NV-07/19/2004, NY-06/15/2007, OR-07/19/2004, TN-06/28/2022, TX-11/15/1996, VA-06/26/2025, WA-07/19/2004",
+          "AK-05/28/2024, AL-12/04/2014, AR-01/10/2023, AZ-12/13/2016, CA-06/25/2014, CO-08/29/2012, CT-05/19/2014, DC-08/28/2012, DE-04/23/2012, FL-04/23/2012, GA-11/19/2012, HI-01/21/2021, IA-09/12/2013, ID-12/10/2018, IL-08/30/2017, IN-05/14/2018, KY-12/02/2011, LA-05/03/2019, MA-08/12/2004, MD-05/24/2012, MI-01/12/2015, MN-05/03/2019, MO-09/23/2015, MS-02/11/2015, MT-10/01/2024, NC-04/18/2012, NE-06/11/2014, NH-11/19/2015, NJ-04/07/2003, NM-07/26/2013, NV-10/11/2019, NY-07/30/2004, OH-03/08/2012, OK-01/07/2026, OR-06/08/2017, PA-03/21/2001, SC-04/24/2012, TN-07/31/2013, TX-03/26/2004, VA-11/19/2008, VT-08/14/2017, WA-06/15/2015, WI-05/17/2012, WV-10/23/2015, WY-10/10/2018",
+          "AK-07/21/1987, AL-04/18/1991, AR-07/17/1987, AZ-10/02/2008, CA-07/08/1997, CO-02/02/2005, CT-08/19/1997, DC-01/16/1994, DE-09/22/2003, FL-06/25/1984, GA-01/02/1992, HI-01/01/1988, IA-01/01/1999, ID-08/19/1987, IL-10/29/1985, IN-01/17/2003, KS-07/16/1987, KY-11/21/1997, LA-09/28/2001, MD-11/07/1990, ME-01/01/1998, MI-02/02/2005, MN-07/17/1987, MO-11/20/1998, MS-05/03/2001, MT-11/07/1997, NC-01/17/2003, ND-07/16/1987, NE-07/31/1997, NH-09/24/1984, NJ-01/01/1961, NM-08/19/1987, NV-12/13/1990, NY-04/11/1986, OH-09/27/2001, OK-01/01/1998, OR-01/28/2001, PA-10/26/1981, PR-09/16/1987, RI-01/01/1993, SC-07/23/1987, SD-05/15/1986, TN-01/12/1998, TX-01/29/1985, UT-12/03/1990, VA-07/24/1987, VI-03/30/2010, VT-11/04/1994, WA-04/01/1988, WI-07/01/1985, WV-07/15/1987, WY-07/05/2017",
+          "AK-07/05/2002, AL-12/14/2004, AR-06/10/2005, AZ-07/01/2002, CA-07/01/2002, CO-12/19/2002, CT-12/19/2002, DC-07/02/2002, DE-06/14/2005, FL-07/02/2002, GA-07/01/2002, HI-08/06/2004, IA-08/16/2004, ID-09/13/1994, IL-07/08/2002, IN-07/01/2002, KS-07/01/2002, KY-12/20/2007, LA-06/08/2005, MA-04/16/2004, MD-07/01/2002, ME-06/08/2005, MI-12/17/2003, MN-07/11/2002, MO-12/19/2002, MS-06/08/2005, MT-12/19/1997, NC-07/01/2002, ND-07/01/2002, NE-08/06/2004, NH-12/14/2004, NJ-07/01/2002, NM-07/01/2002, NV-07/01/2002, NY-12/19/2002, OH-07/01/2002, OK-06/08/2005, OR-12/21/2001, PA-12/19/2002, RI-12/21/2021, SC-06/08/2005, SD-07/02/2002, TN-12/15/2004, TX-07/01/2002, UT-09/19/1997, VA-07/01/2002, VT-06/08/2005, WA-12/01/1994, WI-08/06/2004, WV-12/20/2013, WY-12/21/2017",
+          "AK-07/05/2000, AL-03/04/1999, AR-10/20/1997, AZ-01/29/2002, CA-09/11/1997, CO-01/01/1999, CT-02/07/2001, DC-02/26/2001, DE-08/29/2003, FL-09/09/1997, GA-09/10/1997, HI-10/16/1997, IA-01/01/1999, ID-09/09/1997, IL-10/15/1997, IN-02/13/2001, KS-09/08/1997, KY-08/08/1997, LA-10/04/2001, MA-03/29/2019, MD-01/01/1998, ME-10/14/1997, MI-09/23/1997, MN-12/30/1997, MO-12/15/1997, MS-02/05/2001, MT-02/15/1998, NC-02/05/2001, ND-01/29/2002, NE-05/26/1998, NH-08/08/1997, NJ-10/03/1996, NM-11/04/1997, NV-01/27/1999, NY-02/20/1998, OH-02/02/2001, OK-03/14/1999, OR-01/29/2002, PA-01/29/2002, PR-09/09/1997, RI-09/08/1997, SC-11/21/1997, SD-11/18/1997, TN-10/17/1997, TX-03/31/1983, UT-09/08/1997, VA-01/08/1999, VI-03/29/2019, VT-09/08/1997, WA-09/12/1997, WI-09/08/1997, WV-09/08/1997, WY-03/29/2019"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Latest ADV Filing Date",
+        "type": "VARCHAR",
+        "description": "Latest ADV Filing Date (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "06/26/2026",
+          "05/11/2026",
+          "06/30/2026",
+          "01/16/2026",
+          "06/17/2026"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Form Version",
+        "type": "VARCHAR",
+        "description": "Form Version (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "10/2021",
+          "10/2021",
+          "10/2021",
+          "10/2021",
+          "10/2021"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "1I",
+        "type": "VARCHAR",
+        "description": "1I (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Website Address",
+        "type": "VARCHAR",
+        "description": "Website Address (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "HTTPS://WWW.AMERICANINVESTORSCO.COM",
+          "HTTP://WWW.BCGSECURITIES.COM",
+          "https://wealthpartners.jpmorgan.com/",
+          "https://www.facebook.com/DADavidsonCo",
+          "HTTPS://WWW.BNY.COM/INVESTMENTS"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Total Number of Website Addresses",
+        "type": "VARCHAR",
+        "description": "Total Number of Website Addresses (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "1",
+          "1",
+          "10",
+          "5",
+          "2"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "1L",
+        "type": "VARCHAR",
+        "description": "1L (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Location of Books and Records Street Address 1",
+        "type": "VARCHAR",
+        "description": "Location of Books and Records Street Address 1 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "5007 FEDSCO DRIVE",
+          "1111 POLARIS PARKWAY",
+          "360 SW BOND STREET",
+          "INVESCO ADVISERS, INC.",
+          "22291 SHELLHORN ROAD"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Location of Books and Records Street Address 2",
+        "type": "VARCHAR",
+        "description": "Location of Books and Records Street Address 2 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "SUITE 300",
+          "1555 PEACHTREE STREET, N.E.",
+          "Z2P",
+          "SUITE 700",
+          "SUITE 37"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Location of Books and Records City",
+        "type": "VARCHAR",
+        "description": "Location of Books and Records City (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "CONCORD",
+          "COLUMBUS",
+          "BEND",
+          "ATLANTA",
+          "ASHBURN"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Location of Books and Records State",
+        "type": "VARCHAR",
+        "description": "Location of Books and Records State (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "CA",
+          "OH",
+          "OR",
+          "GA",
+          "VA"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Location of Books and Records Country",
+        "type": "VARCHAR",
+        "description": "Location of Books and Records Country (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "United States",
+          "United States",
+          "United States",
+          "United States",
+          "United States"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Location of Books and Records Postal Code",
+        "type": "VARCHAR",
+        "description": "Location of Books and Records Postal Code (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "94521",
+          "43240",
+          "97702",
+          "30309",
+          "20147"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Total Number of Books and Records Locations",
+        "type": "VARCHAR",
+        "description": "Total Number of Books and Records Locations (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "23",
+          "0",
+          "2",
+          "36",
+          "17"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "1M",
+        "type": "VARCHAR",
+        "description": "1M (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "1N",
+        "type": "VARCHAR",
+        "description": "1N (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "1O",
+        "type": "VARCHAR",
+        "description": "1O (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "1O - If yes, approx. amount of assets",
+        "type": "VARCHAR",
+        "description": "1O - If yes, approx. amount of assets (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "More than $50 billion",
+          "$1 billion - $10 billion",
+          "$10 billion - $50 billion",
+          "More than $50 billion",
+          "$1 billion - $10 billion"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "1P",
+        "type": "VARCHAR",
+        "description": "1P (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "ZBUT11V806EZRVTWT807",
+          "549300094RQ5A7DYLF51",
+          "YZRCLX72FTV74B522G90",
+          "254900DD93O7YH65O708",
+          "832R0263EHR5038Q2Z24"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "2A(1)",
+        "type": "VARCHAR",
+        "description": "2A(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "2A(2)",
+        "type": "VARCHAR",
+        "description": "2A(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "2A(4)",
+        "type": "VARCHAR",
+        "description": "2A(4) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "2A(5)",
+        "type": "VARCHAR",
+        "description": "2A(5) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "2A(6)",
+        "type": "VARCHAR",
+        "description": "2A(6) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "2A(7)",
+        "type": "VARCHAR",
+        "description": "2A(7) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "2A(8)",
+        "type": "VARCHAR",
+        "description": "2A(8) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "2A(9)",
+        "type": "VARCHAR",
+        "description": "2A(9) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "2A(10)",
+        "type": "VARCHAR",
+        "description": "2A(10) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "2A(11)",
+        "type": "VARCHAR",
+        "description": "2A(11) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "2A(12)",
+        "type": "VARCHAR",
+        "description": "2A(12) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "2A(13)",
+        "type": "VARCHAR",
+        "description": "2A(13) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "3A",
+        "type": "VARCHAR",
+        "description": "3A (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "Corporation",
+          "Corporation",
+          "Limited Liability Company",
+          "Corporation",
+          "Corporation"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "3A-Other",
+        "type": "VARCHAR",
+        "description": "3A-Other (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "SUB CHAPTER S CORP",
+          "BUSINESS TRUST",
+          "STATUTORY TRUST",
+          "SUB-CHAPTER \"S\" CORPORATION",
+          "STATUTORY TRUST"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "3B",
+        "type": "VARCHAR",
+        "description": "3B (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "MARCH",
+          "DECEMBER",
+          "DECEMBER",
+          "SEPTEMBER",
+          "DECEMBER"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "3C-State",
+        "type": "VARCHAR",
+        "description": "3C-State (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "CA",
+          "PA",
+          "DE",
+          "MT",
+          "NY"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "3C-Country",
+        "type": "VARCHAR",
+        "description": "3C-Country (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "United States",
+          "United States",
+          "United States",
+          "United States",
+          "United States"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "4A",
+        "type": "VARCHAR",
+        "description": "4A (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Acquired Firm",
+        "type": "VARCHAR",
+        "description": "Acquired Firm (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "LEGACY WEALTH MANAGEMENT INC",
+          "HARBERT FUND ADVISORS, LLC",
+          "DIAMOND HILL CAPITAL MANAGEMENT INC",
+          "BERLA INVESTMENT CONSULTING",
+          "ACCOUNTANTS PROPRIETARY FINANCIAL SERVICENET, INC."
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Acquired Firm SEC#",
+        "type": "VARCHAR",
+        "description": "Acquired Firm SEC# (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "801-18073",
+          "801-55926",
+          "801-32176",
+          "801-26502",
+          "801-62457"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Acquired Firm CRD#",
+        "type": "VARCHAR",
+        "description": "Acquired Firm CRD# (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "108619",
+          "110577",
+          "110638",
+          "112847",
+          "126685"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Total Number of Acquired Firms",
+        "type": "VARCHAR",
+        "description": "Total Number of Acquired Firms (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "4B",
+        "type": "VARCHAR",
+        "description": "4B (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "01/01/2026",
+          "11/26/2025",
+          "04/22/2026",
+          "04/20/2026",
+          "10/30/2025"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5A",
+        "type": "VARCHAR",
+        "description": "5A (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "32",
+          "55",
+          "8703",
+          "990",
+          "253"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5B(1)",
+        "type": "VARCHAR",
+        "description": "5B(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "32",
+          "33",
+          "8479",
+          "410",
+          "91"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5B(2)",
+        "type": "VARCHAR",
+        "description": "5B(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "32",
+          "37",
+          "8513",
+          "710",
+          "162"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5B(3)",
+        "type": "VARCHAR",
+        "description": "5B(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "30",
+          "33",
+          "8479",
+          "650",
+          "200"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5B(4)",
+        "type": "VARCHAR",
+        "description": "5B(4) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "3",
+          "5",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5B(5)",
+        "type": "VARCHAR",
+        "description": "5B(5) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "19",
+          "37",
+          "7066",
+          "350",
+          "14"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5B(6)",
+        "type": "VARCHAR",
+        "description": "5B(6) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "1",
+          "0",
+          "10",
+          "3",
+          "1"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5C(1)",
+        "type": "VARCHAR",
+        "description": "5C(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          " 18",
+          " 2100",
+          " 407036",
+          " 1050",
+          " 0"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5C(1)-If more than 100, how many",
+        "type": "VARCHAR",
+        "description": "5C(1)-If more than 100, how many (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "                   0",
+          "                   0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5C(2)",
+        "type": "VARCHAR",
+        "description": "5C(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(1)(a)",
+        "type": "VARCHAR",
+        "description": "5D(1)(a) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(1)(b)",
+        "type": "VARCHAR",
+        "description": "5D(1)(b) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(1)(c)",
+        "type": "VARCHAR",
+        "description": "5D(1)(c) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(1)(d)",
+        "type": "VARCHAR",
+        "description": "5D(1)(d) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(1)(e)",
+        "type": "VARCHAR",
+        "description": "5D(1)(e) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(1)(f)",
+        "type": "VARCHAR",
+        "description": "5D(1)(f) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Up to 10 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(1)(g)",
+        "type": "VARCHAR",
+        "description": "5D(1)(g) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "76-99 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(1)(h)",
+        "type": "VARCHAR",
+        "description": "5D(1)(h) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(1)(i)",
+        "type": "VARCHAR",
+        "description": "5D(1)(i) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(1)(j)",
+        "type": "VARCHAR",
+        "description": "5D(1)(j) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(1)(k)",
+        "type": "VARCHAR",
+        "description": "5D(1)(k) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(1)(l)",
+        "type": "VARCHAR",
+        "description": "5D(1)(l) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(1)(m)",
+        "type": "VARCHAR",
+        "description": "5D(1)(m) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(1)(m)-Other",
+        "type": "VARCHAR",
+        "description": "5D(1)(m)-Other (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": null,
+        "sample_values": [],
+        "constraints": [
+          "all_null"
+        ]
+      },
+      {
+        "name": "5D(2)(a)",
+        "type": "VARCHAR",
+        "description": "5D(2)(a) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(2)(b)",
+        "type": "VARCHAR",
+        "description": "5D(2)(b) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(2)(c)",
+        "type": "VARCHAR",
+        "description": "5D(2)(c) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(2)(d)",
+        "type": "VARCHAR",
+        "description": "5D(2)(d) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(2)(e)",
+        "type": "VARCHAR",
+        "description": "5D(2)(e) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(2)(f)",
+        "type": "VARCHAR",
+        "description": "5D(2)(f) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Up to 50 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(2)(g)",
+        "type": "VARCHAR",
+        "description": "5D(2)(g) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Up to 75 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(2)(h)",
+        "type": "VARCHAR",
+        "description": "5D(2)(h) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(2)(i)",
+        "type": "VARCHAR",
+        "description": "5D(2)(i) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(2)(j)",
+        "type": "VARCHAR",
+        "description": "5D(2)(j) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(2)(k)",
+        "type": "VARCHAR",
+        "description": "5D(2)(k) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(2)(l)",
+        "type": "VARCHAR",
+        "description": "5D(2)(l) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(2)(m)",
+        "type": "VARCHAR",
+        "description": "5D(2)(m) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0 percent"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(2)(m)-Other",
+        "type": "VARCHAR",
+        "description": "5D(2)(m)-Other (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": null,
+        "sample_values": [],
+        "constraints": [
+          "all_null"
+        ]
+      },
+      {
+        "name": "5D(a)(1)",
+        "type": "VARCHAR",
+        "description": "5D(a)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "548",
+          "1891",
+          "877306",
+          "49912",
+          "2997"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(a)(2)",
+        "type": "VARCHAR",
+        "description": "5D(a)(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(a)(3)",
+        "type": "VARCHAR",
+        "description": "5D(a)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "           163,209,871.00",
+          "           425,852,641.00",
+          "       141,826,923,251.00",
+          "        14,015,605,013.00",
+          "           856,258,192.00"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(b)(1)",
+        "type": "VARCHAR",
+        "description": "5D(b)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "211",
+          "169",
+          "356866",
+          "18223",
+          "228"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(b)(2)",
+        "type": "VARCHAR",
+        "description": "5D(b)(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(b)(3)",
+        "type": "VARCHAR",
+        "description": "5D(b)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "           434,165,916.00",
+          "           326,509,792.00",
+          "       251,110,514,971.00",
+          "        23,597,665,968.00",
+          "           420,182,234.00"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(c)(1)",
+        "type": "VARCHAR",
+        "description": "5D(c)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(c)(2)",
+        "type": "VARCHAR",
+        "description": "5D(c)(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(c)(3)",
+        "type": "VARCHAR",
+        "description": "5D(c)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "             2,537,791.00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(d)(1)",
+        "type": "VARCHAR",
+        "description": "5D(d)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(d)(3)",
+        "type": "VARCHAR",
+        "description": "5D(d)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(e)(1)",
+        "type": "VARCHAR",
+        "description": "5D(e)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(e)(3)",
+        "type": "VARCHAR",
+        "description": "5D(e)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(f)(1)",
+        "type": "VARCHAR",
+        "description": "5D(f)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(f)(3)",
+        "type": "VARCHAR",
+        "description": "5D(f)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "           231,395,173.00"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(g)(1)",
+        "type": "VARCHAR",
+        "description": "5D(g)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "65",
+          "2559",
+          "240",
+          "30",
+          "267"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(g)(2)",
+        "type": "VARCHAR",
+        "description": "5D(g)(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(g)(3)",
+        "type": "VARCHAR",
+        "description": "5D(g)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "            25,311,746.00",
+          "         2,839,224,355.00",
+          "           546,783,883.00",
+          "            18,108,974.00",
+          "           459,588,809.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(h)(1)",
+        "type": "VARCHAR",
+        "description": "5D(h)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "928",
+          "1098",
+          "22",
+          "191"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(h)(2)",
+        "type": "VARCHAR",
+        "description": "5D(h)(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(h)(3)",
+        "type": "VARCHAR",
+        "description": "5D(h)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "             2,958,291.00",
+          "         6,275,478,271.00",
+          "         1,828,763,075.00",
+          "            31,061,216.00",
+          "           420,885,664.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(i)(1)",
+        "type": "VARCHAR",
+        "description": "5D(i)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "29",
+          "0",
+          "1"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(i)(2)",
+        "type": "VARCHAR",
+        "description": "5D(i)(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(i)(3)",
+        "type": "VARCHAR",
+        "description": "5D(i)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "                      .00",
+          "           390,228,649.00",
+          "                      .00",
+          "                94,889.00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(j)(1)",
+        "type": "VARCHAR",
+        "description": "5D(j)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "56",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(j)(2)",
+        "type": "VARCHAR",
+        "description": "5D(j)(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(j)(3)",
+        "type": "VARCHAR",
+        "description": "5D(j)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "           141,855,049.00",
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(k)(1)",
+        "type": "VARCHAR",
+        "description": "5D(k)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "9",
+          "0",
+          "12",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(k)(2)",
+        "type": "VARCHAR",
+        "description": "5D(k)(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(k)(3)",
+        "type": "VARCHAR",
+        "description": "5D(k)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "            21,489,909.00",
+          "                      .00",
+          "           141,814,586.00",
+          "                      .00",
+          "           203,297,475.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(l)(1)",
+        "type": "VARCHAR",
+        "description": "5D(l)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(l)(2)",
+        "type": "VARCHAR",
+        "description": "5D(l)(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(l)(3)",
+        "type": "VARCHAR",
+        "description": "5D(l)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(m)(1)",
+        "type": "VARCHAR",
+        "description": "5D(m)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "7",
+          "0",
+          "8977",
+          "616",
+          "441"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(m)(2)",
+        "type": "VARCHAR",
+        "description": "5D(m)(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(m)(3)",
+        "type": "VARCHAR",
+        "description": "5D(m)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "             4,902,762.00",
+          "        27,620,523,120.00",
+          "         1,460,199,111.00",
+          "           264,466,422.00",
+          "         2,001,921,662.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(n)(1)",
+        "type": "VARCHAR",
+        "description": "5D(n)(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "1",
+          "16",
+          "1214",
+          "5375"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5D(n)(2)",
+        "type": "VARCHAR",
+        "description": "5D(n)(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients",
+          "Fewer than 5 clients"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(n)(3)",
+        "type": "VARCHAR",
+        "description": "5D(n)(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "               117,220.00",
+          "               337,165.00",
+          "         6,858,599,639.00",
+          "        11,103,855,487.00",
+          "         4,810,940,191.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5D(n)(3) - Other",
+        "type": "VARCHAR",
+        "description": "5D(n)(3) - Other (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "ASSOCIATIONS",
+          "LABOR UNIONS",
+          "MODEL-ONLY WRAP PROGRAM SPONSORS",
+          "RETIREMENT AND OTHER ENTITY TYPES",
+          "PARTNERSHIPS, INVESTMENT CLUBS AND LIMITED LIABILITY COMPANIES"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5E(1)",
+        "type": "VARCHAR",
+        "description": "5E(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5E(2)",
+        "type": "VARCHAR",
+        "description": "5E(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "N",
+          "N",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5E(3)",
+        "type": "VARCHAR",
+        "description": "5E(3) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5E(4)",
+        "type": "VARCHAR",
+        "description": "5E(4) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "N",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5E(5)",
+        "type": "VARCHAR",
+        "description": "5E(5) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5E(6)",
+        "type": "VARCHAR",
+        "description": "5E(6) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5E(7)",
+        "type": "VARCHAR",
+        "description": "5E(7) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5E(7)-Other",
+        "type": "VARCHAR",
+        "description": "5E(7)-Other (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "FEE COMPUTED BASED ON CENTS-PER-SHARE-DEPOSITED-INTO-THE-ACCOUNT",
+          "SEE SCHEDULE D - MISCELLANEOUS",
+          "% OF REVENUE/INTRACOMPANY AGRMTS",
+          "EXECUTION CHARGES, CUSTODY, MANAGEMENT FEE",
+          "FEE PLUS COMMISSION"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5F(1)",
+        "type": "VARCHAR",
+        "description": "5F(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5F(2)(a)",
+        "type": "VARCHAR",
+        "description": "5F(2)(a) (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "           628,902,725.00",
+          "                      .00",
+          "       358,295,849,690.00",
+          "        38,297,454,732.00",
+          "           703,050,630.00"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5F(2)(b)",
+        "type": "VARCHAR",
+        "description": "5F(2)(b) (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "             1,763,081.00",
+          "           894,217,482.00",
+          "        71,398,641,352.00",
+          "         3,541,790,967.00",
+          "         7,745,626,047.00"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5F(2)(c)",
+        "type": "VARCHAR",
+        "description": "5F(2)(c) (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "           630,665,806.00",
+          "           894,217,482.00",
+          "       429,694,491,042.00",
+          "        41,839,245,699.00",
+          "         8,448,676,677.00"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5F(2)(d)",
+        "type": "VARCHAR",
+        "description": "5F(2)(d) (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "               1,548",
+          "                   0",
+          "           1,083,815",
+          "              88,458",
+          "               1,422"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5F(2)(e)",
+        "type": "VARCHAR",
+        "description": "5F(2)(e) (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "                   6",
+          "               2,100",
+          "             162,831",
+          "               3,688",
+          "               2,310"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5F(2)(f)",
+        "type": "VARCHAR",
+        "description": "5F(2)(f) (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "               1,554",
+          "               2,100",
+          "           1,246,646",
+          "              92,146",
+          "               3,732"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5F(3)",
+        "type": "VARCHAR",
+        "description": "5F(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "             1,217,154.00",
+          "                      .00",
+          "         2,420,913,251.00",
+          "            40,420,879.00",
+          "             1,227,418.00"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5G(1)",
+        "type": "VARCHAR",
+        "description": "5G(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5G(2)",
+        "type": "VARCHAR",
+        "description": "5G(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5G(3)",
+        "type": "VARCHAR",
+        "description": "5G(3) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5.G.(3) - Total number of RICs or BDCs",
+        "type": "VARCHAR",
+        "description": "5.G.(3) - Total number of RICs or BDCs (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "1",
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.G.(3) - Total amount of Parallel Assets",
+        "type": "VARCHAR",
+        "description": "5.G.(3) - Total amount of Parallel Assets (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "115447151596",
+          "25455934",
+          "14571870043",
+          "165132397675",
+          "10922609977"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5G(4)",
+        "type": "VARCHAR",
+        "description": "5G(4) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5G(5)",
+        "type": "VARCHAR",
+        "description": "5G(5) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5G(6)",
+        "type": "VARCHAR",
+        "description": "5G(6) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5G(7)",
+        "type": "VARCHAR",
+        "description": "5G(7) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5G(8)",
+        "type": "VARCHAR",
+        "description": "5G(8) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5G(9)",
+        "type": "VARCHAR",
+        "description": "5G(9) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5G(10)",
+        "type": "VARCHAR",
+        "description": "5G(10) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5G(11)",
+        "type": "VARCHAR",
+        "description": "5G(11) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5G(12)",
+        "type": "VARCHAR",
+        "description": "5G(12) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5G(12)-Other",
+        "type": "VARCHAR",
+        "description": "5G(12)-Other (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "BNYMSC SPONSORS A WRAP FEE PROGRAM, AND SERVES AS A PORTFOLIO MGR OR MODEL PROVIDER TO THIRD PARTY WRAP PROGRAM SPONSORS.",
+          "RECOMMEND WRAP FEE MANAGEMENT PROGRAMS OF OTHER REGISTERED INVESTMENT ADVISERS",
+          "EXECUTION SERVICES",
+          "SPONSOR WRAP FEE PROGRAM",
+          "ANALYTICAL REPORTS/PUBLIC FINANCE CONSULTING PROGRAM"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5H",
+        "type": "VARCHAR",
+        "description": "5H (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          " 0",
+          " 1-10",
+          " More than 500",
+          " More than 500",
+          " 0"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5H-If more than 500, how many",
+        "type": "VARCHAR",
+        "description": "5H-If more than 500, how many (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "53000",
+          "7000",
+          "5500",
+          "10000",
+          "16000"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5I(1)",
+        "type": "VARCHAR",
+        "description": "5I(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5I(2)(a)",
+        "type": "VARCHAR",
+        "description": "5I(2)(a) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "           736,613,167.00",
+          "       270,731,952,158.00",
+          "         6,050,330,480.00",
+          "         1,233,265,109.00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5I(2)(b)",
+        "type": "VARCHAR",
+        "description": "5I(2)(b) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "           736,613,167.00",
+          "                      .00",
+          "                      .00",
+          "         7,213,678,554.00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5I(2)(c)",
+        "type": "VARCHAR",
+        "description": "5I(2)(c) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "           736,613,167.00",
+          "       176,110,278,778.00",
+          "        35,788,915,219.00",
+          "             1,733,014.00",
+          "        26,563,422,263.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.I.(2) - Total number of wrap fee programs",
+        "type": "VARCHAR",
+        "description": "5.I.(2) - Total number of wrap fee programs (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "1",
+          "4",
+          "3",
+          "13",
+          "7"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5J(1)",
+        "type": "VARCHAR",
+        "description": "5J(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "Y",
+          "N",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5J(2)",
+        "type": "VARCHAR",
+        "description": "5J(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5K(1)",
+        "type": "VARCHAR",
+        "description": "5K(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(i) midyear percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(i) midyear percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "22",
+          "34",
+          "30",
+          "35",
+          "11"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(ii) midyear percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(ii) midyear percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(iii) midyear percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(iii) midyear percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "2",
+          "4",
+          "0",
+          "4"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(iv) midyear percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(iv) midyear percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "14",
+          "3",
+          "1",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(v) midyear percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(v) midyear percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(vi) midyear percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(vi) midyear percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "1",
+          "2",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(vii) midyear percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(vii) midyear percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(viii) midyear percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(viii) midyear percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "1",
+          "0",
+          "74"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(ix) midyear percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(ix) midyear percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "61",
+          "56",
+          "58",
+          "63",
+          "2"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(x) midyear percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(x) midyear percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(xi) midyear percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(xi) midyear percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "2",
+          "2",
+          "2",
+          "2",
+          "9"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(xii) midyear percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(xii) midyear percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "2",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(i) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(i) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "23",
+          "35",
+          "30",
+          "38",
+          "7"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(ii) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(ii) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(iii) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(iii) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "2",
+          "3",
+          "0",
+          "4"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(iv) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(iv) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "12",
+          "2",
+          "1",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(v) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(v) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(vi) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(vi) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "1",
+          "3",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(vii) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(vii) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "1",
+          "0",
+          "0",
+          "1"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(viii) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(viii) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "1",
+          "0",
+          "76"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(ix) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(ix) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "62",
+          "57",
+          "57",
+          "60",
+          "3"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(x) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(x) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(xi) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(xi) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "2",
+          "2",
+          "2",
+          "2",
+          "9"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(xii) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(xii) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "3",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(a)(xii)  - Other description",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(a)(xii)  - Other description (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "LIMITED PARTNERSHIPS, EQUITY BACKED UNITS, CMO, MBS.",
+          "5.K.(1)(A)(VIII) INCLUDES DERIVATIVE POSITIONS CLASSIFIED AS ASSETS FOR FINANCIAL ACCOUNTING PURPOSES ONLY AND DERIVATIVES REFLECTED AS ASSETS ON FINANCIAL STATEMENTS. PWM DERIVATIVE POSITIONS CLASSIFIED AS LIABILITIES ARE REFLECTED IN \"OTHER\". SEE SCHEDULE D MISC. FOR MORE INFORMATION.\u00a0\"OTHER\" ALSO INCLUDES STRUCTURED NOTES. WHERE A CALCULATED PERCENTAGE WAS GREATER THAN 0% AND STANDARD ROUNDING WOULD HAVE RESULTED IN 0% WE ROUNDED UP TO AVOID IMPLYING THE VALUE WAS TRULY 0%.",
+          "ONLY ANNUITIES ARE LISTED IN THE OTHER CATEGORY.",
+          "VARIABLE ANNUITIES, STRUCTURED PRODUCTS/ALTERNATIVE INVESTMENTS, RETIREMENT PLAN ASSETS",
+          "VARIABLE GROUP ANNUITIES, STRUCTURED NOTES, MORTGAGE BACKED"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(1)(b)(i) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(b)(i) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "34",
+          "40",
+          "86",
+          "52",
+          "27"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(b)(ii) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(b)(ii) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(b)(iii) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(b)(iii) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "5",
+          "0",
+          "0",
+          "1"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(b)(iv) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(b)(iv) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "5",
+          "3",
+          "1",
+          "3"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(b)(v) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(b)(v) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(b)(vi) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(b)(vi) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "5",
+          "0",
+          "1",
+          "1"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(b)(vii) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(b)(vii) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "5",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(b)(viii) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(b)(viii) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(b)(ix) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(b)(ix) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "61",
+          "35",
+          "11",
+          "46",
+          "60"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(b)(x) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(b)(x) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(b)(xi) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(b)(xi) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "3",
+          "5",
+          "0",
+          "0",
+          "5"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(b)(xii) end year percentage",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(b)(xii) end year percentage (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "2",
+          "0",
+          "0",
+          "0",
+          "3"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "5.K.(1)(b)(xii)  - Other description",
+        "type": "VARCHAR",
+        "description": "5.K.(1)(b)(xii)  - Other description (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "INCLUDES FRACTIONAL PERCENTAGES OF NON-TRADED DIRECT PARTICIPATION PROGRAMS, CDS, U.S. GOVERNMENT/AGENCY BONDS, U.S. STATE AND LOCAL BONDS, INVESTMENT GRADE CORPORATE BONDS, AND DERIVATIVES CATEGORIES ABOVE.",
+          "FIXED AND VARIABLE ANNUITIES, LISTED OPTIONS",
+          "CERTIFICATES OF DEPOSIT - REIT - LIMITED PARTNERSHIPS - ANNUITIES",
+          "VARIABLE ANNUITIES, WARRANTS, OPTIONS, UIT, PREFERRED STOCK",
+          "THE OTHER CATEGORY GENERALLY INCLUDES ALTERNATIVES WITH GUARANTEED INVESTMENT CERTIFICATES (GICS) AND REPURCHASE AGREEMENTS (REPOS)."
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5K(2)",
+        "type": "VARCHAR",
+        "description": "5K(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5K(3)",
+        "type": "VARCHAR",
+        "description": "5K(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "N",
+          "Y",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(1) less 10",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(1) less 10 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "        18,529,859,201.00",
+          "            14,818,916.00",
+          "           252,048,212.00",
+          "        12,428,403,345.00",
+          "       114,450,886,029.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(1) 10-149",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(1) 10-149 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "         5,507,816,083.00",
+          "                      .00",
+          "           123,117,180.00",
+          "        66,860,062,975.00",
+          "         9,459,659,172.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(1) over 150",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(1) over 150 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "        11,210,582,508.00",
+          "                      .00",
+          "                      .00",
+          "           371,098,299.00",
+          "            77,109,548.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(2) less 10",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(2) less 10 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "         3,541,292,940.00",
+          "                      .00",
+          "             4,747,686.00",
+          "                      .00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(2) 10-149",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(2) 10-149 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "           987,632,853.00",
+          "                      .00",
+          "            22,389,524.00",
+          "                      .00",
+          "             1,359,376.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(2) over 150",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(2) over 150 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "           651,342,414.00",
+          "                      .00",
+          "                      .00",
+          "            10,731,465.00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(a) less 10 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(a) less 10 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(b) less 10 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(b) less 10 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(c) less 10 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(c) less 10 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(d) less 10 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(d) less 10 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "2.1",
+          "100",
+          "0",
+          "0",
+          "0.11"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(e) less10 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(e) less10 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(f) less 10 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(f) less 10 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(a) 10-149 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(a) 10-149 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(b) 10-149 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(b) 10-149 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "7",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(c) 10-149 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(c) 10-149 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(d) 10-149 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(d) 10-149 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "100",
+          "25",
+          "27",
+          "40.16"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(e) 10-149 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(e) 10-149 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "2",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(f) 10-149 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(f) 10-149 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "54",
+          "0.03",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(a) over 150 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(a) over 150 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(b) over 150 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(b) over 150 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "25",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(c) over 150 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(c) over 150 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(d) over 150 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(d) over 150 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "396",
+          "198.38",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(e) over 150 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(e) over 150 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(i)(3)(f) over 150 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(i)(3)(f) over 150 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(1) less 10",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(1) less 10 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "        20,968,514,344.00",
+          "            11,534,386.00",
+          "           187,400,819.00",
+          "        11,870,626,480.00",
+          "       126,248,471,497.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(1) 10-149",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(1) 10-149 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "         6,425,088,674.00",
+          "                      .00",
+          "           135,434,386.00",
+          "        68,989,363,730.00",
+          "         6,903,432,120.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(1) over 150",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(1) over 150 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "        13,486,033,070.00",
+          "                      .00",
+          "                      .00",
+          "           492,325,308.00",
+          "            98,968,375.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(2) less 10",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(2) less 10 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "         3,861,628,386.00",
+          "                      .00",
+          "             3,257,053.00",
+          "                      .00",
+          "                10,568.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(2) 10-149",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(2) 10-149 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "         1,134,084,870.00",
+          "                      .00",
+          "            31,141,618.00",
+          "                      .00",
+          "                 3,808.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(2) over 150",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(2) over 150 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "           759,000,679.00",
+          "                      .00",
+          "                      .00",
+          "               389,968.00",
+          "            10,430,494.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(a) less 10 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(a) less 10 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(b) less 10 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(b) less 10 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(c) less 10 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(c) less 10 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(d) less 10 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(d) less 10 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0.03",
+          "100",
+          "0",
+          "0",
+          "0.1"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(e) less10 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(e) less10 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(f) less 10 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(f) less 10 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0.03",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(a) 10-149 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(a) 10-149 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(b) 10-149 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(b) 10-149 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "6",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(c) 10-149 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(c) 10-149 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(d) 10-149 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(d) 10-149 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "100",
+          "26",
+          "15",
+          "32.46"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(e) 10-149 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(e) 10-149 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(f) 10-149 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(f) 10-149 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0.03",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(a) over 150 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(a) over 150 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(b) over 150 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(b) over 150 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "16",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(c) over 150 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(c) over 150 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(d) over 150 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(d) over 150 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "366",
+          "190.52",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(e) over 150 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(e) over 150 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(a)(ii)(3)(f) over 150 percentage ",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(a)(ii)(3)(f) over 150 percentage  (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(b)(1) less 10",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(b)(1) less 10 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "                      .00",
+          "            11,711,731.00",
+          "           191,472,211.00",
+          "                      .00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(b)(1) 10-149",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(b)(1) 10-149 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "                      .00",
+          "            11,116,596.00",
+          "            62,980,926.00",
+          "            37,241,000.00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(b)(1) over150",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(b)(1) over150 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(b)(2) less 10",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(b)(2) less 10 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "                      .00",
+          "               173,363.00",
+          "                      .00",
+          "             1,836,699.00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(b)(2) 10-149",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(b)(2) 10-149 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "                      .00",
+          "             3,154,443.00",
+          "                      .00",
+          "            10,191,694.00",
+          "               653,000.00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5.K.(2)(b)(2) over150",
+        "type": "VARCHAR",
+        "description": "5.K.(2)(b)(2) over150 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "5K(4)",
+        "type": "VARCHAR",
+        "description": "5K(4) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5L(1)(a)",
+        "type": "VARCHAR",
+        "description": "5L(1)(a) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5L(1)(b)",
+        "type": "VARCHAR",
+        "description": "5L(1)(b) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5L(1)(c)",
+        "type": "VARCHAR",
+        "description": "5L(1)(c) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5L(1)(d)",
+        "type": "VARCHAR",
+        "description": "5L(1)(d) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5L(1)(e)",
+        "type": "VARCHAR",
+        "description": "5L(1)(e) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5L(2)",
+        "type": "VARCHAR",
+        "description": "5L(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5L(3)",
+        "type": "VARCHAR",
+        "description": "5L(3) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "5L(4)",
+        "type": "VARCHAR",
+        "description": "5L(4) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(1)",
+        "type": "VARCHAR",
+        "description": "6A(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(2)",
+        "type": "VARCHAR",
+        "description": "6A(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "Y",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(3)",
+        "type": "VARCHAR",
+        "description": "6A(3) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(4)",
+        "type": "VARCHAR",
+        "description": "6A(4) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(5)",
+        "type": "VARCHAR",
+        "description": "6A(5) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(6)",
+        "type": "VARCHAR",
+        "description": "6A(6) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(7)",
+        "type": "VARCHAR",
+        "description": "6A(7) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(8)",
+        "type": "VARCHAR",
+        "description": "6A(8) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(9)",
+        "type": "VARCHAR",
+        "description": "6A(9) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(10)",
+        "type": "VARCHAR",
+        "description": "6A(10) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(11)",
+        "type": "VARCHAR",
+        "description": "6A(11) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(12)",
+        "type": "VARCHAR",
+        "description": "6A(12) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(13)",
+        "type": "VARCHAR",
+        "description": "6A(13) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(14)",
+        "type": "VARCHAR",
+        "description": "6A(14) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6A(14)-Other",
+        "type": "VARCHAR",
+        "description": "6A(14)-Other (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "CORPORATE FINANCE",
+          "SOLICITATION FOR ADVISORY AFFILIATES TO THEIR CLIE",
+          "INSURANCE",
+          "CFTC SWAP DEALER",
+          "PERTH MINT CERTIFICATE PROGRAM"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "6B(1)",
+        "type": "VARCHAR",
+        "description": "6B(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6B(2)",
+        "type": "VARCHAR",
+        "description": "6B(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "6B(3)",
+        "type": "VARCHAR",
+        "description": "6B(3) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(1)",
+        "type": "VARCHAR",
+        "description": "7A(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(2)",
+        "type": "VARCHAR",
+        "description": "7A(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(3)",
+        "type": "VARCHAR",
+        "description": "7A(3) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(4)",
+        "type": "VARCHAR",
+        "description": "7A(4) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(5)",
+        "type": "VARCHAR",
+        "description": "7A(5) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(6)",
+        "type": "VARCHAR",
+        "description": "7A(6) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(7)",
+        "type": "VARCHAR",
+        "description": "7A(7) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(8)",
+        "type": "VARCHAR",
+        "description": "7A(8) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(9)",
+        "type": "VARCHAR",
+        "description": "7A(9) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(10)",
+        "type": "VARCHAR",
+        "description": "7A(10) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(11)",
+        "type": "VARCHAR",
+        "description": "7A(11) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(12)",
+        "type": "VARCHAR",
+        "description": "7A(12) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(13)",
+        "type": "VARCHAR",
+        "description": "7A(13) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "Y",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(14)",
+        "type": "VARCHAR",
+        "description": "7A(14) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(15)",
+        "type": "VARCHAR",
+        "description": "7A(15) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7A(16)",
+        "type": "VARCHAR",
+        "description": "7A(16) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of IA Affiliates",
+        "type": "VARCHAR",
+        "description": "Count of IA Affiliates (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "3",
+          "0",
+          "11",
+          "1",
+          "21"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Count of IA/BD Affiliates",
+        "type": "VARCHAR",
+        "description": "Count of IA/BD Affiliates (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "1",
+          "0",
+          "0",
+          "6"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Count of BD Affiliates",
+        "type": "VARCHAR",
+        "description": "Count of BD Affiliates (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "2",
+          "0",
+          "10"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Control/Controlled by Related Person",
+        "type": "VARCHAR",
+        "description": "Control/Controlled by Related Person (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Under Common Control",
+        "type": "VARCHAR",
+        "description": "Under Common Control (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "N",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Share Supervised Persons",
+        "type": "VARCHAR",
+        "description": "Share Supervised Persons (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Share Location",
+        "type": "VARCHAR",
+        "description": "Share Location (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "7B",
+        "type": "VARCHAR",
+        "description": "7B (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of Private Funds - 7B(1)",
+        "type": "VARCHAR",
+        "description": "Count of Private Funds - 7B(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "                   0",
+          "                   0",
+          "                   0",
+          "                   0",
+          "                   0"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Any PFs a Master",
+        "type": "VARCHAR",
+        "description": "Any PFs a Master (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Any Hedge Funds",
+        "type": "VARCHAR",
+        "description": "Any Hedge Funds (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Total number of Hedge funds",
+        "type": "VARCHAR",
+        "description": "Total number of Hedge funds (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "3",
+          "3",
+          "1",
+          "39",
+          "4"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Any Liquidity Funds",
+        "type": "VARCHAR",
+        "description": "Any Liquidity Funds (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Total number of Liquidity funds",
+        "type": "VARCHAR",
+        "description": "Total number of Liquidity funds (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "1",
+          "2",
+          "1",
+          "3",
+          "5"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Any PE Funds",
+        "type": "VARCHAR",
+        "description": "Any PE Funds (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Total number of PE funds",
+        "type": "VARCHAR",
+        "description": "Total number of PE funds (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "21",
+          "1",
+          "54",
+          "29",
+          "8"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Any Real Estate Funds",
+        "type": "VARCHAR",
+        "description": "Any Real Estate Funds (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Total number of Real Estate funds",
+        "type": "VARCHAR",
+        "description": "Total number of Real Estate funds (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "1",
+          "28",
+          "1",
+          "2",
+          "1"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Any Securitized Funds",
+        "type": "VARCHAR",
+        "description": "Any Securitized Funds (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Total number of Securitized funds",
+        "type": "VARCHAR",
+        "description": "Total number of Securitized funds (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "6",
+          "2",
+          "9",
+          "6",
+          "70"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Any VC Funds",
+        "type": "VARCHAR",
+        "description": "Any VC Funds (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Total number of VC funds",
+        "type": "VARCHAR",
+        "description": "Total number of VC funds (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "1",
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Any Other Funds",
+        "type": "VARCHAR",
+        "description": "Any Other Funds (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Total number of Other funds",
+        "type": "VARCHAR",
+        "description": "Total number of Other funds (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "21",
+          "1",
+          "3",
+          "2",
+          "1"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "Total Gross Assets of Private Funds",
+        "type": "VARCHAR",
+        "description": "Total Gross Assets of Private Funds (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00",
+          "                      .00"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Count of Private Funds - 7B(2)",
+        "type": "VARCHAR",
+        "description": "Count of Private Funds - 7B(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "                   0",
+          "                   0",
+          "                   0",
+          "                   0",
+          "                   0"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "8A(1)",
+        "type": "VARCHAR",
+        "description": "8A(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8A(2)",
+        "type": "VARCHAR",
+        "description": "8A(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8A(3)",
+        "type": "VARCHAR",
+        "description": "8A(3) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8B(1)",
+        "type": "VARCHAR",
+        "description": "8B(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8B(2)",
+        "type": "VARCHAR",
+        "description": "8B(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8B(3)",
+        "type": "VARCHAR",
+        "description": "8B(3) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8C(1)",
+        "type": "VARCHAR",
+        "description": "8C(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8C(2)",
+        "type": "VARCHAR",
+        "description": "8C(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8C(3)",
+        "type": "VARCHAR",
+        "description": "8C(3) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8C(4)",
+        "type": "VARCHAR",
+        "description": "8C(4) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8D",
+        "type": "VARCHAR",
+        "description": "8D (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "Y",
+          "Y",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8E",
+        "type": "VARCHAR",
+        "description": "8E (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "N",
+          "Y",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8F",
+        "type": "VARCHAR",
+        "description": "8F (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8G(1)",
+        "type": "VARCHAR",
+        "description": "8G(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8G(2)",
+        "type": "VARCHAR",
+        "description": "8G(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "Y",
+          "Y",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8H",
+        "type": "VARCHAR",
+        "description": "8H (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8H(1)",
+        "type": "VARCHAR",
+        "description": "8H(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8H(2)",
+        "type": "VARCHAR",
+        "description": "8H(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "8I",
+        "type": "VARCHAR",
+        "description": "8I (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "9A(1)(a)",
+        "type": "VARCHAR",
+        "description": "9A(1)(a) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "9A(1)(b)",
+        "type": "VARCHAR",
+        "description": "9A(1)(b) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "9A(2)(a)",
+        "type": "VARCHAR",
+        "description": "9A(2)(a) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "       607,928,315,964.00",
+          "        41,566,552,470.00",
+          "        26,337,270,635.00",
+          "       327,309,253,843.00",
+          "                      .00"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "9A(2)(b)",
+        "type": "VARCHAR",
+        "description": "9A(2)(b) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "           1,727,010",
+          "              70,269",
+          "              38,316",
+          "           1,310,947",
+          "                   0"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "9B(1)(a)",
+        "type": "VARCHAR",
+        "description": "9B(1)(a) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "9B(1)(b)",
+        "type": "VARCHAR",
+        "description": "9B(1)(b) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "9B(2)(a)",
+        "type": "VARCHAR",
+        "description": "9B(2)(a) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "        41,697,449,053.00",
+          "         4,983,233,788.00",
+          "       564,668,715,601.00",
+          "        19,993,264,115.00",
+          "                      .00"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "9B(2)(b)",
+        "type": "VARCHAR",
+        "description": "9B(2)(b) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "              70,307",
+          "               2,671",
+          "           3,275,867",
+          "                  34",
+          "                   0"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "Total Custody Amount",
+        "type": "VARCHAR",
+        "description": "Total Custody Amount (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "       607,928,315,964.00",
+          "        83,264,001,523.00",
+          "         4,983,233,788.00",
+          "        26,337,270,635.00",
+          "       891,977,969,444.00"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "9C(1)",
+        "type": "VARCHAR",
+        "description": "9C(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "9C(2)",
+        "type": "VARCHAR",
+        "description": "9C(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "9C(3)",
+        "type": "VARCHAR",
+        "description": "9C(3) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "9C(4)",
+        "type": "VARCHAR",
+        "description": "9C(4) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "9C Unqual Opinion",
+        "type": "VARCHAR",
+        "description": "9C Unqual Opinion (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "9D(1)",
+        "type": "VARCHAR",
+        "description": "9D(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "9D(2)",
+        "type": "VARCHAR",
+        "description": "9D(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "9E",
+        "type": "VARCHAR",
+        "description": "9E (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "mixed",
+        "sample_values": [
+          "11/2025",
+          "04/2025",
+          "04/2024",
+          "11/2025",
+          "03/2025"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "9F",
+        "type": "VARCHAR",
+        "description": "9F (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "5",
+          "14",
+          "7",
+          "1",
+          "2"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "10A",
+        "type": "VARCHAR",
+        "description": "10A (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of Control person Public Reporting Company",
+        "type": "VARCHAR",
+        "description": "Count of Control person Public Reporting Company (VARCHAR)",
+        "nullable": false,
+        "pattern": "mixed",
+        "sample_values": [
+          "                   0",
+          "                   1",
+          "                   1",
+          "                   0",
+          "                   1"
+        ],
+        "constraints": [
+          "pattern:mixed"
+        ]
+      },
+      {
+        "name": "11",
+        "type": "VARCHAR",
+        "description": "11 (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "11A(1)",
+        "type": "VARCHAR",
+        "description": "11A(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11A(1) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11A(1) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11A(2)",
+        "type": "VARCHAR",
+        "description": "11A(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11A(2) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11A(2) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11B(1)",
+        "type": "VARCHAR",
+        "description": "11B(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11B(1) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11B(1) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11B(2)",
+        "type": "VARCHAR",
+        "description": "11B(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11B(2) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11B(2) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11C(1)",
+        "type": "VARCHAR",
+        "description": "11C(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11C(1) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11C(1) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "3",
+          "0",
+          "1"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11C(2)",
+        "type": "VARCHAR",
+        "description": "11C(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11C(2) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11C(2) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "15",
+          "2",
+          "5"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11C(3)",
+        "type": "VARCHAR",
+        "description": "11C(3) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11C(3) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11C(3) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11C(4)",
+        "type": "VARCHAR",
+        "description": "11C(4) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11C(4) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11C(4) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "16",
+          "2",
+          "4"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11C(5)",
+        "type": "VARCHAR",
+        "description": "11C(5) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11C(5) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11C(5) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "16",
+          "2",
+          "5"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11D(1)",
+        "type": "VARCHAR",
+        "description": "11D(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11D(1) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11D(1) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11D(2)",
+        "type": "VARCHAR",
+        "description": "11D(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11D(2) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11D(2) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "7",
+          "2",
+          "1"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11D(3)",
+        "type": "VARCHAR",
+        "description": "11D(3) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11D(3) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11D(3) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11D(4)",
+        "type": "VARCHAR",
+        "description": "11D(4) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11D(4) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11D(4) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "7",
+          "2",
+          "2"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11D(5)",
+        "type": "VARCHAR",
+        "description": "11D(5) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11D(5) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11D(5) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11E(1)",
+        "type": "VARCHAR",
+        "description": "11E(1) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11E(1) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11E(1) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11E(2)",
+        "type": "VARCHAR",
+        "description": "11E(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11E(2) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11E(2) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "93",
+          "7",
+          "1"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11E(3)",
+        "type": "VARCHAR",
+        "description": "11E(3) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11E(3) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11E(3) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11E(4)",
+        "type": "VARCHAR",
+        "description": "11E(4) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "Y",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11E(4) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11E(4) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "2",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11F",
+        "type": "VARCHAR",
+        "description": "11F (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11F disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11F disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11G",
+        "type": "VARCHAR",
+        "description": "11G (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11G disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11G disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11H(1)(a)",
+        "type": "VARCHAR",
+        "description": "11H(1)(a) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11H(1)(a) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11H(1)(a) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11H(1)(b)",
+        "type": "VARCHAR",
+        "description": "11H(1)(b) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11H(1)(b) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11H(1)(b) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11H(1)(c)",
+        "type": "VARCHAR",
+        "description": "11H(1)(c) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "Y",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11H(1)(c) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11H(1)(c) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "2",
+          "0",
+          "4"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "11H(2)",
+        "type": "VARCHAR",
+        "description": "11H(2) (VARCHAR)",
+        "nullable": false,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "Count of 11H(2) disclosures",
+        "type": "VARCHAR",
+        "description": "Count of 11H(2) disclosures (VARCHAR)",
+        "nullable": false,
+        "pattern": "^\\d+$",
+        "sample_values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "constraints": [
+          "pattern:^\\d+$"
+        ]
+      },
+      {
+        "name": "12A",
+        "type": "VARCHAR",
+        "description": "12A (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "12B(1)",
+        "type": "VARCHAR",
+        "description": "12B(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "12B(2)",
+        "type": "VARCHAR",
+        "description": "12B(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "12C(1)",
+        "type": "VARCHAR",
+        "description": "12C(1) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "Y",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^[A-Za-z]+$"
+        ]
+      },
+      {
+        "name": "12C(2)",
+        "type": "VARCHAR",
+        "description": "12C(2) (VARCHAR) - nullable",
+        "nullable": true,
+        "pattern": "^[A-Za-z]+$",
+        "sample_values": [
+          "Y",
+          "Y",
+          "N",
+          "N",
+          "Y"
+        ],
+        "constraints": [
+          "mostly_null",
+          "pattern:^[A-Za-z]+$"
+        ]
+      }
+    ]
+  }
+}

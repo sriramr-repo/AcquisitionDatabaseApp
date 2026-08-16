@@ -73,6 +73,7 @@ class DatasetRegistry:
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
                 )
             """)
+            conn.commit()
 
     def register(self, meta: dict):
         """Register new dataset ingestion."""
@@ -93,6 +94,7 @@ class DatasetRegistry:
                 meta.get('status'),
                 meta.get('notes')
             ))
+            conn.commit()
 
     def exists(self, dataset_version: str) -> bool:
         """Check if dataset exists and has successful status."""
