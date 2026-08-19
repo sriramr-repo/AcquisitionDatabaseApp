@@ -1,0 +1,2 @@
+import { auth } from "../../../auth"; import { targetData } from "../../../lib/queries";
+export async function GET(req:Request){if(!(await auth()))return Response.json({error:"Unauthorized"},{status:401});const u=new URL(req.url);return Response.json(await targetData({search:u.searchParams.get("q")||undefined,priority:u.searchParams.get("priority")||undefined,page:Number(u.searchParams.get("page")||1),pageSize:Number(u.searchParams.get("pageSize")||25)}));}

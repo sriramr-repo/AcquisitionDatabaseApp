@@ -1,0 +1,2 @@
+import { auth } from "../../../auth"; import { db } from "../../../lib/db"; import { sql } from "drizzle-orm";
+export async function GET(){if(!(await auth()))return Response.json({error:"Unauthorized"},{status:401});const [runs,alerts,backups]=await Promise.all([db.execute(sql`select * from pipeline_runs order by started_at desc limit 50`),db.execute(sql`select * from alerts order by created_at desc limit 50`),db.execute(sql`select * from backup_metadata order by created_at desc limit 20`)]);return Response.json({runs:runs.rows,alerts:alerts.rows,backups:backups.rows});}
