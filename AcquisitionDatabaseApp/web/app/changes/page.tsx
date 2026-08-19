@@ -1,0 +1,3 @@
+export const dynamic = "force-dynamic";
+import { sql } from "drizzle-orm"; import { db } from "../../lib/db";
+export default async function Changes(){const rows=await db.execute(sql`select * from change_intelligence order by created_at desc limit 100`);return <><h2>Change intelligence</h2><p className="muted">Dataset-to-dataset events and research refresh signals.</p><div className="panel table-wrap"><table><thead><tr><th>Event</th><th>Firm</th><th>Dataset</th><th>Details</th><th>Created</th></tr></thead><tbody>{rows.rows.map((r:any)=><tr key={r.change_id}><td>{r.event_type}</td><td>{r.firm_id||"Universe"}</td><td>{r.dataset_version}</td><td><pre>{JSON.stringify(r.details)}</pre></td><td>{r.created_at?.toString()}</td></tr>)}</tbody></table></div></>}

@@ -1,0 +1,4 @@
+"use client";
+import { signIn } from "next-auth/react";
+import { useState } from "react";
+export default function Login(){ const [error,setError]=useState(""); return <main style={{maxWidth:420,margin:"15vh auto"}}><div className="panel"><h1>SCM RIA Intelligence</h1><p className="muted">Private internal application</p><form onSubmit={async e=>{e.preventDefault();const f=new FormData(e.currentTarget);const r=await signIn("credentials",{email:f.get("email"),password:f.get("password"),redirect:false});if(r?.error)setError("Invalid credentials");else location.href="/dashboard"}}><p><input name="email" type="email" placeholder="Email" required style={{width:"100%"}}/></p><p><input name="password" type="password" placeholder="Password" required style={{width:"100%"}}/></p>{error&&<p className="badge warn">{error}</p>}<button type="submit">Sign in</button></form></div></main> }

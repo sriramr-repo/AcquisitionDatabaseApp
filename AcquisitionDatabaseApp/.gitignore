@@ -1,0 +1,26 @@
+# Local environments and operational state
+data-dev/
+data-test/
+data-prod/backups/
+data-prod/logs/
+data-prod/run_manifests/
+data/backups/
+data/logs/
+data/run_manifests/
+
+# Local secrets/config overrides
+.env
+.env.*
+!.env.example
+web/node_modules/
+web/.next/
+*.pem
+*.key
+
+# Python/build artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+dist/
+build/
+*.egg-info/
