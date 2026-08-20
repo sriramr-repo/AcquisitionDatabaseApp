@@ -8,6 +8,34 @@
       "when": 1787161988439,
       "tag": "0000_parched_prima",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1787179775827,
+      "tag": "0001_new_leopardon",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1787181109553,
+      "tag": "0002_lucky_ser_duncan",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1787181660104,
+      "tag": "0003_bent_morlocks",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1787182433454,
+      "tag": "0004_massive_gambit",
+      "breakpoints": true
     }
   ]
 }

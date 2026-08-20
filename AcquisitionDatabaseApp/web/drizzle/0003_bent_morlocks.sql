@@ -1,0 +1,1 @@
+ALTER TABLE "firm_facts" DROP COLUMN "fewer_than_five_clients";

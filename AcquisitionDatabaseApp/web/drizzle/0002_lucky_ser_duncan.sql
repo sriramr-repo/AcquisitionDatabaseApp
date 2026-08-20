@@ -1,0 +1,1 @@
+ALTER TABLE "firm_facts" ADD COLUMN "fewer_than_five_clients" text;

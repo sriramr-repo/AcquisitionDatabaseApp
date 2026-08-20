@@ -1,0 +1,1 @@
+ALTER TABLE "firms" ADD COLUMN "sec_number" text;
