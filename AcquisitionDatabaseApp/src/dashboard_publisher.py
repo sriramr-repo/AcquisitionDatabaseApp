@@ -64,6 +64,30 @@ def _rows(path: str, table: str) -> tuple[list[str], list[tuple[Any, ...]]]:
         return [d[0] for d in result.description], [tuple(_clean(v) for v in row) for row in result.fetchall()]
 
 
+def _main_offices(path: str, dataset_version: str) -> dict[str, dict[str, Any]]:
+    """Read main-office facts when the protected Silver office table exists."""
+    table = f"silver_firm_offices_{dataset_version}"
+    with duckdb.connect(path, read_only=True) as conn:
+        tables = {row[0] for row in conn.execute("SHOW TABLES").fetchall()}
+        if table not in tables:
+            return {}
+        rows = conn.execute(
+            f'''SELECT firm_id, street_address_1, street_address_2, city, state, country, telephone
+                FROM "{table}" WHERE office_type = 'MAIN' ORDER BY firm_id'''
+        ).fetchall()
+    result: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        result.setdefault(str(row[0]), {
+            "main_office_street_address_1": _clean(row[1]),
+            "main_office_street_address_2": _clean(row[2]),
+            "main_office_city": _clean(row[3]),
+            "main_office_state": _clean(row[4]),
+            "main_office_country": _clean(row[5]),
+            "main_office_phone": _clean(row[6]),
+        })
+    return result
+
+
 def _upsert(conn: Any, table: str, columns: list[str], values: tuple[Any, ...], conflict: list[str], updates: list[str]) -> None:
     cols = ",".join(columns)
     placeholders = ",".join("%s" for _ in columns)
@@ -80,6 +104,7 @@ def publish(dataset_version: str, database_url: str) -> dict[str, Any]:
     if not rows or "firm_id" not in columns:
         raise RuntimeError(f"Protected Gold V1 table is empty or invalid: {table}")
     index = {column: columns.index(column) for column in columns}
+    offices = _main_offices(str(settings.DUCKDB_FILE), dataset_version)
     priorities = {str(row[index["priority_category"]]): 0 for row in rows if "priority_category" in index}
     for row in rows:
         if "priority_category" in index:
@@ -111,12 +136,13 @@ def publish(dataset_version: str, database_url: str) -> dict[str, Any]:
                 firm_id = str(row[index["firm_id"]])
                 base = (firm_id, dataset_version, now, now)
                 def val(name: str) -> Any: return row[index[name]] if name in index else None
-                conn.execute("""INSERT INTO firms (firm_id,dataset_version,name,primary_business_name,website_address,organization_state,sec_region,sec_current_status,created_at,updated_at)
-                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (firm_id,dataset_version) DO UPDATE SET name=EXCLUDED.name,primary_business_name=EXCLUDED.primary_business_name,website_address=EXCLUDED.website_address,organization_state=EXCLUDED.organization_state,sec_region=EXCLUDED.sec_region,sec_current_status=EXCLUDED.sec_current_status,updated_at=EXCLUDED.updated_at""",
-                    base[:2] + (val("name"), val("primary_business_name"), val("website_address"), val("organization_state"), val("sec_region"), val("sec_current_status"), now, now))
-                conn.execute("""INSERT INTO firm_facts (firm_id,dataset_version,total_aum,discretionary_aum,non_discretionary_aum,total_account_count,average_account_size,individual_hnw_share,employee_count,advisory_employee_count,state_iar_count,has_item_11_disclosure,regulatory_review_flag,created_at,updated_at)
-                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (firm_id,dataset_version) DO UPDATE SET total_aum=EXCLUDED.total_aum,discretionary_aum=EXCLUDED.discretionary_aum,non_discretionary_aum=EXCLUDED.non_discretionary_aum,total_account_count=EXCLUDED.total_account_count,average_account_size=EXCLUDED.average_account_size,individual_hnw_share=EXCLUDED.individual_hnw_share,employee_count=EXCLUDED.employee_count,advisory_employee_count=EXCLUDED.advisory_employee_count,state_iar_count=EXCLUDED.state_iar_count,has_item_11_disclosure=EXCLUDED.has_item_11_disclosure,regulatory_review_flag=EXCLUDED.regulatory_review_flag,updated_at=EXCLUDED.updated_at""",
-                    (firm_id,dataset_version,val("total_aum"),val("discretionary_aum"),val("non_discretionary_aum"),val("total_account_count"),val("average_account_size"),val("individual_hnw_share"),val("employee_count"),val("advisory_employee_count"),val("state_iar_count"),_bool(val("has_item_11_disclosure")),_bool(val("regulatory_review_flag")),now,now))
+                conn.execute("""INSERT INTO firms (firm_id,dataset_version,name,primary_business_name,sec_number,website_address,organization_state,sec_region,sec_current_status,created_at,updated_at)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (firm_id,dataset_version) DO UPDATE SET name=EXCLUDED.name,primary_business_name=EXCLUDED.primary_business_name,sec_number=EXCLUDED.sec_number,website_address=EXCLUDED.website_address,organization_state=EXCLUDED.organization_state,sec_region=EXCLUDED.sec_region,sec_current_status=EXCLUDED.sec_current_status,updated_at=EXCLUDED.updated_at""",
+                    base[:2] + (val("name"), val("primary_business_name"), val("sec_number"), val("website_address"), val("organization_state"), val("sec_region"), val("sec_current_status"), now, now))
+                office = offices.get(firm_id, {})
+                conn.execute("""INSERT INTO firm_facts (firm_id,dataset_version,total_aum,discretionary_aum,non_discretionary_aum,total_account_count,average_account_size,individual_hnw_share,employee_count,advisory_employee_count,state_iar_count,has_item_11_disclosure,regulatory_review_flag,main_office_street_address_1,main_office_street_address_2,main_office_city,main_office_state,main_office_country,main_office_phone,created_at,updated_at)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (firm_id,dataset_version) DO UPDATE SET total_aum=EXCLUDED.total_aum,discretionary_aum=EXCLUDED.discretionary_aum,non_discretionary_aum=EXCLUDED.non_discretionary_aum,total_account_count=EXCLUDED.total_account_count,average_account_size=EXCLUDED.average_account_size,individual_hnw_share=EXCLUDED.individual_hnw_share,employee_count=EXCLUDED.employee_count,advisory_employee_count=EXCLUDED.advisory_employee_count,state_iar_count=EXCLUDED.state_iar_count,has_item_11_disclosure=EXCLUDED.has_item_11_disclosure,regulatory_review_flag=EXCLUDED.regulatory_review_flag,main_office_street_address_1=EXCLUDED.main_office_street_address_1,main_office_street_address_2=EXCLUDED.main_office_street_address_2,main_office_city=EXCLUDED.main_office_city,main_office_state=EXCLUDED.main_office_state,main_office_country=EXCLUDED.main_office_country,main_office_phone=EXCLUDED.main_office_phone,updated_at=EXCLUDED.updated_at""",
+                    (firm_id,dataset_version,val("total_aum"),val("discretionary_aum"),val("non_discretionary_aum"),val("total_account_count"),val("average_account_size"),val("individual_hnw_share"),val("employee_count"),val("advisory_employee_count"),val("state_iar_count"),_bool(val("has_item_11_disclosure")),_bool(val("regulatory_review_flag")),office.get("main_office_street_address_1"),office.get("main_office_street_address_2"),office.get("main_office_city"),office.get("main_office_state"),office.get("main_office_country"),office.get("main_office_phone"),now,now))
                 conn.execute("""INSERT INTO firm_scores (firm_id,dataset_version,acquisition_score,priority_category,priority_readiness,review_required,component_scores,reason_codes,created_at,updated_at)
                     VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (firm_id,dataset_version) DO UPDATE SET acquisition_score=EXCLUDED.acquisition_score,priority_category=EXCLUDED.priority_category,priority_readiness=EXCLUDED.priority_readiness,review_required=EXCLUDED.review_required,component_scores=EXCLUDED.component_scores,reason_codes=EXCLUDED.reason_codes,updated_at=EXCLUDED.updated_at""",
                     (firm_id,dataset_version,val("acquisition_score"),val("priority_category"),val("priority_readiness"),val("review_required"),json.dumps({k:val(k) for k in ("aum_fit_score","discretionary_fit_score","client_fit_score","account_practice_fit_score","practice_complexity_score","advisory_model_fit_score","regulatory_quality_score")}),json.dumps(_json(val("reason_codes"))),now,now))
