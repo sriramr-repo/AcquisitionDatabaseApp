@@ -21,7 +21,7 @@ export async function targetData(params: {search?:string; priority?:string; sort
   return {rows: rows.rows, total: Number(total.rows[0]?.count || 0), page, pageSize:size};
 }
 export async function firmData(firmId:string): Promise<any>{
-  const [firm,facts,scores,research,sources,contacts,outreach,activities] = await Promise.all([
+  const [firm,facts,scores,research,sources,contacts,outreach,activities,representatives] = await Promise.all([
     db.execute(sql`select * from firms where firm_id=${firmId} order by dataset_version desc limit 1`),
     db.execute(sql`select x.* from firm_facts x where firm_id=${firmId} order by dataset_version desc limit 1`),
     db.execute(sql`select s.* from firm_scores s where firm_id=${firmId} order by dataset_version desc limit 1`),
@@ -30,5 +30,22 @@ export async function firmData(firmId:string): Promise<any>{
     db.execute(sql`select * from contacts where firm_id=${firmId} order by contact_name`),
     db.execute(sql`select * from outreach_targets where firm_id=${firmId} order by dataset_version desc limit 1`),
     db.execute(sql`select * from outreach_activities where firm_id=${firmId} order by occurred_at desc`),
-  ]); return {firm:firm.rows[0]||null,facts:facts.rows[0]||null,scores:scores.rows[0]||null,research:research.rows[0]||null,sources:sources.rows,contacts:contacts.rows,outreach:outreach.rows[0]||null,activities:activities.rows};
+    db.execute(sql`with latest_snapshot as (
+      select snapshot_id from iapd_individual_snapshots where status='SUCCESS' order by snapshot_date desc limit 1
+    ) select i.individual_crd,i.full_name,i.active_ag_registration,i.composite_link,e.employer_name,e.employer_firm_crd,
+      e.address_line_1,e.address_line_2,e.city,e.state,e.postal_code,e.country,
+      coalesce(jsonb_agg(distinct jsonb_build_object('authority',r.authority,'category',r.category,'status',r.status,'status_date',r.status_date)) filter (where r.registration_id is not null),'[]'::jsonb) as current_registrations,
+      coalesce(bool_or(coalesce(d.reg_action,false) or coalesce(d.criminal,false) or coalesce(d.bankrupt,false) or coalesce(d.civil_judgment,false) or coalesce(d.bond,false) or coalesce(d.judgment,false) or coalesce(d.investigation,false) or coalesce(d.customer_complaint,false) or coalesce(d.termination,false)),false) as has_disclosures,
+      coalesce(bool_or(ob.other_business_id is not null),false) as has_other_business,
+      coalesce(rc.freshness,'monthly_confirmed') as freshness, rc.effective_fields, rc.conflicts, rc.created_at as last_retrieved_at
+      from iapd_individual_current_employments e join latest_snapshot s on s.snapshot_id=e.snapshot_id
+      join iapd_individuals i on i.individual_crd=e.individual_crd
+      left join iapd_individual_current_registrations r on r.snapshot_id=e.snapshot_id and r.employment_id=e.employment_id
+      left join iapd_individual_disclosure_flags d on d.snapshot_id=e.snapshot_id and d.individual_crd=e.individual_crd
+      left join iapd_individual_other_businesses ob on ob.snapshot_id=e.snapshot_id and ob.individual_crd=e.individual_crd
+      left join lateral (select freshness,effective_fields,conflicts,created_at from iapd_individual_reconciliations where individual_crd=e.individual_crd order by created_at desc limit 1) rc on true
+      where e.employer_firm_crd=${firmId}
+      group by i.individual_crd,i.full_name,i.active_ag_registration,i.composite_link,e.employer_name,e.employer_firm_crd,e.address_line_1,e.address_line_2,e.city,e.state,e.postal_code,e.country,rc.freshness,rc.effective_fields,rc.conflicts,rc.created_at
+      order by i.full_name nulls last`),
+  ]); return {firm:firm.rows[0]||null,facts:facts.rows[0]||null,scores:scores.rows[0]||null,research:research.rows[0]||null,sources:sources.rows,contacts:contacts.rows,outreach:outreach.rows[0]||null,activities:activities.rows,representatives:representatives.rows};
 }
