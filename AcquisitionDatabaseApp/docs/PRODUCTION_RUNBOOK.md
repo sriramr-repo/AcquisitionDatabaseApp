@@ -31,7 +31,7 @@ SCM_ENV=PROD python3 -m src.cli production-health-check
 
 Discovery provenance is recorded on the `dataset_discovery` stage. `details_json.discovery_source=primary` means the SEC index was read successfully; `discovery_source=fallback` and `fallback_used=true` mean the primary request failed or contained no IA ZIP link. Fallback use remains a successful `NO_CHANGE` when the fallback version is already current, but it increments the run warning count and emits `DISCOVERY_FALLBACK_USED` with severity `WARNING`.
 
-The deployed launchd job is `com.scm.ria.production-refresh`, installed at `~/Library/LaunchAgents/com.scm.ria.production-refresh.plist`. It runs at 06:00 on day 1 of each month and invokes `deploy/production-refresh.sh` with the validated absolute Python interpreter. A host-local advisory lock at `data/.production-refresh.lock` returns `BUSY` for overlapping runs; OS file-lock release handles stale processes. Wrapper logs rotate at 10 MB, retaining one `.1` generation.
+The deployed launchd job is `com.scm.ria.production-refresh`, installed at `~/Library/LaunchAgents/com.scm.ria.production-refresh.plist`. It runs at 06:00 on day 4 of each month and invokes `deploy/production-refresh.sh` with the validated absolute Python interpreter. The wrapper publishes the firm dashboard dataset and then runs the IAPD individual-representative snapshot job; the IAPD job skips safely unless the run date is the fourth. A host-local advisory lock at `data/.production-refresh.lock` returns `BUSY` for overlapping runs; OS file-lock release handles stale processes. Wrapper logs rotate at 10 MB, retaining one `.1` generation.
 
 ## Backups and recovery
 
