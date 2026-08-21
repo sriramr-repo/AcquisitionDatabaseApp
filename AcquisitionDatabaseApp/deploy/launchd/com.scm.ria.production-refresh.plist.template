@@ -8,6 +8,7 @@
     <string>/bin/bash</string>
     <string>/ABSOLUTE/PATH/TO/AcquisitionDatabaseApp/deploy/production-refresh.sh</string>
   </array>
+  <!-- The IAPD representative snapshot uses the same day-4 monthly run. -->
   <key>StartCalendarInterval</key>
   <dict><key>Day</key><integer>4</integer><key>Hour</key><integer>6</integer><key>Minute</key><integer>0</integer></dict>
   <key>StandardOutPath</key><string>/ABSOLUTE/PATH/TO/AcquisitionDatabaseApp/data/logs/launchd.out.log</string>

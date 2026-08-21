@@ -16,10 +16,12 @@ rotate_log() {
 mkdir -p "$LOG_DIR"
 rotate_log "$LOG_DIR/launchd.out.log"
 rotate_log "$LOG_DIR/launchd.err.log"
-PUBLISHER_DATABASE_URL="\${PUBLISHER_DATABASE_URL:-postgres://scm:scm@localhost:5432/scm_dashboard}"
+PUBLISHER_DATABASE_URL="${PUBLISHER_DATABASE_URL:-postgres://scm:scm@localhost:5432/scm_dashboard}"
 REFRESH_OUTPUT="$("$PYTHON_BIN" -m src.cli production-refresh)"
 printf '%s\n' "$REFRESH_OUTPUT"
 DATASET_VERSION="$("$PYTHON_BIN" -c 'import json,sys; print(json.loads(sys.stdin.read())["dataset_version"])' <<< "$REFRESH_OUTPUT")"
 "$PYTHON_BIN" -m src.dashboard_publisher publish \
   --dataset-version "$DATASET_VERSION" \
+  --database-url "$PUBLISHER_DATABASE_URL"
+"$PYTHON_BIN" -m src.iapd refresh \
   --database-url "$PUBLISHER_DATABASE_URL"

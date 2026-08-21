@@ -13,6 +13,11 @@ The Firecrawl endpoint is intentionally explicit and bounded. It is not called
 while rendering target lists, does not send outreach, and does not overwrite
 analyst research.
 
+IAPD representative enrichment is a separate monthly PostgreSQL snapshot
+pipeline. It links people to the firm dashboard by current employer CRD and
+does not modify firm master, Silver, Gold, scoring, or analyst research. See
+`docs/IAPD_REPRESENTATIVE_ENRICHMENT.md`.
+
 Local PostgreSQL requires Docker. If the Docker daemon is unavailable, the
 Next.js production build and Python publisher compilation can still be checked,
 but migrations and a real publish must wait for PostgreSQL.
