@@ -89,6 +89,61 @@ def test_scope_inspection_counts_only_matching_current_employments(tmp_path):
     assert summary["current_registrations"] == 1
 
 
+def test_summary_deduplicates_the_same_firm_person_pair():
+    person = list(iapd.parse_iapd_xml(io.BytesIO(SAMPLE_XML)))[0]
+    person["current_employments"].append(dict(person["current_employments"][0]))
+    summary = iapd._summarize_iapd_people([person], {"98765"})
+    assert summary["98765"]["representative_count"] == 1
+    assert summary["98765"]["active_representative_count"] == 1
+
+
+def test_summary_merge_replaces_additive_database_behavior_with_exact_staging():
+    total = iapd._empty_firm_summary()
+    iapd._merge_firm_summary(total, {
+        "representative_count": 2,
+        "active_representative_count": 1,
+        "representative_with_disclosure_count": 1,
+        "representative_with_other_business_count": 0,
+        "registration_count": 3,
+        "registration_status_counts": {"APPROVED": 3},
+    })
+    iapd._merge_firm_summary(total, {
+        "representative_count": 1,
+        "active_representative_count": 1,
+        "representative_with_disclosure_count": 0,
+        "representative_with_other_business_count": 1,
+        "registration_count": 1,
+        "registration_status_counts": '{"APPROVED_RES": 1}',
+    })
+    assert total["representative_count"] == 3
+    assert total["registration_status_counts"] == {"APPROVED": 3, "APPROVED_RES": 1}
+
+
+@pytest.mark.parametrize("limit", [0, 1001])
+def test_detail_expansion_rejects_unbounded_batch_sizes(limit):
+    with pytest.raises(ValueError, match="between 1 and 1000"):
+        iapd.expand_iapd_details(
+            snapshot_date=date(2026, 8, 20),
+            source_url="https://example.test/feed.zip",
+            source_zip=Path("unused.zip"),
+            database_url="postgresql://unused",
+            limit=limit,
+        )
+
+
+@pytest.mark.parametrize("budget", [0, 5001])
+def test_detail_expansion_rejects_unbounded_representative_budgets(budget):
+    with pytest.raises(ValueError, match="between 1 and 5000"):
+        iapd.expand_iapd_details(
+            snapshot_date=date(2026, 8, 20),
+            source_url="https://example.test/feed.zip",
+            source_zip=Path("unused.zip"),
+            database_url="postgresql://unused",
+            limit=25,
+            max_representatives=budget,
+        )
+
+
 def test_extract_iapd_xml_and_validate_zip(tmp_path):
     zip_path = tmp_path / "feed.zip"
     with zipfile.ZipFile(zip_path, "w") as archive:

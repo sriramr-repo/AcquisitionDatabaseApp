@@ -1,0 +1,13 @@
+{
+  "release_id": "SCM_RIA_INTELLIGENCE_V1.0",
+  "code_version": "5b32da66b7148c0f3adfa08628a2164a1710c075",
+  "dataset_version": "ia07012026",
+  "score_version": "SCM_ACQUISITION_V1",
+  "production_run_schema_version": "pipeline-runs-v1",
+  "target_export_schema_version": "SCM_TARGET_EXPORT_V1",
+  "research_schema_version": "research-v1",
+  "configuration_version": "settings-v1",
+  "runbook_version": "production-runbook-v1",
+  "status": "accepted",
+  "protected_gold_v1_parquet_sha256": "35719e8f573296b41548d09bdad53e409c94fa32e2c97c6bce3f157bdc68a7fd"
+}
