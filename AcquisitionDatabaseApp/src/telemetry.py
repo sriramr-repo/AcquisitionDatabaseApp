@@ -6,9 +6,10 @@ from functools import wraps
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, Any, Optional
+from src.config import settings
 
 # Structured logging setup
-LOG_DIR = Path("data/logs")
+LOG_DIR = settings.LOG_DIR
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 class StructuredFormatter(logging.Formatter):

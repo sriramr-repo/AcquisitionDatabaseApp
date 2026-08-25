@@ -7,11 +7,18 @@ data-prod/run_manifests/
 data/backups/
 data/logs/
 data/run_manifests/
+data/iapd/local/
+data/iapd/bundles/
+data/iapd/neon-backups/
+data/iapd/audits/
+data/iapd/r2-publications/
+data/iapd/raw/
 
 # Local secrets/config overrides
 .env
 .env.*
 !.env.example
+deploy/production-refresh.env
 web/node_modules/
 web/.next/
 *.pem
