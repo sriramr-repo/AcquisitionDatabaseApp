@@ -2,9 +2,10 @@ import zipfile
 from pathlib import Path
 
 import duckdb
+import pandas as pd
 import pytest
 
-from src.gold_v1 import gold_v1_table_name
+from src.gold_v1 import GOLD_V1_COLUMNS, GoldV1Builder, gold_v1_table_name
 from src.staged_refresh import StagedRefresh
 from src.storage import DatasetRegistry
 
@@ -13,19 +14,59 @@ DATASET = "ia07012026"
 
 
 def _fixture_frames(tmp_path):
-    """Copy a preserved local Gold V1 snapshot into memory; never write it."""
-    production_db = Path(__file__).parents[1] / "data" / "analytics.duckdb"
-    connection = duckdb.connect(str(production_db), read_only=True)
-    try:
-        source = connection.execute(f'SELECT * FROM "{gold_v1_table_name(DATASET)}"').df()
-    finally:
-        connection.close()
-    # Keep both a Priority A and a non-A candidate so queue behavior is real.
-    baseline = source[source["priority_category"].isin(["PRIORITY_A", "PRIORITY_B"])].head(8).copy()
-    assert len(baseline) >= 3
+    """Build a deterministic fixture without reading production artifacts."""
+    rows = []
+    for index in range(8):
+        total_aum = 35_000_000.0 + index * 1_000_000.0
+        row = {column: None for column in GOLD_V1_COLUMNS}
+        row.update({
+            "firm_id": f"fixture-{index}",
+            "name": f"FIXTURE ADVISER {index}",
+            "primary_business_name": f"FIXTURE ADVISER {index}",
+            "sec_current_status": "Approved",
+            "total_aum": total_aum,
+            "discretionary_aum": total_aum * 0.98,
+            "non_discretionary_aum": total_aum * 0.02,
+            "total_account_count": 30 + index,
+            "discretionary_account_count": 30 + index,
+            "non_discretionary_account_count": 0,
+            "individual_client_count": 20,
+            "individual_client_aum": total_aum * 0.55,
+            "hnw_client_count": 8,
+            "hnw_client_aum": total_aum * 0.40,
+            "individual_hnw_client_count": 28,
+            "individual_hnw_client_aum": total_aum * 0.95,
+            "advises_individuals_or_small_businesses": True,
+            "employee_count": 3,
+            "advisory_employee_count": 2,
+            "provides_financial_planning": True,
+            "provides_pension_consulting": False,
+            "advises_investment_companies": False,
+            "advises_pooled_investment_vehicles": False,
+            "advises_institutional_clients": False,
+            "selects_other_advisers": False,
+            "provides_other_advisory_services": False,
+            "has_unlisted_control_person": False,
+            "has_related_person_control": False,
+            "under_common_control": False,
+            "disciplinary_event_count": 0,
+            "civil_action_count": 0,
+            "bonding_requirement_count": 0,
+            "other_regulatory_event_count": 0,
+            "financial_condition_event_count": 0,
+            "affiliation_change_count": 0,
+            "has_item_11_disclosure": False,
+            "has_felony_conviction": False,
+            "has_felony_charge": False,
+            "has_pending_regulatory_proceeding": False,
+            "has_pending_civil_proceeding": False,
+        })
+        rows.append(row)
+    baseline = GoldV1Builder().build(pd.DataFrame(rows))
+    assert len(baseline) == 8
     # Keep the change-intelligence fixture deterministic as the production
     # priority population evolves.
-    baseline.loc[baseline.index[1], "has_item_11_disclosure"] = 0.0
+    baseline.loc[baseline.index[1], "has_item_11_disclosure"] = False
     new = baseline.iloc[:-1].copy()
     new["has_item_11_disclosure"] = new["has_item_11_disclosure"].astype(object)
     added = baseline.iloc[[0]].copy()
@@ -35,7 +76,7 @@ def _fixture_frames(tmp_path):
     added["total_aum"] = added["total_aum"] * 1.25
     added["employee_count"] = added["employee_count"].fillna(1) + 1
     added["has_item_11_disclosure"] = True
-    new = __import__("pandas").concat([new, added], ignore_index=True)
+    new = pd.concat([new, added], ignore_index=True)
     changed = new["firm_id"] == baseline.iloc[1]["firm_id"]
     new.loc[changed, "total_aum"] = new.loc[changed, "total_aum"] * 1.30
     new.loc[changed, "employee_count"] = new.loc[changed, "employee_count"].fillna(1) + 1

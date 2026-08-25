@@ -44,13 +44,19 @@ def test_health_report():
         assert "threshold" in check
 
 
-def test_execution_summary():
-    es = ExecutionSummary("data/logs/pipeline.log")
+def test_execution_summary(tmp_path):
+    log_path = tmp_path / "pipeline.log"
+    log_path.write_text(
+        "2026-08-24T00:00:00Z | INFO | EXEC|SUCCESS|1.5s\n"
+        "2026-08-24T00:01:00Z | ERROR | EXEC|FAILED|2.5s\n"
+    )
+    es = ExecutionSummary(log_path)
     summary = es.get_summary()
-    assert "total_executions" in summary
-    assert "successful" in summary
-    assert "failed" in summary
-    assert "success_rate" in summary
+    assert summary["total_executions"] == 2
+    assert summary["successful"] == 1
+    assert summary["failed"] == 1
+    assert summary["success_rate"] == 50.0
+    assert summary["avg_duration_seconds"] == 2.0
 
 
 def test_warning_emitters(caplog):
