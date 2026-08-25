@@ -1,0 +1,1 @@
+ALTER TABLE "research_agent_jobs" ADD COLUMN "max_chunks_per_request" integer DEFAULT 2 NOT NULL;

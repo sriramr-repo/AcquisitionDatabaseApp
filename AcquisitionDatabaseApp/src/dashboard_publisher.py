@@ -124,7 +124,11 @@ def publish(dataset_version: str, database_url: str) -> dict[str, Any]:
         operational_alerts = operations_db.execute("select * from operational_alerts order by created_at desc").fetchall() if "operational_alerts" in table_names else []
         backups = operations_db.execute("select * from backups order by created_at desc").fetchall() if "backups" in table_names else []
     with psycopg.connect(database_url) as conn:
-        with conn.transaction():
+        # Keep the existing all-or-nothing transaction, but pipeline the
+        # independent per-row upserts.  This preserves every SQL statement,
+        # conflict rule, and source mapping while avoiding one network
+        # round-trip per firm when the destination is remote PostgreSQL.
+        with conn.transaction(), conn.pipeline():
             conn.execute("""INSERT INTO dataset_versions
                 (dataset_version,dataset_date,score_version,silver_rows,gold_rows,priority_counts,published_at,created_at,updated_at)
                 VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)

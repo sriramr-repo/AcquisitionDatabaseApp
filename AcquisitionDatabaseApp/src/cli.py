@@ -342,6 +342,77 @@ def list_observations_command(firm_id: str, dataset_version: str, review_status:
     typer.echo(json.dumps(ResearchRepository().list_observations(firm_id, dataset_version, review_status), indent=2))
 
 
+@app.command("research-agent-queue")
+def research_agent_queue_command(
+    firm_id: str = typer.Option(..., "--firm-id"),
+    dataset_version: str = typer.Option(..., "--dataset-version"),
+    database_url: str = typer.Option(
+        ..., "--database-url", envvar=["PUBLISHER_DATABASE_URL", "DATABASE_URL"]
+    ),
+    requested_by: Optional[str] = typer.Option("cli", "--requested-by"),
+):
+    """Queue one review-gated research extraction over existing evidence."""
+    from src.research_agent import build_service
+    import json
+    result = build_service(database_url).queue(
+        firm_id=firm_id, dataset_version=dataset_version, requested_by=requested_by
+    )
+    typer.echo(json.dumps(result, indent=2, default=str))
+
+
+@app.command("research-agent-worker")
+def research_agent_worker_command(
+    database_url: str = typer.Option(
+        ..., "--database-url", envvar=["PUBLISHER_DATABASE_URL", "DATABASE_URL"]
+    ),
+    limit: int = typer.Option(3, "--limit", min=1, max=25),
+):
+    """Process a bounded batch of queued research-agent jobs."""
+    from src.research_agent import build_service
+    import json
+    result = build_service(database_url).process_queued(limit=limit)
+    typer.echo(json.dumps(result, indent=2, default=str))
+
+
+@app.command("research-agent-queue-batch")
+def research_agent_queue_batch_command(
+    dataset_version: str = typer.Option(..., "--dataset-version"),
+    database_url: str = typer.Option(
+        ..., "--database-url", envvar=["PUBLISHER_DATABASE_URL", "DATABASE_URL"]
+    ),
+    limit: int = typer.Option(10, "--limit", min=1, max=25),
+    requested_by: Optional[str] = typer.Option("cli", "--requested-by"),
+):
+    """Queue a bounded, evidence-backed Priority A research batch."""
+    from src.research_agent import build_service
+    import json
+    result = build_service(database_url).queue_priority_a_batch(
+        dataset_version=dataset_version,
+        limit=limit,
+        requested_by=requested_by,
+    )
+    typer.echo(json.dumps(result, indent=2, default=str))
+
+
+@app.command("research-agent-review")
+def research_agent_review_command(
+    observation_id: str = typer.Option(..., "--observation-id"),
+    status: str = typer.Option(..., "--status"),
+    reviewer: str = typer.Option(..., "--reviewer"),
+    database_url: str = typer.Option(
+        ..., "--database-url", envvar=["PUBLISHER_DATABASE_URL", "DATABASE_URL"]
+    ),
+    notes: Optional[str] = typer.Option(None, "--notes"),
+):
+    """Accept, reject, or mark one source-linked observation conflicting."""
+    from src.research_agent import PostgresResearchAgentRepository
+    import json
+    result = PostgresResearchAgentRepository(database_url).review_observation(
+        observation_id, status=status.upper(), reviewer=reviewer, notes=notes
+    )
+    typer.echo(json.dumps(result, indent=2, default=str))
+
+
 @app.command("monthly-report")
 def monthly_report_command(dataset_version: Optional[str] = None):
     """Generate the operational and acquisition monthly JSON report."""

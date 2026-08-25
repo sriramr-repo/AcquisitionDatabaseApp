@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import { db } from "./db";
+import { getIapdFirmBundle } from "./iapd-bundles";
 
 export async function dashboardData(): Promise<any>{
   const [dataset, counts, research, outreach] = await Promise.all([
@@ -21,7 +22,7 @@ export async function targetData(params: {search?:string; priority?:string; sort
   return {rows: rows.rows, total: Number(total.rows[0]?.count || 0), page, pageSize:size};
 }
 export async function firmData(firmId:string): Promise<any>{
-  const [firm,facts,scores,research,sources,contacts,outreach,activities,representatives] = await Promise.all([
+  const [firm,facts,scores,research,sources,contacts,outreach,activities,representatives,iapdSummary,iapdCoverage,iapdPrincipals,agentJobs,observations] = await Promise.all([
     db.execute(sql`select * from firms where firm_id=${firmId} order by dataset_version desc limit 1`),
     db.execute(sql`select x.* from firm_facts x where firm_id=${firmId} order by dataset_version desc limit 1`),
     db.execute(sql`select s.* from firm_scores s where firm_id=${firmId} order by dataset_version desc limit 1`),
@@ -47,5 +48,48 @@ export async function firmData(firmId:string): Promise<any>{
       where e.employer_firm_crd=${firmId}
       group by i.individual_crd,i.full_name,i.active_ag_registration,i.composite_link,e.employer_name,e.employer_firm_crd,e.address_line_1,e.address_line_2,e.city,e.state,e.postal_code,e.country,rc.freshness,rc.effective_fields,rc.conflicts,rc.created_at
       order by i.full_name nulls last`),
-  ]); return {firm:firm.rows[0]||null,facts:facts.rows[0]||null,scores:scores.rows[0]||null,research:research.rows[0]||null,sources:sources.rows,contacts:contacts.rows,outreach:outreach.rows[0]||null,activities:activities.rows,representatives:representatives.rows};
+    db.execute(sql`select * from iapd_firm_summaries where firm_id=${firmId} order by snapshot_date desc limit 1`),
+    db.execute(sql`select * from iapd_firm_coverage where firm_id=${firmId} order by dataset_version desc limit 1`),
+    db.execute(sql`with latest as (select max(filing_date) filing_date from iapd_firm_principals where firm_id=${firmId})
+      select * from iapd_firm_principals where firm_id=${firmId}
+        and filing_date is not distinct from (select filing_date from latest)
+      order by schedule_type,principal_type,full_legal_name`),
+    db.execute(sql`select * from research_agent_jobs where firm_id=${firmId} order by created_at desc limit 10`),
+    db.execute(sql`select o.*,s.source_url,s.source_title,coalesce(c.content_hash,lc.content_hash) as capture_content_hash,
+      (o.agent_job_id is null or (j.prompt_version='scm-research-prompt-v7' and j.extraction_version='scm-research-extraction-v7')) as contract_current
+      from research_observations o join research_sources s on s.source_id=o.source_id
+      left join research_agent_jobs j on j.job_id=o.agent_job_id
+      left join research_evidence_captures c on c.capture_id=o.source_capture_id
+      left join iapd_live_captures lc on lc.capture_id=o.source_capture_id
+      where o.firm_id=${firmId}
+        and (o.agent_job_id is null or (j.prompt_version='scm-research-prompt-v7' and j.extraction_version='scm-research-extraction-v7'))
+      order by o.created_at desc limit 100`),
+  ]);
+  const firmRecord:any = firm.rows[0] || null;
+  const detail:any = firmRecord
+    ? await getIapdFirmBundle(String(firmRecord.dataset_version), firmId)
+    : {status:"FAILED",message:"Firm not found"};
+  let representativeRows:any[] = representatives.rows as any[];
+  let detailStatus:any = detail;
+  if (detail.status === "AVAILABLE") {
+    representativeRows = (detail.bundle?.representatives || []).map((representative:any) => ({
+      ...representative,
+      ...(representative.current_employment || {}),
+    }));
+    detailStatus = {
+      status: detail.status,
+      source: "CLOUDFLARE_R2",
+      snapshot_date: detail.bundle?.snapshot_date,
+      representative_count: detail.bundle?.representative_count,
+    };
+  } else if (detail.status === "NO_CURRENT_REPRESENTATIVE") {
+    representativeRows = [];
+  } else if (representativeRows.length) {
+    detailStatus = {
+      status: "LEGACY_FALLBACK",
+      source: "NEON",
+      message: detail.message || "Cloudflare R2 detail is unavailable; using the verified hosted fallback.",
+    };
+  }
+  return {firm:firmRecord,facts:facts.rows[0]||null,scores:scores.rows[0]||null,research:research.rows[0]||null,sources:sources.rows,contacts:contacts.rows,outreach:outreach.rows[0]||null,activities:activities.rows,representatives:representativeRows,iapdDetail:detailStatus,iapdSummary:iapdSummary.rows[0]||null,iapdCoverage:iapdCoverage.rows[0]||null,iapdPrincipals:iapdPrincipals.rows,agentJobs:agentJobs.rows,observations:observations.rows};
 }

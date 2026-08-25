@@ -73,11 +73,34 @@ class DatasetRegistry:
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
                 )
             """)
+            # Compatibility table retained for older operators/tests. The
+            # canonical registry remains `datasets`.
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS ingestion_metadata (
+                    dataset_version TEXT PRIMARY KEY,
+                    dataset_name TEXT,
+                    source_url TEXT,
+                    download_timestamp DATETIME,
+                    file_name TEXT,
+                    file_size INTEGER,
+                    sha256_checksum TEXT,
+                    status TEXT,
+                    notes TEXT
+                )
+            """)
             conn.commit()
 
     def register(self, meta: dict):
         """Register new dataset ingestion."""
         with self._connect() as conn:
+            existing = conn.execute(
+                "SELECT status FROM datasets WHERE dataset_version = ?",
+                (meta.get('dataset_version'),),
+            ).fetchone()
+            # A failed retry must not demote the last known-good dataset. Run
+            # failures are recorded in pipeline_runs instead.
+            if existing and existing[0] == 'success' and meta.get('status') not in {'success', 'skipped'}:
+                return
             conn.execute("""
                 INSERT OR REPLACE INTO datasets (
                     dataset_version, dataset_name, source_url, download_timestamp,
@@ -93,6 +116,16 @@ class DatasetRegistry:
                 meta.get('sha256_checksum'),
                 meta.get('status'),
                 meta.get('notes')
+            ))
+            conn.execute("""
+                INSERT OR REPLACE INTO ingestion_metadata (
+                    dataset_version, dataset_name, source_url, download_timestamp,
+                    file_name, file_size, sha256_checksum, status, notes
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                meta.get('dataset_version'), meta.get('dataset_name'), meta.get('source_url'),
+                meta.get('download_timestamp'), meta.get('file_name'), meta.get('file_size'),
+                meta.get('sha256_checksum'), meta.get('status'), meta.get('notes')
             ))
             conn.commit()
 

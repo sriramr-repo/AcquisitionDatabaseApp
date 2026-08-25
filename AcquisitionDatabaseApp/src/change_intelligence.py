@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 import duckdb
+import pandas as pd
 
 from src.config import settings
 from src.gold_v1 import gold_v1_table_name
@@ -56,9 +57,11 @@ def compare_gold_versions(previous_version: str, current_version: str,
             if column not in old.columns or column not in new.columns:
                 return False
             a, b = before.get(column), after.get(column)
-            if a != a and b != b:  # both NaN
+            a_missing = bool(pd.isna(a))
+            b_missing = bool(pd.isna(b))
+            if a_missing and b_missing:
                 return False
-            return (a if a == a else None) != (b if b == b else None)
+            return (None if a_missing else a) != (None if b_missing else b)
         def add(event_type: str, details: dict[str, Any]) -> None:
             events.append({"event_type": event_type, "firm_id": str(firm_id), "name": name, "details": details})
         if changed("priority_category"):
@@ -89,4 +92,3 @@ def save_change_intelligence(report: dict[str, Any], output_dir: Path | None = N
     path = root / "monthly_change_intelligence.json"
     path.write_text(json.dumps(report, indent=2, default=str) + "\n")
     return path
-

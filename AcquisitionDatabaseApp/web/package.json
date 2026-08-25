@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.7.4",
+    "@aws-sdk/client-s3": "^3.1117.0",
     "@libsql/client": "^0.15.15",
     "@radix-ui/react-slot": "^1.2.3",
     "bcryptjs": "^3.0.2",

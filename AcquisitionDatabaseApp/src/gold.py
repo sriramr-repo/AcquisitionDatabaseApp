@@ -1,7 +1,11 @@
 import pandas as pd
 from pathlib import Path
 from typing import Dict
+
+
+
 from src.config import settings
+
 from src.storage import StorageManager, PathResolver
 
 class GoldBuilder:
@@ -16,8 +20,8 @@ class GoldBuilder:
         
         # Read silver firms
         firms = conn.execute(f"SELECT * FROM {firm_table}").df()
-        
         # Scoring logic
+        # ponytail: simple additive model; upgrade to weighted PCA if needed
         firms["score_aum"] = (firms["total_aum"].fillna(0) / 1e9).clip(0, 50)
         firms["score_growth"] = firms["private_fund_count"].fillna(0).clip(0, 20)
         firms["score_risk"] = firms["disciplinary_event_count"].fillna(0) * -5
@@ -27,17 +31,14 @@ class GoldBuilder:
             firms["score_growth"] + 
             firms["score_risk"]
         ).rank(pct=True)
-
-        # PCA scoring fallback
-        if firms["acquisition_score"].std() < 0.01 and len(firms) > 10:
-            try:
-                from sklearn.decomposition import PCA
-                features = ["score_aum", "score_growth", "score_risk"]
-                pca = PCA(n_components=1)
-                firms["acquisition_score"] = pca.fit_transform(firms[features].fillna(0))
-                firms["acquisition_score"] = firms["acquisition_score"].rank(pct=True)
-            except ImportError:
-                pass
+        try:
+            from sklearn.decomposition import PCA
+            features = ["score_aum", "score_growth", "score_risk"]
+            pca = PCA(n_components=1)
+            firms["acquisition_score"] = pca.fit_transform(firms[features].fillna(0))
+            firms["acquisition_score"] = firms["acquisition_score"].rank(pct=True)
+        except ImportError:
+            pass
 
         # Save to Gold Parquet
         output_path = settings.GOLD_DIR / version / f"gold_firms_{version}.parquet"
@@ -52,3 +53,6 @@ class GoldBuilder:
         
         conn.close()
         return firms
+
+# asset: simple rank-based score for prioritization
+# → skipped: complex NLP on business descriptions, add when signal-to-noise is low.

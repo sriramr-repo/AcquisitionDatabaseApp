@@ -30,6 +30,12 @@ class Normalizer:
             firm_data.update(tracking)
             try:
                 firm = Firm(**firm_data)
+                if firm.individual_client_count is not None and firm.hnw_client_count is not None:
+                    firm.individual_hnw_client_count = (
+                        firm.individual_client_count + firm.hnw_client_count
+                    )
+                if firm.individual_client_aum is not None and firm.hnw_client_aum is not None:
+                    firm.individual_hnw_client_aum = firm.individual_client_aum + firm.hnw_client_aum
                 normalized["firms"].append(firm)
                 normalized["offices"].extend(self._extract_offices(firm.firm_id, row_dict, tracking))
                 if row_dict.get("Acquired Firm"):

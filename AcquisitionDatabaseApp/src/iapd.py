@@ -456,6 +456,182 @@ def inspect_iapd_scope(zip_path: Path, firm_crds: set[str]) -> dict[str, int]:
     return dict(summary)
 
 
+def _empty_firm_summary() -> dict[str, Any]:
+    return {
+        "representative_count": 0,
+        "active_representative_count": 0,
+        "representative_with_disclosure_count": 0,
+        "representative_with_other_business_count": 0,
+        "registration_count": 0,
+        "registration_status_counts": Counter(),
+    }
+
+
+def _summarize_iapd_people(
+    people: Iterable[dict[str, Any]], target_firms: set[str]
+) -> dict[str, dict[str, Any]]:
+    """Return unique firm/person counts for one complete feed or ZIP member."""
+    summaries: dict[str, dict[str, Any]] = {}
+    seen: set[tuple[str, str]] = set()
+    for person in people:
+        disclosed = any(
+            any(item.get(field) is True for field in DISCLOSURE_FIELDS)
+            for item in person["disclosures"]
+        )
+        other_business = bool(person["other_businesses"])
+        for employment in person["current_employments"]:
+            firm_id = employment["employer_firm_crd"]
+            key = (firm_id or "", person["individual_crd"])
+            if firm_id not in target_firms or key in seen:
+                continue
+            seen.add(key)
+            summary = summaries.setdefault(firm_id, _empty_firm_summary())
+            summary["representative_count"] += 1
+            summary["active_representative_count"] += int(
+                person["active_ag_registration"] is True
+            )
+            summary["representative_with_disclosure_count"] += int(disclosed)
+            summary["representative_with_other_business_count"] += int(other_business)
+            summary["registration_count"] += len(employment["registrations"])
+            for registration in employment["registrations"]:
+                if status := registration.get("status"):
+                    summary["registration_status_counts"][status] += 1
+    return summaries
+
+
+def _merge_firm_summary(
+    target: dict[str, Any], source: dict[str, Any]
+) -> None:
+    for field in (
+        "representative_count",
+        "active_representative_count",
+        "representative_with_disclosure_count",
+        "representative_with_other_business_count",
+        "registration_count",
+    ):
+        target[field] += int(source.get(field) or 0)
+    statuses = source.get("registration_status_counts") or {}
+    if isinstance(statuses, str):
+        statuses = json.loads(statuses)
+    target["registration_status_counts"].update(statuses)
+
+
+def import_iapd_firm_summaries(
+    *, snapshot_date: date, source_url: str, source_zip: Path, database_url: str,
+    member_names: Iterable[str] | None = None, finalize: bool = True,
+    content_hash: str | None = None,
+) -> dict[str, Any]:
+    """Publish a compact current IAPD coverage record for every dashboard firm.
+
+    This is intentionally separate from the detailed representative tables:
+    all firm CRDs receive a lightweight summary, while full people/history
+    records remain a targeted research workflow.
+    """
+    import psycopg
+
+    content_hash = content_hash or _sha256(source_zip)
+    snapshot_id = _stable_id(snapshot_date.isoformat(), content_hash)
+    selected_members = tuple(member_names) if member_names is not None else None
+    partial_batch = selected_members is not None and not finalize
+    with psycopg.connect(database_url) as connection:
+        target_firms = _dashboard_firm_crds(connection)
+        if not target_firms:
+            raise IAPDFeedUnavailable("No current dashboard firms are available for IAPD summary publication")
+        if partial_batch:
+            if len(selected_members) != 1:
+                raise ValueError("partial IAPD summary publication requires exactly one ZIP member")
+            summaries = _summarize_iapd_people(
+                parse_iapd_zip(source_zip, member_names=selected_members), target_firms
+            )
+        elif selected_members == ():
+            summaries = {firm_id: _empty_firm_summary() for firm_id in target_firms}
+            staged = connection.execute(
+                """SELECT firm_id,representative_count,active_representative_count,
+                          representative_with_disclosure_count,
+                          representative_with_other_business_count,registration_count,
+                          registration_status_counts
+                     FROM iapd_firm_summary_batch_counts WHERE snapshot_id=%s""",
+                (snapshot_id,),
+            ).fetchall()
+            for row in staged:
+                values = {
+                    "representative_count": row[1],
+                    "active_representative_count": row[2],
+                    "representative_with_disclosure_count": row[3],
+                    "representative_with_other_business_count": row[4],
+                    "registration_count": row[5],
+                    "registration_status_counts": row[6],
+                }
+                _merge_firm_summary(summaries.setdefault(str(row[0]), _empty_firm_summary()), values)
+        else:
+            summaries = {firm_id: _empty_firm_summary() for firm_id in target_firms}
+            direct = _summarize_iapd_people(
+                parse_iapd_zip(source_zip, member_names=selected_members), target_firms
+            )
+            for firm_id, values in direct.items():
+                _merge_firm_summary(summaries[firm_id], values)
+        now = datetime.now(timezone.utc)
+        rows = [
+            (snapshot_id, snapshot_date.isoformat(), firm_id, source_url, content_hash,
+             values["representative_count"], values["active_representative_count"],
+             values["representative_with_disclosure_count"], values["representative_with_other_business_count"],
+             values["registration_count"], json.dumps(dict(values["registration_status_counts"])), now)
+            for firm_id, values in summaries.items()
+        ]
+        with connection.transaction():
+            if partial_batch:
+                connection.execute(
+                    """INSERT INTO iapd_firm_summary_batches (snapshot_id,member_name,processed_at)
+                       VALUES (%s,%s,%s) ON CONFLICT (snapshot_id,member_name)
+                       DO UPDATE SET processed_at=EXCLUDED.processed_at""",
+                    (snapshot_id, selected_members[0], now),
+                )
+                connection.execute(
+                    "DELETE FROM iapd_firm_summary_batch_counts WHERE snapshot_id=%s AND member_name=%s",
+                    (snapshot_id, selected_members[0]),
+                )
+                batch_rows = [
+                    (snapshot_id, selected_members[0], firm_id,
+                     values["representative_count"], values["active_representative_count"],
+                     values["representative_with_disclosure_count"],
+                     values["representative_with_other_business_count"],
+                     values["registration_count"],
+                     json.dumps(dict(values["registration_status_counts"])), now)
+                    for firm_id, values in summaries.items()
+                ]
+                _execute_many(connection, """INSERT INTO iapd_firm_summary_batch_counts
+                    (snapshot_id,member_name,firm_id,representative_count,active_representative_count,
+                     representative_with_disclosure_count,representative_with_other_business_count,
+                     registration_count,registration_status_counts,processed_at)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""", batch_rows)
+            else:
+                _execute_many(connection, """INSERT INTO iapd_firm_summaries
+                (snapshot_id,snapshot_date,firm_id,source_url,content_hash,representative_count,active_representative_count,representative_with_disclosure_count,representative_with_other_business_count,registration_count,registration_status_counts,published_at)
+                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                ON CONFLICT (snapshot_id,firm_id) DO UPDATE SET
+                  snapshot_date=EXCLUDED.snapshot_date,source_url=EXCLUDED.source_url,
+                  content_hash=EXCLUDED.content_hash,
+                  representative_count=EXCLUDED.representative_count,
+                  active_representative_count=EXCLUDED.active_representative_count,
+                  representative_with_disclosure_count=EXCLUDED.representative_with_disclosure_count,
+                  representative_with_other_business_count=EXCLUDED.representative_with_other_business_count,
+                  registration_count=EXCLUDED.registration_count,
+                  registration_status_counts=EXCLUDED.registration_status_counts,
+                  published_at=EXCLUDED.published_at""", rows)
+                # Member rows are restart checkpoints, not historical facts.
+                # Once the exact summary is committed they only consume hosted
+                # database capacity and can be regenerated from the raw ZIP.
+                connection.execute(
+                    "DELETE FROM iapd_firm_summary_batch_counts WHERE snapshot_id=%s",
+                    (snapshot_id,),
+                )
+        covered = connection.execute(
+            "SELECT COUNT(*) FROM iapd_firm_summaries WHERE snapshot_id=%s AND representative_count>0",
+            (snapshot_id,),
+        ).fetchone()[0]
+        return {"status": "success" if finalize else "partial", "snapshot_id": snapshot_id, "firm_count": len(rows), "firms_with_representatives": covered}
+
+
 def _execute_many(connection: Any, statement: str, rows: list[tuple[Any, ...]]) -> None:
     if rows:
         # psycopg 3 exposes executemany on cursors; the lightweight test
@@ -582,8 +758,10 @@ def import_iapd_snapshot(
     database_url: str,
     dashboard_only: bool = True,
     priority_categories: Iterable[str] | None = None,
+    target_firm_crds: Iterable[str] | None = None,
     member_names: Iterable[str] | None = None,
     finalize: bool = True,
+    expand_existing: bool = False,
 ) -> dict[str, Any]:
     """Normalize one IAPD snapshot into PostgreSQL, scoped to dashboard firms.
 
@@ -616,13 +794,21 @@ def import_iapd_snapshot(
                 connection.commit()
             elif str(existing[1]) == "RUNNING":
                 snapshot_id = str(existing[0])
+            elif expand_existing and str(existing[1]) == "SUCCESS":
+                snapshot_id = str(existing[0])
             else:
                 return {"status": "skipped", "snapshot_id": str(existing[0]), "reason": "duplicate_snapshot"}
-        target_firm_crds = (
-            _dashboard_firm_crds(connection, priority_categories=priority_categories)
-            if dashboard_only else None
-        )
-        if dashboard_only and not target_firm_crds:
+        if dashboard_only:
+            dashboard_firms = _dashboard_firm_crds(
+                connection, priority_categories=priority_categories
+            )
+            selected_firms = (
+                dashboard_firms.intersection(str(value) for value in target_firm_crds)
+                if target_firm_crds is not None else dashboard_firms
+            )
+        else:
+            selected_firms = None
+        if dashboard_only and not selected_firms:
             raise IAPDFeedUnavailable("No current dashboard firms are available for a scoped IAPD import")
         previous = connection.execute(
             "SELECT snapshot_id FROM iapd_individual_snapshots WHERE status='SUCCESS' ORDER BY snapshot_date DESC LIMIT 1"
@@ -667,10 +853,10 @@ def import_iapd_snapshot(
                     rows.clear()
             people = parse_iapd_xml(xml_path, issues=issues) if xml_path is not None else parse_iapd_zip(source_zip, issues=issues, member_names=member_names)
             for person in people:
-                if target_firm_crds is not None:
+                if selected_firms is not None:
                     person["current_employments"] = [
                         employment for employment in person["current_employments"]
-                        if employment["employer_firm_crd"] in target_firm_crds
+                        if employment["employer_firm_crd"] in selected_firms
                     ]
                     if not person["current_employments"]:
                         continue
@@ -682,8 +868,9 @@ def import_iapd_snapshot(
                 people_rows.append((crd, person["first_name"], person["middle_name"], person["last_name"], person["suffix"], person["full_name"], person["active_ag_registration"], person["composite_link"], snapshot_id, now, now))
                 members.append((snapshot_id, crd, now))
                 counts["individuals"] += 1
-                for alias in person["aliases"]:
-                    aliases.append((_stable_id(snapshot_id, crd, alias["alias_name"]), snapshot_id, crd, alias["alias_name"], alias["first_name"], alias["middle_name"], alias["last_name"], alias["suffix"], now))
+                if selected_firms is None:
+                    for alias in person["aliases"]:
+                        aliases.append((_stable_id(snapshot_id, crd, alias["alias_name"]), snapshot_id, crd, alias["alias_name"], alias["first_name"], alias["middle_name"], alias["last_name"], alias["suffix"], now))
                 for employment in person["current_employments"]:
                     # Each feed is a distinct monthly snapshot, so dependent
                     # records need a snapshot-scoped employment identifier.
@@ -695,13 +882,14 @@ def import_iapd_snapshot(
                     # scoped mode.  They are high-cardinality location data
                     # with no current dashboard consumer; the raw ZIP retains
                     # them if needed for a future, dedicated workflow.
-                    if target_firm_crds is None:
+                    if selected_firms is None:
                         for branch in employment["branches"]:
                             branches.append((_stable_id(snapshot_id, employment_id, branch["branch_name"], branch["address_line_1"], branch["city"], branch["state"]), snapshot_id, employment_id, crd, employment["employer_firm_crd"], branch["branch_name"], branch["address_line_1"], branch["address_line_2"], branch["city"], branch["state"], branch["postal_code"], branch["country"], now))
-                for registration in person["previous_registrations"]:
-                    previous_regs.append((_stable_id(snapshot_id, crd, registration["employer_firm_crd"], registration["authority"], registration["begin_date"], registration["end_date"]), snapshot_id, crd, registration["employer_firm_crd"], registration["employer_name"], registration["authority"], registration["category"], registration["status"], registration["begin_date"], registration["end_date"], registration["address_line_1"], registration["address_line_2"], registration["city"], registration["state"], registration["postal_code"], registration["country"], now))
-                for history in person["employment_history"]:
-                    histories.append((_stable_id(snapshot_id, crd, history["organization_name"], history["city"], history["state"], history["from_date"], history["to_date"]), snapshot_id, crd, history["organization_name"], history["city"], history["state"], history["from_date"], history["to_date"], now))
+                if selected_firms is None:
+                    for registration in person["previous_registrations"]:
+                        previous_regs.append((_stable_id(snapshot_id, crd, registration["employer_firm_crd"], registration["authority"], registration["begin_date"], registration["end_date"]), snapshot_id, crd, registration["employer_firm_crd"], registration["employer_name"], registration["authority"], registration["category"], registration["status"], registration["begin_date"], registration["end_date"], registration["address_line_1"], registration["address_line_2"], registration["city"], registration["state"], registration["postal_code"], registration["country"], now))
+                    for history in person["employment_history"]:
+                        histories.append((_stable_id(snapshot_id, crd, history["organization_name"], history["city"], history["state"], history["from_date"], history["to_date"]), snapshot_id, crd, history["organization_name"], history["city"], history["state"], history["from_date"], history["to_date"], now))
                 for business in person["other_businesses"]:
                     businesses.append((_stable_id(snapshot_id, crd, business["description"]), snapshot_id, crd, business["description"], now))
                 for index, disclosure in enumerate(person["disclosures"]):
@@ -709,18 +897,124 @@ def import_iapd_snapshot(
                 if counts["individuals"] % 5_000 == 0:
                     flush_batch()
             flush_batch()
+            if selected_firms is not None:
+                # The parser sees the national feed even for a bounded firm
+                # expansion. Persist only issues tied to selected people plus
+                # a small source-level sample; the raw ZIP remains authoritative.
+                selected_issues = [
+                    issue for issue in issues
+                    if issue.get("individual_crd") in seen_crds
+                ]
+                selected_issues.extend(
+                    issue for issue in issues
+                    if not issue.get("individual_crd")
+                )
+                issues = selected_issues[:500]
             issue_rows = [(_stable_id(snapshot_id, member_names and tuple(member_names), index, issue.get("code"), issue.get("individual_crd")), snapshot_id, issue.get("individual_crd"), issue["stage"], issue["severity"], issue["code"], issue["message"], json.dumps(issue), now) for index, issue in enumerate(issues)]
             _execute_many(connection, "INSERT INTO iapd_import_issues (issue_id,snapshot_id,individual_crd,stage,severity,issue_code,message,details,created_at) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING", issue_rows)
             if finalize:
-                _record_changes(connection, snapshot_id, previous_snapshot_id)
-                summary = _change_summary(connection, snapshot_id)
-                summary["parse_issues"] = connection.execute("SELECT COUNT(*) FROM iapd_import_issues WHERE snapshot_id=%s", (snapshot_id,)).fetchone()[0]
+                if expand_existing:
+                    summary = {
+                        "status": "expanded",
+                        "batch_individuals": counts["individuals"],
+                        "parse_issues": len(issue_rows),
+                    }
+                else:
+                    _record_changes(connection, snapshot_id, previous_snapshot_id)
+                    summary = _change_summary(connection, snapshot_id)
+                    summary["parse_issues"] = connection.execute("SELECT COUNT(*) FROM iapd_import_issues WHERE snapshot_id=%s", (snapshot_id,)).fetchone()[0]
                 individual_count = connection.execute("SELECT COUNT(*) FROM iapd_individual_snapshot_members WHERE snapshot_id=%s", (snapshot_id,)).fetchone()[0]
-                connection.execute("UPDATE iapd_individual_snapshots SET status='SUCCESS', individual_count=%s, change_summary=%s, parsed_at=%s, updated_at=%s WHERE snapshot_id=%s", (individual_count, json.dumps(summary), now, now, snapshot_id))
+                if expand_existing:
+                    connection.execute("UPDATE iapd_individual_snapshots SET status='SUCCESS', individual_count=%s, parsed_at=%s, updated_at=%s WHERE snapshot_id=%s", (individual_count, now, now, snapshot_id))
+                else:
+                    connection.execute("UPDATE iapd_individual_snapshots SET status='SUCCESS', individual_count=%s, change_summary=%s, parsed_at=%s, updated_at=%s WHERE snapshot_id=%s", (individual_count, json.dumps(summary), now, now, snapshot_id))
             else:
                 summary = {"status": "running", "batch_individuals": counts["individuals"]}
                 connection.execute("UPDATE iapd_individual_snapshots SET individual_count=(SELECT COUNT(*) FROM iapd_individual_snapshot_members WHERE snapshot_id=%s), updated_at=%s WHERE snapshot_id=%s", (snapshot_id, now, snapshot_id))
-    return {"status": "success" if finalize else "running", "snapshot_id": snapshot_id, "snapshot_date": snapshot_date.isoformat(), "individuals": counts["individuals"], "changes": summary, "dashboard_only": dashboard_only, "target_firm_count": len(target_firm_crds or [])}
+    return {"status": "success" if finalize else "running", "snapshot_id": snapshot_id, "snapshot_date": snapshot_date.isoformat(), "individuals": counts["individuals"], "changes": summary, "dashboard_only": dashboard_only, "target_firm_count": len(selected_firms or [])}
+
+
+def repair_iapd_firm_summaries(
+    *, snapshot_date: date, source_url: str, source_zip: Path, database_url: str
+) -> dict[str, Any]:
+    """Recompute exact summary counts from the retained raw ZIP."""
+    members = _validate_zip(source_zip)
+    content_hash = _sha256(source_zip)
+    for member in members:
+        import_iapd_firm_summaries(
+            snapshot_date=snapshot_date, source_url=source_url, source_zip=source_zip,
+            database_url=database_url, member_names=(member,), finalize=False,
+            content_hash=content_hash,
+        )
+    result = import_iapd_firm_summaries(
+        snapshot_date=snapshot_date, source_url=source_url, source_zip=source_zip,
+        database_url=database_url, member_names=(), finalize=True,
+        content_hash=content_hash,
+    )
+    from src.adv_principals import refresh_iapd_firm_coverage
+    result["coverage"] = refresh_iapd_firm_coverage(database_url=database_url)
+    return result
+
+
+def expand_iapd_details(
+    *, snapshot_date: date, source_url: str, source_zip: Path, database_url: str,
+    priority_categories: Iterable[str] = ("PRIORITY_A", "PRIORITY_B", "PRIORITY_C"),
+    limit: int = 250,
+    max_representatives: int = 500,
+) -> dict[str, Any]:
+    """Publish one restartable, deterministic batch of missing firm detail."""
+    import psycopg
+
+    if limit < 1 or limit > 1_000:
+        raise ValueError("detail expansion limit must be between 1 and 1000")
+    if max_representatives < 1 or max_representatives > 5_000:
+        raise ValueError("representative budget must be between 1 and 5000")
+    content_hash = _sha256(source_zip)
+    snapshot_id = _stable_id(snapshot_date.isoformat(), content_hash)
+    with psycopg.connect(database_url) as connection:
+        dashboard_firms = _dashboard_firm_crds(
+            connection, priority_categories=priority_categories
+        )
+        summary_firms = {
+            str(row[0]): int(row[1]) for row in connection.execute(
+                """SELECT firm_id,representative_count FROM iapd_firm_summaries
+                   WHERE snapshot_id=%s AND representative_count>0""",
+                (snapshot_id,),
+            ).fetchall()
+        }
+        candidates = sorted(
+            dashboard_firms.intersection(summary_firms),
+            key=lambda firm_id: (summary_firms[firm_id], firm_id),
+        )
+        existing = {
+            str(row[0]) for row in connection.execute(
+                "SELECT DISTINCT employer_firm_crd FROM iapd_individual_current_employments WHERE snapshot_id=%s",
+                (snapshot_id,),
+            ).fetchall() if row[0] is not None
+        }
+    selected: list[str] = []
+    representative_total = 0
+    for firm_id in candidates:
+        if firm_id in existing:
+            continue
+        firm_representatives = summary_firms[firm_id]
+        if representative_total + firm_representatives > max_representatives:
+            continue
+        selected.append(firm_id)
+        representative_total += firm_representatives
+        if len(selected) >= limit:
+            break
+    if not selected:
+        return {"status": "complete", "snapshot_id": snapshot_id, "selected_firms": 0}
+    result = import_iapd_snapshot(
+        None, snapshot_date=snapshot_date, source_url=source_url, source_zip=source_zip,
+        database_url=database_url, priority_categories=priority_categories,
+        target_firm_crds=selected, expand_existing=True,
+    )
+    result["selected_firms"] = len(selected)
+    result["selected_firm_ids"] = selected
+    result["selected_representatives"] = representative_total
+    return result
 
 
 def run_iapd_monthly(
@@ -730,20 +1024,22 @@ def run_iapd_monthly(
     force: bool = False,
     priority_categories: Iterable[str] = ("PRIORITY_A",),
 ) -> dict[str, Any]:
-    """Download and import the scheduled, capacity-safe IAPD target scope."""
+    """Download and publish current compact IAPD coverage for all dashboard firms."""
     snapshot_date = run_date or date.today()
     if snapshot_date.day != 4 and not force:
         return {"status": "skipped", "reason": "not_scheduled_day", "snapshot_date": snapshot_date.isoformat()}
     try:
         zip_path, source_url, _ = download_iapd_feed(snapshot_date)
-        return import_iapd_snapshot(
-            None,
-            snapshot_date=snapshot_date,
-            source_url=source_url,
-            source_zip=zip_path,
-            database_url=database_url,
-            priority_categories=priority_categories,
+        summary = repair_iapd_firm_summaries(
+            snapshot_date=snapshot_date, source_url=source_url,
+            source_zip=zip_path, database_url=database_url,
         )
+        summary["detail_scope"] = list(priority_categories)
+        summary["detail_note"] = "Representative detail remains targeted and on-demand."
+        summary["source_zip"] = str(zip_path.resolve())
+        summary["source_url"] = source_url
+        summary["snapshot_date"] = snapshot_date.isoformat()
+        return summary
     except IAPDFeedUnavailable as exc:
         # The individual crawl is deliberately targeted by CRD; a failed
         # monthly feed must not trigger an unbounded crawl or fail the firm
@@ -777,14 +1073,32 @@ def import_iapd_from_paths(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="IAPD individual representative monthly ingestion")
-    parser.add_argument("command", choices=("refresh",))
+    parser.add_argument("command", choices=("refresh", "repair-summaries", "expand-details"))
     parser.add_argument("--database-url", required=True)
     parser.add_argument("--date", type=date.fromisoformat)
     parser.add_argument("--force", action="store_true", help="Permit a manual run outside the fourth day of the month")
     parser.add_argument("--source-zip", type=Path, help="Use an already-downloaded SEC ZIP instead of fetching")
     parser.add_argument("--xml-path", type=Path, help="Use an already-extracted XML file")
     parser.add_argument("--source-url", help="Override the recorded source URL for a manual import")
+    parser.add_argument("--priority", action="append", dest="priorities")
+    parser.add_argument("--limit", type=int, default=250)
+    parser.add_argument("--max-representatives", type=int, default=500)
     args = parser.parse_args()
+    if args.command in {"repair-summaries", "expand-details"}:
+        if not args.date or not args.source_zip or not args.source_url:
+            parser.error("--date, --source-zip, and --source-url are required")
+        result = repair_iapd_firm_summaries(
+            snapshot_date=args.date, source_url=args.source_url,
+            source_zip=args.source_zip, database_url=args.database_url,
+        ) if args.command == "repair-summaries" else expand_iapd_details(
+            snapshot_date=args.date, source_url=args.source_url,
+            source_zip=args.source_zip, database_url=args.database_url,
+            priority_categories=args.priorities or ("PRIORITY_A", "PRIORITY_B", "PRIORITY_C"),
+            limit=args.limit,
+            max_representatives=args.max_representatives,
+        )
+        print(json.dumps(result, indent=2, default=str))
+        return
     if args.xml_path:
         if not args.date:
             parser.error("--date is required when using --xml-path")

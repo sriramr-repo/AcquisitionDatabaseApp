@@ -10,6 +10,11 @@ dependencies = [
     "typer[all]",
     "SQLAlchemy",
     "pydantic-settings",
+    "psycopg[binary]",
+    "boto3>=1.35,<2",
+    "langchain-core>=0.3,<2",
+    "langchain-openai>=0.3,<2",
+    "langchain-ollama>=0.3,<2",
 ]
 requires-python = ">=3.12"
 
@@ -21,7 +26,7 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
-addopts = "--ignore=src/pipeline_test.py" # Temporarily ignore pipeline_test until all components are ready
+addopts = "--ignore=src/pipeline_test.py --ignore=scm-ria-intelligence" # The nested prototype has an independent environment and test suite.
 
 [build-system]
 requires = ["setuptools>=61.0"]
