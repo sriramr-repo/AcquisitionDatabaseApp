@@ -74,6 +74,13 @@ ObservationConfidence = Literal["LOW", "MEDIUM", "HIGH", "VERIFIED"]
 T = TypeVar("T")
 
 
+def configure_langsmith_privacy() -> None:
+    """Enable useful execution traces without exporting captured evidence text."""
+    os.environ.setdefault("LANGSMITH_HIDE_INPUTS", "true")
+    os.environ.setdefault("LANGSMITH_HIDE_OUTPUTS", "true")
+    os.environ.setdefault("LANGSMITH_PROJECT", "scm-research-agent")
+
+
 class ResearchAgentError(RuntimeError):
     """Base error for bounded research-agent failures."""
 
@@ -305,6 +312,7 @@ class LangChainOpenAIExtractor:
     def extract(
         self, *, firm_id: str, dataset_version: str, captures: Sequence[EvidenceCapture]
     ) -> ResearchExtraction:
+        configure_langsmith_privacy()
         _load_local_openai_key()
         if not os.getenv("OPENAI_API_KEY"):
             raise ResearchAgentUnavailable("OPENAI_API_KEY is not configured")
@@ -405,6 +413,7 @@ class LangChainFreeTokenExtractor:
     def extract(
         self, *, firm_id: str, dataset_version: str, captures: Sequence[EvidenceCapture]
     ) -> ResearchExtraction:
+        configure_langsmith_privacy()
         if not self._ready:
             self.check_ready()
         try:
@@ -460,6 +469,7 @@ class LangChainOllamaExtractor:
     def extract(
         self, *, firm_id: str, dataset_version: str, captures: Sequence[EvidenceCapture]
     ) -> ResearchExtraction:
+        configure_langsmith_privacy()
         try:
             from langchain_core.messages import HumanMessage, SystemMessage
             from langchain_ollama import ChatOllama

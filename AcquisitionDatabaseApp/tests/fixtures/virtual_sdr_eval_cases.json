@@ -1,0 +1,44 @@
+[
+  {
+    "case_id": "valid-grounded-brief",
+    "description": "A complete brief whose claims cite accepted evidence.",
+    "brief": {
+      "executive_summary": {"text": "The firm is founder-led.", "source_ids": ["source-accepted"]},
+      "acquisition_fit_thesis": {"text": "Its profile warrants a discreet introductory conversation.", "source_ids": ["source-accepted"]},
+      "decision_makers": [{"name": "Verified Principal", "role": "Principal", "rationale": "Named in accepted evidence.", "source_ids": ["source-accepted"]}],
+      "talking_points": [{"text": "Discuss long-term continuity.", "source_ids": ["source-accepted"]}],
+      "research_gaps": [],
+      "email_subject": "A discreet introduction",
+      "email_body": "I would welcome a confidential introductory conversation.",
+      "call_opener": "I am calling to introduce SCM and learn about your long-term priorities.",
+      "discovery_questions": ["What matters most?", "How is the team structured?", "What would make a partnership useful?"],
+      "likely_objections": [],
+      "confidence": "HIGH",
+      "source_ids": ["source-accepted"]
+    },
+    "allowed_source_ids": ["source-accepted"],
+    "expected_status": "PASSED",
+    "tags": ["grounding", "complete"]
+  },
+  {
+    "case_id": "invented-source-rejected",
+    "description": "A structurally complete brief must fail when it cites an unaccepted source.",
+    "brief": {
+      "executive_summary": {"text": "The firm is founder-led.", "source_ids": ["invented-source"]},
+      "acquisition_fit_thesis": {"text": "Its profile warrants review.", "source_ids": ["invented-source"]},
+      "decision_makers": [],
+      "talking_points": [{"text": "Discuss continuity.", "source_ids": ["invented-source"]}],
+      "research_gaps": ["Decision maker is not verified."],
+      "email_subject": "A discreet introduction",
+      "email_body": "I would welcome an introductory conversation.",
+      "call_opener": "I am calling to introduce SCM.",
+      "discovery_questions": ["What matters most?", "How is the team structured?", "What are your priorities?"],
+      "likely_objections": [],
+      "confidence": "LOW",
+      "source_ids": ["invented-source"]
+    },
+    "allowed_source_ids": ["source-accepted"],
+    "expected_status": "FAILED",
+    "tags": ["hallucination", "citation"]
+  }
+]

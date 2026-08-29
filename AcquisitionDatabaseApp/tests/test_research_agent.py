@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import time
 
 import pytest
@@ -45,6 +46,7 @@ from src.research_agent import (
     normalize_exact_evidence_references,
     normalize_openai_base_url,
     validate_extraction,
+    configure_langsmith_privacy,
 )
 
 
@@ -149,6 +151,14 @@ def test_valid_structured_extraction_is_saved_as_proposed():
     assert result == {"job_id": "job-1", "status": "REVIEW_REQUIRED", "observations": 1}
     assert repository.saved[0].proposed_value == "Jane Doe"
     assert repository.statuses[-1][1] == "REVIEW_REQUIRED"
+
+
+def test_research_agent_langsmith_traces_hide_evidence_by_default(monkeypatch):
+    monkeypatch.delenv("LANGSMITH_HIDE_INPUTS", raising=False)
+    monkeypatch.delenv("LANGSMITH_HIDE_OUTPUTS", raising=False)
+    configure_langsmith_privacy()
+    assert os.environ["LANGSMITH_HIDE_INPUTS"] == "true"
+    assert os.environ["LANGSMITH_HIDE_OUTPUTS"] == "true"
 
 
 def test_priority_a_batch_queue_is_bounded_and_uses_normal_queue_flow():

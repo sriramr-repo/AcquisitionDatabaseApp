@@ -1,6 +1,7 @@
 import { sql } from "drizzle-orm";
 import { db } from "./db";
 import { getIapdFirmBundle } from "./iapd-bundles";
+import { virtualSdrData } from "./virtual-sdr";
 
 export async function dashboardData(): Promise<any>{
   const [dataset, counts, research, outreach] = await Promise.all([
@@ -69,6 +70,7 @@ export async function firmData(firmId:string): Promise<any>{
   const detail:any = firmRecord
     ? await getIapdFirmBundle(String(firmRecord.dataset_version), firmId)
     : {status:"FAILED",message:"Firm not found"};
+  const sdr = firmRecord ? await virtualSdrData(firmId) : {runs:[],artifacts:[],reviews:[],qualityChecks:[]};
   let representativeRows:any[] = representatives.rows as any[];
   let detailStatus:any = detail;
   if (detail.status === "AVAILABLE") {
@@ -91,5 +93,5 @@ export async function firmData(firmId:string): Promise<any>{
       message: detail.message || "Cloudflare R2 detail is unavailable; using the verified hosted fallback.",
     };
   }
-  return {firm:firmRecord,facts:facts.rows[0]||null,scores:scores.rows[0]||null,research:research.rows[0]||null,sources:sources.rows,contacts:contacts.rows,outreach:outreach.rows[0]||null,activities:activities.rows,representatives:representativeRows,iapdDetail:detailStatus,iapdSummary:iapdSummary.rows[0]||null,iapdCoverage:iapdCoverage.rows[0]||null,iapdPrincipals:iapdPrincipals.rows,agentJobs:agentJobs.rows,observations:observations.rows};
+  return {firm:firmRecord,facts:facts.rows[0]||null,scores:scores.rows[0]||null,research:research.rows[0]||null,sources:sources.rows,contacts:contacts.rows,outreach:outreach.rows[0]||null,activities:activities.rows,representatives:representativeRows,iapdDetail:detailStatus,iapdSummary:iapdSummary.rows[0]||null,iapdCoverage:iapdCoverage.rows[0]||null,iapdPrincipals:iapdPrincipals.rows,agentJobs:agentJobs.rows,observations:observations.rows,sdr};
 }
