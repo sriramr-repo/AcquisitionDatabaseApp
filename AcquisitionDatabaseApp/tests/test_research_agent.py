@@ -47,6 +47,9 @@ from src.research_agent import (
     normalize_openai_base_url,
     validate_extraction,
     configure_langsmith_privacy,
+    research_job_trace_metadata,
+    _research_job_trace_inputs,
+    _research_job_trace_outputs,
 )
 
 
@@ -154,11 +157,41 @@ def test_valid_structured_extraction_is_saved_as_proposed():
 
 
 def test_research_agent_langsmith_traces_hide_evidence_by_default(monkeypatch):
+    monkeypatch.delenv("LANGSMITH_TRACING", raising=False)
+    monkeypatch.setenv("LANGSMITH_API_KEY", "test-key")
     monkeypatch.delenv("LANGSMITH_HIDE_INPUTS", raising=False)
     monkeypatch.delenv("LANGSMITH_HIDE_OUTPUTS", raising=False)
+    monkeypatch.delenv("LANGCHAIN_CALLBACKS_BACKGROUND", raising=False)
     configure_langsmith_privacy()
+    assert os.environ["LANGSMITH_TRACING"] == "true"
     assert os.environ["LANGSMITH_HIDE_INPUTS"] == "true"
     assert os.environ["LANGSMITH_HIDE_OUTPUTS"] == "true"
+    assert os.environ["LANGCHAIN_CALLBACKS_BACKGROUND"] == "false"
+
+
+def test_research_job_trace_payload_is_searchable_without_evidence_or_error_text():
+    source_job = {
+        **job(),
+        "evidence_excerpt": "Jane Doe founded the firm.",
+        "contact_email": "jane@example.com",
+    }
+    service = ResearchAgentService(
+        FakeRepository(), FakeExtractor(), ResearchAgentConfig()
+    )
+    metadata = research_job_trace_metadata(source_job, provider="fake", model="safe")
+    traced_inputs = _research_job_trace_inputs({"self": service, "job": source_job})
+    traced_outputs = _research_job_trace_outputs({
+        "job_id": "job-1",
+        "status": "FAILED",
+        "error": "private provider response",
+    })
+    serialized = str({"metadata": metadata, "inputs": traced_inputs, "outputs": traced_outputs})
+    assert metadata["firm_id"] == "firm-1"
+    assert metadata["source_capture_count"] == 1
+    assert traced_outputs["has_error"] is True
+    assert "Jane Doe" not in serialized
+    assert "jane@example.com" not in serialized
+    assert "private provider response" not in serialized
 
 
 def test_priority_a_batch_queue_is_bounded_and_uses_normal_queue_flow():

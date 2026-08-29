@@ -16,6 +16,9 @@ from src.virtual_sdr import (
     sanitized_trace_metadata,
     validate_brief_sources,
     R2ArtifactStore,
+    _sdr_generation_trace_inputs,
+    _sdr_generation_trace_outputs,
+    _sdr_revision_trace_inputs,
 )
 
 
@@ -173,11 +176,44 @@ def test_trace_metadata_contains_counts_but_no_evidence_or_contacts():
 
 
 def test_langsmith_privacy_defaults_hide_inputs_and_outputs(monkeypatch):
+    monkeypatch.delenv("LANGSMITH_TRACING", raising=False)
+    monkeypatch.setenv("LANGSMITH_API_KEY", "test-key")
     monkeypatch.delenv("LANGSMITH_HIDE_INPUTS", raising=False)
     monkeypatch.delenv("LANGSMITH_HIDE_OUTPUTS", raising=False)
+    monkeypatch.delenv("LANGCHAIN_CALLBACKS_BACKGROUND", raising=False)
     configure_langsmith_privacy()
+    assert os.environ["LANGSMITH_TRACING"] == "true"
     assert os.environ["LANGSMITH_HIDE_INPUTS"] == "true"
     assert os.environ["LANGSMITH_HIDE_OUTPUTS"] == "true"
+    assert os.environ["LANGCHAIN_CALLBACKS_BACKGROUND"] == "false"
+
+
+def test_virtual_sdr_trace_payloads_expose_counts_not_evidence_or_drafts():
+    source_context = context()
+    source_context["accepted_observations"][0]["evidence_excerpt"] = "private evidence"
+    traced_inputs = _sdr_generation_trace_inputs({
+        "context": source_context,
+        "research_gaps": ["private research gap"],
+    })
+    generated = brief()
+    generated.email_body = "private email draft"
+    traced_outputs = _sdr_generation_trace_outputs(generated)
+    revision_inputs = _sdr_revision_trace_inputs({
+        "brief": generated,
+        "notes": "private reviewer note",
+    })
+    serialized = str({
+        "inputs": traced_inputs,
+        "outputs": traced_outputs,
+        "revision": revision_inputs,
+    })
+    assert traced_inputs["accepted_fact_count"] == 1
+    assert traced_inputs["research_gap_count"] == 1
+    assert traced_outputs["source_count"] == 1
+    assert revision_inputs["review_note_chars"] == len("private reviewer note")
+    assert "private evidence" not in serialized
+    assert "private email draft" not in serialized
+    assert "private reviewer note" not in serialized
 
 
 def test_quality_validation_preserves_null_and_zero_and_rejects_unknown_sources():

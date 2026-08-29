@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from typing import Any, Literal, Protocol, Sequence, TypedDict
 
+from langsmith import traceable
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
@@ -24,9 +25,14 @@ ALLOWED_DECISIONS = {"APPROVED", "REJECTED", "REVISION_REQUESTED"}
 
 def configure_langsmith_privacy() -> None:
     """Trace execution metadata without exporting evidence, contacts, or drafts."""
+    os.environ.setdefault(
+        "LANGSMITH_TRACING",
+        "true" if os.getenv("LANGSMITH_API_KEY") else "false",
+    )
     os.environ.setdefault("LANGSMITH_HIDE_INPUTS", "true")
     os.environ.setdefault("LANGSMITH_HIDE_OUTPUTS", "true")
     os.environ.setdefault("LANGSMITH_PROJECT", "scm-virtual-sdr")
+    os.environ.setdefault("LANGCHAIN_CALLBACKS_BACKGROUND", "false")
 
 
 class CitedText(BaseModel):
@@ -140,6 +146,37 @@ def sanitized_trace_metadata(state: SdrState) -> dict[str, Any]:
         "accepted_fact_count": len(context.get("accepted_observations") or []),
         "official_principal_count": len(context.get("official_principals") or []),
         "verified_contact_count": len(context.get("verified_contacts") or []),
+    }
+
+
+def _sdr_generation_trace_inputs(inputs: dict[str, Any]) -> dict[str, Any]:
+    context = inputs.get("context") if isinstance(inputs.get("context"), dict) else {}
+    firm = context.get("firm") if isinstance(context.get("firm"), dict) else {}
+    return {
+        "firm_id": str(context.get("firm_id") or firm.get("firm_id") or ""),
+        "dataset_version": str(context.get("dataset_version") or ""),
+        "accepted_fact_count": len(context.get("accepted_observations") or []),
+        "official_principal_count": len(context.get("official_principals") or []),
+        "verified_contact_count": len(context.get("verified_contacts") or []),
+        "research_gap_count": len(inputs.get("research_gaps") or []),
+    }
+
+
+def _sdr_generation_trace_outputs(output: Any) -> dict[str, Any]:
+    brief = output if isinstance(output, SdrBrief) else None
+    return {
+        "confidence": brief.confidence if brief else "UNKNOWN",
+        "source_count": len(brief.source_ids) if brief else 0,
+        "decision_maker_count": len(brief.decision_makers) if brief else 0,
+        "talking_point_count": len(brief.talking_points) if brief else 0,
+    }
+
+
+def _sdr_revision_trace_inputs(inputs: dict[str, Any]) -> dict[str, Any]:
+    brief = inputs.get("brief")
+    return {
+        "source_count": len(brief.source_ids) if isinstance(brief, SdrBrief) else 0,
+        "review_note_chars": len(str(inputs.get("notes") or "")),
     }
 
 
@@ -299,6 +336,35 @@ class LangChainSdrGenerator:
         )
 
     def generate(self, context: dict[str, Any], research_gaps: Sequence[str]) -> SdrBrief:
+        metadata = {
+            **_sdr_generation_trace_inputs(
+                {"context": context, "research_gaps": research_gaps}
+            ),
+            "workflow_version": WORKFLOW_VERSION,
+            "prompt_version": PROMPT_VERSION,
+            "provider": self.provider,
+            "model": self.model_name,
+        }
+        return self._generate_traced(
+            context,
+            research_gaps,
+            langsmith_extra={"metadata": metadata},
+        )
+
+    @traceable(
+        name="scm_virtual_sdr_generate_brief",
+        run_type="chain",
+        metadata={
+            "workflow_version": WORKFLOW_VERSION,
+            "prompt_version": PROMPT_VERSION,
+        },
+        tags=["scm", "virtual-sdr", "accepted-evidence-only"],
+        process_inputs=_sdr_generation_trace_inputs,
+        process_outputs=_sdr_generation_trace_outputs,
+    )
+    def _generate_traced(
+        self, context: dict[str, Any], research_gaps: Sequence[str]
+    ) -> SdrBrief:
         from langchain_core.messages import HumanMessage, SystemMessage
 
         safe_context = {
@@ -318,6 +384,33 @@ class LangChainSdrGenerator:
         return result if isinstance(result, SdrBrief) else SdrBrief.model_validate(result)
 
     def revise(self, brief: SdrBrief, notes: str) -> SdrBrief:
+        return self._revise_traced(
+            brief,
+            notes,
+            langsmith_extra={
+                "metadata": {
+                    "workflow_version": WORKFLOW_VERSION,
+                    "prompt_version": PROMPT_VERSION,
+                    "provider": self.provider,
+                    "model": self.model_name,
+                    "source_count": len(brief.source_ids),
+                    "review_note_chars": len(notes),
+                }
+            },
+        )
+
+    @traceable(
+        name="scm_virtual_sdr_revise_brief",
+        run_type="chain",
+        metadata={
+            "workflow_version": WORKFLOW_VERSION,
+            "prompt_version": PROMPT_VERSION,
+        },
+        tags=["scm", "virtual-sdr", "human-revision"],
+        process_inputs=_sdr_revision_trace_inputs,
+        process_outputs=_sdr_generation_trace_outputs,
+    )
+    def _revise_traced(self, brief: SdrBrief, notes: str) -> SdrBrief:
         from langchain_core.messages import HumanMessage, SystemMessage
 
         result = self._model().invoke([

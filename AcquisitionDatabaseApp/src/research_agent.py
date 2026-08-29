@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import Annotated, Any, Callable, Literal, Protocol, Sequence, TypeVar
 
 import psycopg
+from langsmith import traceable
 from psycopg.rows import dict_row
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -76,9 +77,79 @@ T = TypeVar("T")
 
 def configure_langsmith_privacy() -> None:
     """Enable useful execution traces without exporting captured evidence text."""
+    os.environ.setdefault(
+        "LANGSMITH_TRACING",
+        "true" if os.getenv("LANGSMITH_API_KEY") else "false",
+    )
     os.environ.setdefault("LANGSMITH_HIDE_INPUTS", "true")
     os.environ.setdefault("LANGSMITH_HIDE_OUTPUTS", "true")
     os.environ.setdefault("LANGSMITH_PROJECT", "scm-research-agent")
+    os.environ.setdefault("LANGCHAIN_CALLBACKS_BACKGROUND", "false")
+
+
+def research_job_trace_metadata(
+    job: dict[str, Any], *, provider: str | None = None, model: str | None = None
+) -> dict[str, Any]:
+    """Return searchable job metadata without evidence, contacts, or model output."""
+    return {
+        "job_id": str(job.get("job_id") or ""),
+        "firm_id": str(job.get("firm_id") or ""),
+        "dataset_version": str(job.get("dataset_version") or ""),
+        "prompt_version": str(job.get("prompt_version") or PROMPT_VERSION),
+        "extraction_version": str(
+            job.get("extraction_version") or EXTRACTION_VERSION
+        ),
+        "provider": provider or str(job.get("model_provider") or ""),
+        "model": model or str(job.get("model_name") or ""),
+        "source_capture_count": len(job.get("source_capture_ids") or []),
+        "attempt": int(job.get("attempt_count") or 0),
+    }
+
+
+def _research_job_trace_inputs(inputs: dict[str, Any]) -> dict[str, Any]:
+    job = inputs.get("job") if isinstance(inputs.get("job"), dict) else {}
+    service = inputs.get("self")
+    extractor = getattr(service, "extractor", None)
+    return research_job_trace_metadata(
+        job,
+        provider=getattr(extractor, "provider", None),
+        model=getattr(extractor, "model_name", None),
+    )
+
+
+def _research_job_trace_outputs(output: Any) -> dict[str, Any]:
+    result = output if isinstance(output, dict) else {}
+    observations = result.get("observations")
+    return {
+        "job_id": str(result.get("job_id") or ""),
+        "status": str(result.get("status") or "UNKNOWN"),
+        "observation_count": observations if isinstance(observations, int) else 0,
+        "attempt": int(result.get("attempt") or 0),
+        "has_error": bool(result.get("error")),
+    }
+
+
+def _research_batch_trace_inputs(inputs: dict[str, Any]) -> dict[str, Any]:
+    service = inputs.get("self")
+    extractor = getattr(service, "extractor", None)
+    return {
+        "limit": int(inputs.get("limit") or 0),
+        "provider": str(getattr(extractor, "provider", "")),
+        "model": str(getattr(extractor, "model_name", "")),
+    }
+
+
+def _research_batch_trace_outputs(output: Any) -> dict[str, Any]:
+    results = output if isinstance(output, list) else []
+    statuses: dict[str, int] = {}
+    for result in results:
+        status = (
+            str(result.get("status") or "UNKNOWN")
+            if isinstance(result, dict)
+            else "UNKNOWN"
+        )
+        statuses[status] = statuses.get(status, 0) + 1
+    return {"jobs_processed": len(results), "status_counts": statuses}
 
 
 class ResearchAgentError(RuntimeError):
@@ -1312,6 +1383,7 @@ class ResearchAgentService:
         extractor: ResearchExtractor,
         config: ResearchAgentConfig | None = None,
     ):
+        configure_langsmith_privacy()
         self.repository = repository
         self.extractor = extractor
         self.config = config or ResearchAgentConfig.from_environment()
@@ -1371,6 +1443,27 @@ class ResearchAgentService:
         }
 
     def process_job(self, job: dict[str, Any]) -> dict[str, Any]:
+        metadata = research_job_trace_metadata(
+            job,
+            provider=self.extractor.provider,
+            model=self.extractor.model_name,
+        )
+        return self._process_job_traced(
+            job, langsmith_extra={"metadata": metadata}
+        )
+
+    @traceable(
+        name="scm_research_agent_job",
+        run_type="chain",
+        metadata={
+            "prompt_version": PROMPT_VERSION,
+            "extraction_version": EXTRACTION_VERSION,
+        },
+        tags=["scm", "research-agent", "review-gated"],
+        process_inputs=_research_job_trace_inputs,
+        process_outputs=_research_job_trace_outputs,
+    )
+    def _process_job_traced(self, job: dict[str, Any]) -> dict[str, Any]:
         job_id = str(job["job_id"])
         try:
             if (
@@ -1475,6 +1568,27 @@ class ResearchAgentService:
             return {"job_id": job_id, "status": "FAILED", "error": str(exc)}
 
     def process_queued(self, limit: int = 3) -> list[dict[str, Any]]:
+        return self._process_queued_traced(
+            limit,
+            langsmith_extra={
+                "metadata": {
+                    "limit": limit,
+                    "provider": self.extractor.provider,
+                    "model": self.extractor.model_name,
+                    "prompt_version": PROMPT_VERSION,
+                    "extraction_version": EXTRACTION_VERSION,
+                }
+            },
+        )
+
+    @traceable(
+        name="scm_research_agent_batch",
+        run_type="chain",
+        tags=["scm", "research-agent", "batch"],
+        process_inputs=_research_batch_trace_inputs,
+        process_outputs=_research_batch_trace_outputs,
+    )
+    def _process_queued_traced(self, limit: int = 3) -> list[dict[str, Any]]:
         readiness_check = getattr(self.extractor, "check_ready", None)
         if callable(readiness_check):
             try:
