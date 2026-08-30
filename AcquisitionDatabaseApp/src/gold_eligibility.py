@@ -12,7 +12,7 @@ from typing import Any, Iterable, Optional
 import pandas as pd
 
 
-SCORE_VERSION = "SCM_ACQUISITION_V1"
+SCORE_VERSION = "SCM_ACQUISITION_V2"
 
 # These are the only registration statuses observed in ia07012026.  Other
 # values are deliberately treated as ambiguous until their semantics are

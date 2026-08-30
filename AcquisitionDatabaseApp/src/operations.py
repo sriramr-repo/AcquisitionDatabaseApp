@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from src.config import settings
+from src.gold_eligibility import SCORE_VERSION
 
 
 RUN_STATUSES = {
@@ -133,7 +134,7 @@ class OperationsRepository:
 
     def start_run(self, *, dataset_version: str | None, source_url: str | None,
                   trigger_type: str, previous_dataset_version: str | None = None,
-                  score_version: str = "SCM_ACQUISITION_V1") -> str:
+                  score_version: str = SCORE_VERSION) -> str:
         run_id = uuid.uuid4().hex
         with self.connect() as c:
             c.execute("""INSERT INTO pipeline_runs

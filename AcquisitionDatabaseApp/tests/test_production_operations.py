@@ -7,6 +7,7 @@ import pytest
 
 from src import backup, production
 from src.config import settings
+from src.gold_eligibility import SCORE_VERSION
 from src.operations import OperationsRepository
 from src.storage import DatasetRegistry
 
@@ -32,6 +33,7 @@ def test_run_registry_persists_stages_and_failure(tmp_path):
     repository.update_run(run_id, status="FAILED_DOWNLOAD", error_count=1, notes="network")
     run = repository.get_run(run_id)
     assert run["status"] == "FAILED_DOWNLOAD"
+    assert run["score_version"] == SCORE_VERSION
     assert repository.list_stages(run_id)[0]["stage_name"] == "download"
 
 
@@ -53,6 +55,7 @@ def test_backup_verify_and_isolated_restore(monkeypatch, tmp_path):
     parquet = settings.GOLD_DIR / "fixture" / "gold_scm_acquisition_v1_fixture.parquet"
     parquet.write_bytes(b"parquet-fixture")
     manifest = backup.create_backup(dataset_version="fixture")
+    assert manifest["score_version"] == SCORE_VERSION
     path = settings.BACKUP_DIR / manifest["backup_id"]
     assert backup.verify_backup(path)["valid"] is True
     restored = backup.restore_backup(path, tmp_path / "restore")

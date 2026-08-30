@@ -14,6 +14,7 @@ from typing import Any
 import duckdb
 
 from src.config import settings
+from src.gold_eligibility import SCORE_VERSION
 from src.gold_v1 import gold_v1_table_name
 
 
@@ -96,6 +97,21 @@ def _upsert(conn: Any, table: str, columns: list[str], values: tuple[Any, ...], 
     conn.execute(sql, values)
 
 
+def _source_score_version(columns: list[str], rows: list[tuple[Any, ...]]) -> str:
+    """Return the one score version carried by Gold, rejecting mixed output."""
+    if "score_version" not in columns:
+        return SCORE_VERSION
+    position = columns.index("score_version")
+    versions = {
+        str(row[position]).strip()
+        for row in rows
+        if row[position] is not None and str(row[position]).strip()
+    }
+    if len(versions) > 1:
+        raise RuntimeError(f"Protected Gold contains mixed score versions: {sorted(versions)}")
+    return next(iter(versions), SCORE_VERSION)
+
+
 def publish(dataset_version: str, database_url: str) -> dict[str, Any]:
     import psycopg
 
@@ -104,6 +120,7 @@ def publish(dataset_version: str, database_url: str) -> dict[str, Any]:
     if not rows or "firm_id" not in columns:
         raise RuntimeError(f"Protected Gold V1 table is empty or invalid: {table}")
     index = {column: columns.index(column) for column in columns}
+    score_version = _source_score_version(columns, rows)
     offices = _main_offices(str(settings.DUCKDB_FILE), dataset_version)
     priorities = {str(row[index["priority_category"]]): 0 for row in rows if "priority_category" in index}
     for row in rows:
@@ -135,7 +152,7 @@ def publish(dataset_version: str, database_url: str) -> dict[str, Any]:
                 ON CONFLICT (dataset_version) DO UPDATE SET dataset_date=EXCLUDED.dataset_date,
                 score_version=EXCLUDED.score_version,silver_rows=EXCLUDED.silver_rows,gold_rows=EXCLUDED.gold_rows,
                 priority_counts=EXCLUDED.priority_counts,published_at=EXCLUDED.published_at,updated_at=EXCLUDED.updated_at""",
-                (dataset_version, dataset_version[2:], "SCM_ACQUISITION_V1", len(rows), len(rows), json.dumps(priorities), now, now, now))
+                (dataset_version, dataset_version[2:], score_version, len(rows), len(rows), json.dumps(priorities), now, now, now))
             for row in rows:
                 firm_id = str(row[index["firm_id"]])
                 base = (firm_id, dataset_version, now, now)

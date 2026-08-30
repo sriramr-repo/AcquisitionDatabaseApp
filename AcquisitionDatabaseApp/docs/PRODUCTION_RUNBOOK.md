@@ -4,7 +4,7 @@
 
 The application uses Bronze, Silver, Gold, Gold V1, reporting exports, and a separate research database. Production is selected explicitly with `SCM_ENV=PROD`; development and tests default to isolated `data-dev` and temporary directories. The production root is the repository's `data/` directory or the explicit `SCM_DATA_DIR` value.
 
-Gold V1 scoring (`SCM_ACQUISITION_V1`) and priority rules are frozen. Operational metadata is stored separately in `pipeline_runs`, `pipeline_stages`, `operational_alerts`, and `backups` tables in `metadata.db`.
+The Gold V1 materialization stack currently emits score version `SCM_ACQUISITION_V2`; its scoring formulas and priority rules remain frozen. Operational metadata is stored separately in `pipeline_runs`, `pipeline_stages`, `operational_alerts`, and `backups` tables in `metadata.db`.
 
 ## Monthly workflow
 

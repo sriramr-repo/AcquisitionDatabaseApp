@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from src.config import settings
+from src.gold_eligibility import SCORE_VERSION
 from src.operations import OperationsRepository, code_version
 
 
@@ -58,7 +59,7 @@ def create_backup(*, dataset_version: str | None = None, run_id: str | None = No
         manifest = {
             "backup_id": backup_id, "created_at": _now(), "environment": settings.ENVIRONMENT,
             "dataset_version": dataset_version, "run_id": run_id, "code_version": code_version(),
-            "score_version": "SCM_ACQUISITION_V1", "files": files,
+            "score_version": SCORE_VERSION, "files": files,
         }
         (root / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
         with repository.connect() as connection:
@@ -76,7 +77,7 @@ def create_backup(*, dataset_version: str | None = None, run_id: str | None = No
                 (backup_id,created_at,environment,dataset_version,run_id,code_version,score_version,
                  backup_path,status,error_message) VALUES (?,?,?,?,?,?,?,?,?,?)""", (
                 backup_id, _now(), settings.ENVIRONMENT, dataset_version, run_id, code_version(),
-                "SCM_ACQUISITION_V1", str(root), "FAILED", str(exc),
+                SCORE_VERSION, str(root), "FAILED", str(exc),
             ))
         raise
 

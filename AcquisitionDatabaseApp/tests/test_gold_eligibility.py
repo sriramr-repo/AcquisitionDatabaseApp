@@ -43,6 +43,7 @@ def test_eligibility_statuses_and_version():
     assert bool(eligible.review_required) is False
     assert eligible.hard_exclusion_reason is None
     assert eligible.score_version == SCORE_VERSION
+    assert eligible.score_version == "SCM_ACQUISITION_V2"
 
     ambiguous = result(total_aum=40_000_000, sec_current_status="120-Day Approval")
     assert ambiguous.eligibility_status == "REVIEW_REQUIRED"
