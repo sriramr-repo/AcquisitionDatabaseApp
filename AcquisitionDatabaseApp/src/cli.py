@@ -160,13 +160,15 @@ def iapd_refresh_command(
     database_url: str = typer.Option(..., "--database-url"),
     date: Optional[str] = typer.Option(None, "--date"),
     force: bool = typer.Option(False, "--force"),
+    discover_latest: bool = typer.Option(False, "--discover-latest"),
 ):
     """Run the monthly IAPD representative refresh."""
     from datetime import date as date_type
     from src.iapd import run_iapd_monthly
+    from src.iapd_recovery import monthly_refresh_with_recovery
     import json
     run_date = date_type.fromisoformat(date) if date else None
-    result = run_iapd_monthly(database_url=database_url, run_date=run_date, force=force)
+    result = monthly_refresh_with_recovery(database_url=database_url, run_date=run_date, force=force) if discover_latest else run_iapd_monthly(database_url=database_url, run_date=run_date, force=force)
     typer.echo(json.dumps(result, indent=2, default=str))
 
 
@@ -230,10 +232,31 @@ def iapd_reconcile_command(
 def iapd_audit_command(database_url: str = typer.Option(..., "--database-url")):
     """List recent IAPD parse and reconciliation issues without changing data."""
     import json
-    import psycopg
-    with psycopg.connect(database_url) as connection:
-        rows = connection.execute("SELECT snapshot_id,individual_crd,stage,severity,issue_code,message,created_at FROM iapd_import_issues ORDER BY created_at DESC LIMIT 100").fetchall()
-    typer.echo(json.dumps([list(row) for row in rows], indent=2, default=str))
+    from src.iapd_batch import quality_report
+    typer.echo(json.dumps(quality_report(database_url=database_url), indent=2, default=str))
+
+
+@app.command("iapd-live-batch")
+def iapd_live_batch_command(
+    database_url: str = typer.Option(..., "--database-url"),
+    local_database: str = typer.Option(..., "--local-database"),
+    limit: int = typer.Option(25, "--limit", min=1, max=1000),
+    workers: int = typer.Option(2, "--workers", min=1, max=8),
+    freshness_days: int = typer.Option(30, "--freshness-days", min=1, max=365),
+    all_records: bool = typer.Option(False, "--all", help="Include the national feed, not only current dashboard firms."),
+    resume: bool = typer.Option(False, "--resume", help="Resume retryable queued jobs without creating a new universe."),
+    crd: Optional[list[str]] = typer.Option(None, "--crd", help="Restrict to one or more representative CRDs."),
+):
+    """Run a bounded, restartable live-IAPD enrichment batch."""
+    from pathlib import Path
+    from src.iapd_batch import run_live_batch
+    import json
+    result = run_live_batch(
+        database_url=database_url, local_database=Path(local_database), limit=limit,
+        workers=workers, freshness_days=freshness_days, include_national=all_records,
+        selected_crds=crd or (), resume=resume,
+    )
+    typer.echo(json.dumps(result, indent=2, default=str))
 
 
 @app.command("list-runs")

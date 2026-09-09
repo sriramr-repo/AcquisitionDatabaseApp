@@ -113,6 +113,41 @@
       "when": 1787889190965,
       "tag": "0015_lean_blackheart",
       "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1788152400000,
+      "tag": "0016_adv_facts_and_seller_intent",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1788238800000,
+      "tag": "0017_adv_extraction_pipeline",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1788239400000,
+      "tag": "0018_adv_job_leases",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1788516000000,
+      "tag": "0019_main_office_postal_code",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1788840000000,
+      "tag": "0020_iapd_production_operations",
+      "breakpoints": true
     }
   ]
 }
