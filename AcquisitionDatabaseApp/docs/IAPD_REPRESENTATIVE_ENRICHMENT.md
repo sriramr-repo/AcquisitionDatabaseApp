@@ -133,6 +133,29 @@ Neon remains the control plane and stores compact firm summaries, workflow,
 freshness, conflict, and audit records. This avoids exceeding the hosted
 database storage limit while keeping all dashboard firms queryable.
 
+Compare an activated local snapshot with its preserved predecessor:
+
+```bash
+python3 -m src.iapd_local compare-snapshots \
+  --current-database data/iapd/local/datasets/ia08032026_0/iapd.duckdb \
+  --previous-database data/iapd/local/datasets/ia08032026_0.previous/iapd.duckdb \
+  --report-path data/iapd/local/changes/ia08032026_0_2026-09-08.json
+```
+
+Omitting `--previous-database` emits a valid baseline report. The day-4 job
+writes the comparison automatically, validates it, and publishes compact
+dashboard-firm summaries to Neon before publishing R2 bundles. Reports
+contain aggregate changes and bounded representative-CRD samples; a change is
+not interpreted as misconduct, termination, ownership, or seller intent.
+
+Validate a report without opening a database connection:
+
+```bash
+python3 -m src.iapd_change_publisher publish \
+  --report-path data/iapd/local/changes/ia08032026_0_2026-09-08.json \
+  --dry-run
+```
+
 Run a bounded batch for representatives linked to current dashboard firms:
 
 ```bash
@@ -161,11 +184,16 @@ multiple-current-employer records remain visible in
 Review current quality and operator work:
 
 ```bash
-python3 -m src.cli iapd-audit --database-url "$PUBLISHER_DATABASE_URL"
+python3 -m src.iapd_batch quality \
+  --database-url "$PUBLISHER_DATABASE_URL" \
+  --bundle-manifest data/iapd/bundles/ia08032026_0/manifest.json
 ```
 
-The Operations page displays feed recovery runs, live job states, and open
-review reasons. Target Explorer exposes AUM, state, representative count,
+The report reads the compact Neon control plane and verified local/R2 manifest;
+it no longer depends on detailed person snapshots in Neon. The Operations page
+displays feed recovery runs, live job states, and open review reasons. The
+Changes page displays conservative firm-level IAPD deltas and filters. Target
+Explorer exposes AUM, state, representative count,
 freshness, conflict, and representative-disclosure filters. `NULL` enrichment
 is displayed as unknown and is never counted as zero.
 

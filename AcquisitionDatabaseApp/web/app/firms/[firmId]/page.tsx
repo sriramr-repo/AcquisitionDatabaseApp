@@ -101,7 +101,7 @@ export default async function Firm({ params }: { params: Promise<{ firmId: strin
       </div>
       <div>
         <AdvDetails data={data} />
-        <div className="panel">
+        <div className="panel" id="iapd-representatives">
           <h3>IAPD personnel coverage</h3>
           <div className="score-row"><span><b>{label(coverageStatus)}</b><small className="score-meaning muted">{coverageMeaning}</small></span><span className="badge">{data.iapdCoverage ? "Classified" : "Pending"}</span></div>
           <div className="score-row"><span>Detail source</span><b>{data.iapdDetail?.source === "CLOUDFLARE_R2" ? "Cloudflare R2" : data.iapdDetail?.source === "NEON" ? "Hosted fallback" : "Unavailable"}</b></div>

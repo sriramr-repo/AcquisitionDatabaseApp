@@ -745,6 +745,205 @@ def publish_bundles_to_r2(
     return report
 
 
+def compare_local_snapshots(
+    *, current_database: Path, previous_database: Path | None,
+    report_path: Path | None = None, sample_limit: int = 25,
+) -> dict[str, Any]:
+    """Compare immutable local snapshots and optionally persist an audit report."""
+    current_database = Path(current_database).resolve()
+    if not current_database.is_file():
+        raise IAPDLocalError(f"Current snapshot does not exist: {current_database}")
+    if sample_limit < 0 or sample_limit > 100:
+        raise ValueError("sample_limit must be between 0 and 100")
+    change_names = (
+        "new_representatives", "disappeared_representatives",
+        "employer_changes", "registration_changes", "disclosure_changes",
+        "material_contact_changes",
+    )
+    keys = (
+        "snapshot_id", "dataset_version", "snapshot_date", "source_url",
+        "source_hash", "person_count", "current_link_count",
+    )
+    def snapshot_dict(row: tuple[Any, ...]) -> dict[str, Any]:
+        return {
+            key: value.isoformat() if isinstance(value, date) else value
+            for key, value in zip(keys, row)
+        }
+    with duckdb.connect(str(current_database), read_only=True) as connection:
+        current_rows = connection.execute(
+            """SELECT snapshot_id,dataset_version,snapshot_date,source_url,
+                      source_hash,person_count,current_link_count
+               FROM iapd_snapshot"""
+        ).fetchall()
+        if len(current_rows) != 1:
+            raise IAPDLocalError("Current database must contain exactly one snapshot")
+        current = current_rows[0]
+        comparison_id = _stable_id(
+            "iapd-snapshot-comparison", str(current[0]),
+            str(previous_database or "baseline"),
+        )
+        if previous_database is None:
+            report = {
+                "comparison_id": comparison_id,
+                "status": "baseline", "current": snapshot_dict(current),
+                "previous": None,
+                "counts": {name: 0 for name in change_names},
+                "samples": {}, "firm_changes": [], "affected_firm_count": 0,
+            }
+        else:
+            previous_database = Path(previous_database).resolve()
+            if not previous_database.is_file():
+                raise IAPDLocalError(
+                    f"Previous snapshot does not exist: {previous_database}"
+                )
+            escaped_previous = str(previous_database).replace("'", "''")
+            connection.execute(
+                f"ATTACH '{escaped_previous}' AS previous (READ_ONLY)"
+            )
+            previous_rows = connection.execute(
+                """SELECT snapshot_id,dataset_version,snapshot_date,source_url,
+                          source_hash,person_count,current_link_count
+                   FROM previous.iapd_snapshot"""
+            ).fetchall()
+            if len(previous_rows) != 1:
+                raise IAPDLocalError("Previous database must contain exactly one snapshot")
+            previous = previous_rows[0]
+            comparison_id = _stable_id(
+                "iapd-snapshot-comparison", str(current[0]), str(previous[0]),
+            )
+            queries = {
+                "new_representatives": (
+                    "SELECT individual_crd FROM iapd_people EXCEPT "
+                    "SELECT individual_crd FROM previous.iapd_people"
+                ),
+                "disappeared_representatives": (
+                    "SELECT individual_crd FROM previous.iapd_people EXCEPT "
+                    "SELECT individual_crd FROM iapd_people"
+                ),
+                "employer_changes": """WITH current_firms AS (
+                        SELECT individual_crd,list_sort(list(firm_id)) firms
+                        FROM iapd_current_links GROUP BY 1
+                    ), previous_firms AS (
+                        SELECT individual_crd,list_sort(list(firm_id)) firms
+                        FROM previous.iapd_current_links GROUP BY 1
+                    )
+                    SELECT c.individual_crd FROM current_firms c
+                    JOIN previous_firms p USING(individual_crd)
+                    WHERE c.firms<>p.firms""",
+                "registration_changes": """SELECT c.individual_crd
+                    FROM iapd_current_links c
+                    JOIN previous.iapd_current_links p USING(individual_crd,firm_id)
+                    WHERE json_extract(c.employment_json,'$.registrations')
+                      IS DISTINCT FROM json_extract(p.employment_json,'$.registrations')
+                    GROUP BY 1""",
+                "disclosure_changes": """SELECT c.individual_crd
+                    FROM iapd_people c
+                    JOIN previous.iapd_people p USING(individual_crd)
+                    WHERE json_extract(c.payload_json,'$.disclosures')
+                      IS DISTINCT FROM json_extract(p.payload_json,'$.disclosures')""",
+                "material_contact_changes": """SELECT c.individual_crd
+                    FROM iapd_current_links c
+                    JOIN previous.iapd_current_links p USING(individual_crd,firm_id)
+                    WHERE struct_pack(
+                        address_line_1:=json_extract_string(c.employment_json,'$.address_line_1'),
+                        address_line_2:=json_extract_string(c.employment_json,'$.address_line_2'),
+                        city:=json_extract_string(c.employment_json,'$.city'),
+                        state:=json_extract_string(c.employment_json,'$.state'),
+                        postal_code:=json_extract_string(c.employment_json,'$.postal_code'),
+                        country:=json_extract_string(c.employment_json,'$.country'),
+                        phone:=json_extract_string(c.employment_json,'$.phone'),
+                        website:=json_extract_string(c.employment_json,'$.website'))
+                    IS DISTINCT FROM struct_pack(
+                        address_line_1:=json_extract_string(p.employment_json,'$.address_line_1'),
+                        address_line_2:=json_extract_string(p.employment_json,'$.address_line_2'),
+                        city:=json_extract_string(p.employment_json,'$.city'),
+                        state:=json_extract_string(p.employment_json,'$.state'),
+                        postal_code:=json_extract_string(p.employment_json,'$.postal_code'),
+                        country:=json_extract_string(p.employment_json,'$.country'),
+                        phone:=json_extract_string(p.employment_json,'$.phone'),
+                        website:=json_extract_string(p.employment_json,'$.website'))
+                    GROUP BY 1""",
+            }
+            counts, samples = {}, {}
+            for name, query in queries.items():
+                table = f"change_{name}"
+                connection.execute(
+                    f"CREATE TEMP TABLE {table} AS "
+                    f"SELECT DISTINCT individual_crd FROM ({query}) changes"
+                )
+                counts[name] = int(
+                    connection.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
+                )
+                samples[name] = [
+                    str(row[0]) for row in connection.execute(
+                        f"SELECT individual_crd FROM {table} ORDER BY 1 LIMIT ?",
+                        [sample_limit],
+                    ).fetchall()
+                ]
+            firm_rows = connection.execute(
+                """SELECT firm_id,change_type,individual_crd FROM (
+                    SELECT l.firm_id,'new_representatives' change_type,l.individual_crd
+                      FROM iapd_current_links l JOIN change_new_representatives c USING(individual_crd)
+                    UNION
+                    SELECT l.firm_id,'disappeared_representatives',l.individual_crd
+                      FROM previous.iapd_current_links l JOIN change_disappeared_representatives c USING(individual_crd)
+                    UNION
+                    SELECT l.firm_id,'employer_changes',l.individual_crd
+                      FROM iapd_current_links l JOIN change_employer_changes c USING(individual_crd)
+                    UNION
+                    SELECT l.firm_id,'employer_changes',l.individual_crd
+                      FROM previous.iapd_current_links l JOIN change_employer_changes c USING(individual_crd)
+                    UNION
+                    SELECT l.firm_id,'registration_changes',l.individual_crd
+                      FROM iapd_current_links l JOIN change_registration_changes c USING(individual_crd)
+                    UNION
+                    SELECT l.firm_id,'disclosure_changes',l.individual_crd
+                      FROM iapd_current_links l JOIN change_disclosure_changes c USING(individual_crd)
+                    UNION
+                    SELECT l.firm_id,'disclosure_changes',l.individual_crd
+                      FROM previous.iapd_current_links l JOIN change_disclosure_changes c USING(individual_crd)
+                    UNION
+                    SELECT l.firm_id,'material_contact_changes',l.individual_crd
+                      FROM iapd_current_links l JOIN change_material_contact_changes c USING(individual_crd)
+                ) firm_events ORDER BY firm_id,change_type,individual_crd"""
+            ).fetchall()
+            by_firm: dict[str, dict[str, list[str]]] = {}
+            for firm_id, change_type, individual_crd in firm_rows:
+                values = by_firm.setdefault(str(firm_id), {}).setdefault(
+                    str(change_type), []
+                )
+                values.append(str(individual_crd))
+            firm_changes = []
+            for firm_id in sorted(by_firm):
+                values = by_firm[firm_id]
+                firm_changes.append({
+                    "firm_id": firm_id,
+                    "counts": {
+                        name: len(values.get(name, [])) for name in change_names
+                    },
+                    "representative_samples": {
+                        name: values[name][:sample_limit]
+                        for name in change_names if values.get(name)
+                    },
+                })
+            report = {
+                "comparison_id": comparison_id,
+                "status": "success", "current": snapshot_dict(current),
+                "previous": snapshot_dict(previous),
+                "counts": counts, "samples": samples,
+                "firm_changes": firm_changes,
+                "affected_firm_count": len(firm_changes),
+            }
+    report["interpretation_guardrails"] = [
+        "Representative absence means no longer present in the latest IAPD feed; it does not establish termination.",
+        "A disclosure change does not establish misconduct without source review.",
+        "No comparison event establishes ownership change or seller intent.",
+    ]
+    if report_path is not None:
+        _write_json_atomic(Path(report_path), report)
+    return report
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Local-first IAPD and Cloudflare R2 tools")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -771,6 +970,11 @@ def main() -> None:
         "--workers", type=int, default=int(os.getenv("IAPD_R2_UPLOAD_WORKERS", "16")),
         help="Bounded concurrent R2 uploads (1-64; default: 16)",
     )
+    compare = commands.add_parser("compare-snapshots")
+    compare.add_argument("--current-database", type=Path, required=True)
+    compare.add_argument("--previous-database", type=Path)
+    compare.add_argument("--report-path", type=Path, required=True)
+    compare.add_argument("--sample-limit", type=int, default=25)
     args = parser.parse_args()
     if args.command == "build-store":
         if bool(args.firm_source_duckdb) != bool(args.firm_table):
@@ -793,10 +997,16 @@ def main() -> None:
             dataset_version=args.dataset_version, local_root=args.local_root,
             output_root=args.output_root, firm_ids=firm_ids,
         )
-    else:
+    elif args.command == "publish-r2":
         result = publish_bundles_to_r2(
             manifest_path=args.manifest, report_path=args.report_path,
             force=args.force, workers=args.workers,
+        )
+    else:
+        result = compare_local_snapshots(
+            current_database=args.current_database,
+            previous_database=args.previous_database,
+            report_path=args.report_path, sample_limit=args.sample_limit,
         )
     print(json.dumps(result, indent=2, default=str))
 

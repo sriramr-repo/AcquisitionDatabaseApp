@@ -394,15 +394,92 @@ def run_live_batch(
     return {"batch_id": batch_id, "scope": scope, "status": status.lower(), "attempted": len(jobs), **dict(counts)}
 
 
-def quality_report(*, database_url: str) -> dict[str, Any]:
+def _bundle_manifest_counts(manifest_path: Path | None) -> dict[str, Any] | None:
+    if manifest_path is None:
+        return None
+    manifest = json.loads(Path(manifest_path).read_text())
+    required = ("dataset_version", "firm_count", "available_bundle_count",
+                "unavailable_bundle_count", "representative_count")
+    if any(key not in manifest for key in required):
+        raise ValueError("IAPD bundle manifest is missing required aggregate fields")
+    return {key: manifest[key] for key in required}
+
+
+def quality_report(*, database_url: str,
+                   bundle_manifest: Path | None = None) -> dict[str, Any]:
+    """Report the compact Neon control plane plus local/R2 bundle coverage."""
     import psycopg
     with psycopg.connect(database_url) as connection:
-        latest = connection.execute("SELECT snapshot_date,status,individual_count,source_url FROM iapd_individual_snapshots ORDER BY snapshot_date DESC LIMIT 1").fetchone()
+        available = {row[0] for row in connection.execute(
+            "SELECT relname FROM pg_class WHERE relkind IN ('r','p')"
+        ).fetchall()}
+        latest = None
+        if "iapd_feed_runs" in available:
+            latest = connection.execute(
+                """SELECT selected_date,status,result_counts,source_url
+                   FROM iapd_feed_runs
+                   WHERE status IN ('success','fallback_success')
+                   ORDER BY completed_at DESC NULLS LAST,started_at DESC LIMIT 1"""
+            ).fetchone()
+        if latest is None and "iapd_individual_snapshots" in available:
+            legacy = connection.execute(
+                """SELECT snapshot_date,status,individual_count,source_url
+                   FROM iapd_individual_snapshots ORDER BY snapshot_date DESC LIMIT 1"""
+            ).fetchone()
+            latest = legacy and (legacy[0], legacy[1],
+                                 {"unique_representatives": legacy[2]}, legacy[3])
+        coverage = None
+        if "iapd_firm_coverage" in available:
+            coverage = connection.execute(
+                """SELECT count(*)::int,
+                          count(*) FILTER (WHERE coalesce(representative_count,0)>0)::int,
+                          count(*) FILTER (WHERE coalesce(representative_count,0)=0)::int,
+                          coalesce(sum(representative_count),0)::bigint
+                   FROM iapd_firm_coverage
+                   WHERE dataset_version=(SELECT dataset_version FROM dataset_versions
+                     ORDER BY published_at DESC,dataset_version DESC LIMIT 1)"""
+            ).fetchone()
         jobs = dict(connection.execute("SELECT status,count(*) FROM iapd_live_jobs GROUP BY status").fetchall())
         freshness = dict(connection.execute("WITH latest AS (SELECT DISTINCT ON (individual_crd) individual_crd,freshness FROM iapd_individual_reconciliations ORDER BY individual_crd,created_at DESC) SELECT freshness,count(*) FROM latest GROUP BY freshness").fetchall())
         reviews = dict(connection.execute("SELECT reason_code,count(*) FROM iapd_manual_review_queue WHERE status='OPEN' GROUP BY reason_code").fetchall())
         issues = dict(connection.execute("SELECT issue_code,count(*) FROM iapd_import_issues GROUP BY issue_code").fetchall())
-    return {"latest_snapshot": latest, "live_jobs": jobs, "freshness": freshness, "open_reviews": reviews, "import_issues": issues}
+        comparison = None
+        if "iapd_snapshot_comparisons" in available:
+            comparison = connection.execute(
+                """SELECT comparison_id,current_snapshot_date,previous_snapshot_date,
+                          status,counts,national_affected_firm_count,published_firm_count
+                   FROM iapd_snapshot_comparisons
+                   ORDER BY current_snapshot_date DESC,published_at DESC LIMIT 1"""
+            ).fetchone()
+    manifest = _bundle_manifest_counts(bundle_manifest)
+    feed_counts = (latest[2] or {}) if latest else {}
+    coverage_summary = {
+        "dashboard_firm_count": int(coverage[0]) if coverage else 0,
+        "dashboard_firms_with_links": int(coverage[1]) if coverage else 0,
+        "dashboard_firms_without_links": int(coverage[2]) if coverage else 0,
+        "dashboard_representative_links": int(coverage[3]) if coverage else 0,
+        "firm_bundle_count": int(manifest["available_bundle_count"] if manifest else (coverage[1] if coverage else 0)),
+        "bundle_manifest": manifest,
+    }
+    return {
+        "latest_feed": {
+            "date": str(latest[0]) if latest else None,
+            "status": str(latest[1]) if latest else "missing",
+            "representative_count": int(feed_counts.get("unique_representatives") or 0),
+            "source_url": latest[3] if latest else None,
+        },
+        "coverage": coverage_summary,
+        "open_conflict_count": sum(int(value) for value in reviews.values()),
+        "open_reviews": reviews,
+        "latest_comparison": ({
+            "comparison_id": comparison[0], "current_date": str(comparison[1]),
+            "previous_date": str(comparison[2]) if comparison[2] else None,
+            "status": comparison[3], "counts": comparison[4],
+            "national_affected_firms": int(comparison[5]),
+            "published_dashboard_firms": int(comparison[6]),
+        } if comparison else None),
+        "live_jobs": jobs, "freshness": freshness, "import_issues": issues,
+    }
 
 
 def main() -> None:
@@ -413,11 +490,14 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=25)
     parser.add_argument("--workers", type=int, default=2)
     parser.add_argument("--freshness-days", type=int, default=30)
+    parser.add_argument("--bundle-manifest", type=Path)
     parser.add_argument("--all", action="store_true", dest="include_national")
     parser.add_argument("--crd", action="append", default=[])
     args = parser.parse_args()
     if args.command == "quality":
-        result = quality_report(database_url=args.database_url)
+        result = quality_report(
+            database_url=args.database_url, bundle_manifest=args.bundle_manifest,
+        )
     else:
         if not args.local_database:
             parser.error("--local-database is required for run/resume")

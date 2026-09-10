@@ -73,6 +73,61 @@ export async function targetData(params: {search?:string; priority?:string; sell
   const indicators = new Map(coverage.rows.map(row => [row.firm_id, advIndicators(row)]));
   return {rows: rows.rows.map(row => ({...row,...indicators.get(row.firm_id)})), total: Number(total.rows[0]?.count || 0), universeTotal:Number(universe.rows[0]?.count || 0), page, pageSize:size};
 }
+
+export async function iapdChangesData(params: {changeType?:string; state?:string; priority?:string; aum?:string; conflicts?:string; page?:number; pageSize?:number}): Promise<any> {
+  const changeType = params.changeType || null;
+  const state = params.state?.trim().toUpperCase() || null;
+  const priority = params.priority || null;
+  const aum = params.aum || null;
+  const conflictsOnly = params.conflicts === "1";
+  const page = Math.max(1, params.page || 1);
+  const pageSize = Math.min(100, Math.max(10, params.pageSize || 25));
+  const offset = (page - 1) * pageSize;
+  const base = sql`with active as (
+      select dataset_version from dataset_versions order by published_at desc,dataset_version desc limit 1
+    ), latest_comparison as (
+      select comparison_id,dataset_version from iapd_snapshot_comparisons
+      where dataset_version=(select dataset_version from active)
+      order by current_snapshot_date desc,published_at desc limit 1
+    ), latest_reconciliation as (
+      select distinct on (individual_crd) individual_crd,effective_fields
+      from iapd_individual_reconciliations order by individual_crd,created_at desc
+    ), open_conflict_firms as (
+      select distinct links.firm_id from iapd_manual_review_queue q
+      join latest_reconciliation r using(individual_crd)
+      cross join lateral (
+        select r.effective_fields->>'current_employer_crd' firm_id
+        union select employer->>'crd'
+          from jsonb_array_elements(coalesce(r.effective_fields->'current_employers','[]'::jsonb)) employer
+      ) links where q.status='OPEN' and links.firm_id is not null
+    ), base as (
+      select c.*,f.name,coalesce(x.main_office_state,f.organization_state) organization_state,
+        x.total_aum,s.priority_category,s.acquisition_score,
+        exists(select 1 from open_conflict_firms oc where oc.firm_id=c.firm_id) has_open_conflict
+      from iapd_firm_change_summaries c join latest_comparison lc using(comparison_id,dataset_version)
+      join firms f using(firm_id,dataset_version)
+      left join firm_facts x using(firm_id,dataset_version)
+      left join firm_scores s using(firm_id,dataset_version)
+    ) select * from base where
+      (${changeType}::text is null
+       or (${changeType}='new_representatives' and new_representative_count>0)
+       or (${changeType}='representative_no_longer_present' and representative_no_longer_present_count>0)
+       or (${changeType}='employer_changes' and employer_change_count>0)
+       or (${changeType}='registration_changes' and registration_change_count>0)
+       or (${changeType}='disclosure_changes' and disclosure_change_count>0)
+       or (${changeType}='material_contact_changes' and material_contact_change_count>0))
+      and (${state}::text is null or upper(organization_state)=${state})
+      and (${priority}::text is null or priority_category=${priority})
+      and (${aum}::text is null or (${aum}='under200' and total_aum<200000000))
+      and (not ${conflictsOnly} or has_open_conflict)`;
+  const [comparison, rows, total, reviews] = await Promise.all([
+    db.execute(sql`select * from iapd_snapshot_comparisons where dataset_version=(select dataset_version from dataset_versions order by published_at desc,dataset_version desc limit 1) order by current_snapshot_date desc,published_at desc limit 1`),
+    db.execute(sql`${base} order by acquisition_score desc nulls last,firm_id limit ${pageSize} offset ${offset}`),
+    db.execute(sql`select count(*)::int count from (${base}) filtered`),
+    db.execute(sql`select review_id,individual_crd,reason_code,status,details,updated_at from iapd_manual_review_queue order by case when status='OPEN' then 0 else 1 end,updated_at desc limit 25`),
+  ]);
+  return {comparison:comparison.rows[0] || null, rows:rows.rows, total:Number(total.rows[0]?.count || 0), reviews:reviews.rows, page, pageSize};
+}
 export async function firmData(firmId:string): Promise<any>{
   const activeDataset = sql`(select dataset_version from dataset_versions order by published_at desc, dataset_version desc limit 1)`;
   const [firm,facts,scores,research,sources,contacts,outreach,activities,representatives,iapdSummary,iapdCoverage,iapdPrincipals,agentJobs,observations,advFiling,advFacts,advCustodians,advScheduleObservations,advJobs,sellerIntent,sellerEvidence,sellerHistory] = await Promise.all([

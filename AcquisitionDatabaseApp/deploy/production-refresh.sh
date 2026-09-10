@@ -79,6 +79,20 @@ if [ "$IAPD_STATUS" = "success" ] || [ "$IAPD_STATUS" = "fallback_success" ]; th
     --output-root "$APP_ROOT/data/iapd/local" \
     --firm-source-duckdb "$APP_ROOT/data/analytics.duckdb" \
     --firm-table "$FIRM_TABLE"
+  mkdir -p "$APP_ROOT/data/iapd/local/changes"
+  PREVIOUS_IAPD_DB="$APP_ROOT/data/iapd/local/datasets/$DATASET_VERSION.previous/iapd.duckdb"
+  IAPD_COMPARE_ARGS=(
+    --current-database "$APP_ROOT/data/iapd/local/datasets/$DATASET_VERSION/iapd.duckdb"
+    --report-path "$APP_ROOT/data/iapd/local/changes/${DATASET_VERSION}_${IAPD_DATE}.json"
+  )
+  if [ -f "$PREVIOUS_IAPD_DB" ]; then
+    IAPD_COMPARE_ARGS+=(--previous-database "$PREVIOUS_IAPD_DB")
+  fi
+  IAPD_CHANGE_REPORT="$APP_ROOT/data/iapd/local/changes/${DATASET_VERSION}_${IAPD_DATE}.json"
+  "$PYTHON_BIN" -m src.iapd_local compare-snapshots "${IAPD_COMPARE_ARGS[@]}"
+  "$PYTHON_BIN" -m src.iapd_change_publisher publish \
+    --report-path "$IAPD_CHANGE_REPORT" \
+    --database-url "$PUBLISHER_DATABASE_URL"
   "$PYTHON_BIN" -m src.iapd_local build-bundles \
     --dataset-version "$DATASET_VERSION" \
     --local-root "$APP_ROOT/data/iapd/local" \
