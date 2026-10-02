@@ -72,8 +72,10 @@ def _text(element: ET.Element | None, *names: str) -> str | None:
     candidates = {name.lower() for name in names}
     for child in element.iter():
         if _local_name(child) in candidates:
-            return _clean(child.text)
-    attributes = {key.lower(): value for key, value in element.attrib.items()}
+            value = _clean(child.text)
+            if value is not None:
+                return value
+    attributes = {key.rsplit('}', 1)[-1].lower(): value for key, value in element.attrib.items()}
     for name in candidates:
         if name in attributes:
             return _clean(attributes[name])
@@ -94,7 +96,7 @@ def _collection_records(
     items = {name.lower() for name in item_names}
     records: list[ET.Element] = []
     for collection in collections:
-        direct = [child for child in list(collection) if _local_name(child) in items]
+        direct = [child for child in collection.iter() if child is not collection and _local_name(child) in items]
         if direct:
             records.extend(direct)
         elif _local_name(collection) in items:
@@ -174,7 +176,7 @@ def _record_from_individual(individual: ET.Element) -> dict[str, Any] | None:
     info_nodes = _children_named(individual, ("Info", "IndividualInfo"))
     info = info_nodes[0] if info_nodes else individual
     individual_crd = _text(info, "indvlpk", "individualcrd", "crd", "crdnumber")
-    if individual_crd is None:
+    if individual_crd is None or not individual_crd.isascii() or not individual_crd.isdigit():
         return None
     name = _name(info)
     return {
@@ -193,7 +195,7 @@ def parse_iapd_xml(xml_path: Path | BinaryIO, *, issues: list[dict[str, Any]] | 
     SEC/FINRA naming variants.  Missing optional collections simply yield
     empty lists.
     """
-    context = LET.iterparse(xml_path, events=("end",), recover=False, huge_tree=True)
+    context = LET.iterparse(xml_path, events=("end",), recover=False, huge_tree=True, resolve_entities=False, no_network=True)
     for _, element in context:
         if _local_name(element) not in {"indvl", "individual"}:
             continue
@@ -221,6 +223,12 @@ def parse_iapd_xml(xml_path: Path | BinaryIO, *, issues: list[dict[str, Any]] | 
         for employment in _collection_records(element, ("CrntEmps", "CurrentEmployments"), ("CrntEmp", "CurrentEmployment", "Employment")):
             employer_crd = _text(employment, "orgpk", "firmcrd", "organizationcrd", "employercrd")
             employer_name = _text(employment, "orgname", "orgnm", "firmname", "employername", "organizationname")
+            if employer_crd and (not employer_crd.isascii() or not employer_crd.isdigit()):
+                if issues is not None:
+                    issues.append({"stage":"parse","severity":"warning","code":"INVALID_EMPLOYER_CRD","individual_crd":crd,"message":"Employer CRD is not numeric; no firm join created", "raw_value":employer_crd})
+                employer_crd = None
+            if not employer_crd and issues is not None:
+                issues.append({"stage":"parse","severity":"warning","code":"MISSING_EMPLOYER_CRD","individual_crd":crd,"message":"Employer retained without a firm join"})
             employment_id = _stable_id(crd, employer_crd, employer_name, "current")
             registrations = []
             for registration in _collection_records(employment, ("CrntRgstns", "CurrentRegistrations"), ("CrntRgstn", "CurrentRegistration", "Registration")):
@@ -328,7 +336,7 @@ def validate_iapd_xml(xml_path: Path) -> None:
         root = ET.parse(xml_path).getroot()
     except (ET.ParseError, OSError) as exc:
         raise IAPDFeedUnavailable(f"IAPD XML is malformed or unreadable: {exc}") from exc
-    if _local_name(root) not in {"iapd", "individuals", "indvlfeed", "feed"}:
+    if _local_name(root) not in {"iapd", "individuals", "indvlfeed", "feed", "iapdindividualreport"}:
         raise IAPDFeedUnavailable(f"IAPD XML has an unexpected root element: {_local_name(root)}")
 
 
@@ -340,6 +348,14 @@ def download_iapd_feed(snapshot_date: date, *, session: requests.Session | None 
     raw_dir.mkdir(parents=True, exist_ok=True)
     filename = f"IA_INDVL_Feed_{snapshot_date:%m_%d_%Y}.xml.zip"
     destination = raw_dir / filename
+    if destination.is_file():
+        try:
+            _validate_zip(destination)
+            return destination, url, _sha256(destination)
+        except IAPDFeedUnavailable:
+            # Never trust a stale invalid artifact; the new response is still
+            # written to a temporary file and atomically activated below.
+            pass
     error: Exception | None = None
     for attempt in range(retries):
         try:
@@ -347,8 +363,8 @@ def download_iapd_feed(snapshot_date: date, *, session: requests.Session | None 
                 response = client.get(url, headers=headers, timeout=settings.TIMEOUT, stream=True)
                 if response.status_code == 404:
                     raise IAPDFeedUnavailable(f"IAPD feed is unavailable for {snapshot_date.isoformat()}: HTTP 404")
-                if response.status_code == 403:
-                    error = IAPDFeedUnavailable("IAPD feed returned HTTP 403")
+                if response.status_code in {403, 429} or response.status_code >= 500:
+                    error = requests.HTTPError(f"IAPD feed returned HTTP {response.status_code}")
                     continue
                 response.raise_for_status()
                 with tempfile.NamedTemporaryFile(dir=raw_dir, suffix=".zip", delete=False) as temporary:
@@ -359,15 +375,20 @@ def download_iapd_feed(snapshot_date: date, *, session: requests.Session | None 
                 _validate_zip(temporary_path)
                 os.replace(temporary_path, destination)
                 return destination, url, _sha256(destination)
-            if isinstance(error, IAPDFeedUnavailable):
+            if error is not None:
                 raise error
         except (requests.RequestException, IAPDFeedUnavailable, zipfile.BadZipFile) as exc:
             error = exc
             if "temporary_path" in locals() and temporary_path.exists():
                 temporary_path.unlink()
-            if isinstance(exc, IAPDFeedUnavailable) or attempt == retries - 1:
+            if (isinstance(exc, IAPDFeedUnavailable) and "HTTP 404" in str(exc)) or attempt == retries - 1:
                 break
-            time.sleep(2**attempt)
+            retry_after = None
+            try:
+                retry_after = int(getattr(response, "headers", {}).get("Retry-After", ""))
+            except (TypeError, ValueError):
+                pass
+            time.sleep(min(30, retry_after if retry_after is not None else 2**attempt))
     raise IAPDFeedUnavailable(f"Unable to retrieve IAPD feed {url}: {error}")
 
 
@@ -404,11 +425,15 @@ def parse_iapd_zip(
             raise IAPDFeedUnavailable(f"IAPD ZIP does not contain requested XML member(s): {', '.join(sorted(unknown))}")
         members = [member for member in members if member in requested]
     with zipfile.ZipFile(zip_path) as archive:
+        if issues is not None:
+            for info in archive.infolist():
+                if not info.is_dir() and not info.filename.lower().endswith('.xml'):
+                    issues.append({"stage":"parse","severity":"warning","code":"NON_XML_MEMBER","message":"Non-XML member ignored", "member":info.filename})
         for member in members:
             try:
                 with archive.open(member) as stream:
                     yield from parse_iapd_xml(stream, issues=issues)
-            except ET.ParseError as exc:
+            except (ET.ParseError, LET.XMLSyntaxError) as exc:
                 if issues is not None:
                     issues.append({"stage": "parse", "severity": "error", "code": "MALFORMED_XML_MEMBER", "message": f"{member}: {exc}"})
                 raise IAPDFeedUnavailable(f"IAPD XML member is malformed: {member}") from exc
@@ -862,12 +887,12 @@ def import_iapd_snapshot(
                         continue
                 crd = person["individual_crd"]
                 if crd in seen_crds:
-                    issues.append({"stage": "normalize", "severity": "warning", "code": "DUPLICATE_INDIVIDUAL", "individual_crd": crd, "message": "Duplicate representative record in the same snapshot was skipped."})
-                    continue
-                seen_crds.add(crd)
-                people_rows.append((crd, person["first_name"], person["middle_name"], person["last_name"], person["suffix"], person["full_name"], person["active_ag_registration"], person["composite_link"], snapshot_id, now, now))
-                members.append((snapshot_id, crd, now))
-                counts["individuals"] += 1
+                    issues.append({"stage": "normalize", "severity": "warning", "code": "DUPLICATE_INDIVIDUAL", "individual_crd": crd, "message": "Repeated person: first identity retained; distinct relationship rows retained.", "raw_identity": {key: person[key] for key in ("full_name", "active_ag_registration")}})
+                else:
+                    seen_crds.add(crd)
+                    people_rows.append((crd, person["first_name"], person["middle_name"], person["last_name"], person["suffix"], person["full_name"], person["active_ag_registration"], person["composite_link"], snapshot_id, now, now))
+                    members.append((snapshot_id, crd, now))
+                    counts["individuals"] += 1
                 if selected_firms is None:
                     for alias in person["aliases"]:
                         aliases.append((_stable_id(snapshot_id, crd, alias["alias_name"]), snapshot_id, crd, alias["alias_name"], alias["first_name"], alias["middle_name"], alias["last_name"], alias["suffix"], now))

@@ -1,0 +1,581 @@
+"""Restartable, bounded live-IAPD enrichment batches for official individual pages."""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import time
+import random
+from collections import Counter
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+from typing import Any, Iterable
+
+import duckdb
+
+from src.iapd import _stable_id
+from src.iapd_live import (
+    PARSER_VERSION,
+    IAPDLiveUnavailable,
+    build_iapd_individual_url,
+    capture_iapd_live_page, reconcile_iapd_individual,
+)
+from src.iapd_reconciliation import VERSION
+
+
+TRANSIENT_MARKERS = ("429", "rate", "timeout", "connect", "500", "502", "503", "504")
+
+
+def _safe_reason(error: Exception) -> str:
+    text = str(error).lower()
+    if "crd" in text and "match" in text:
+        return "CRD_MISMATCH"
+    if any(marker in text for marker in TRANSIENT_MARKERS):
+        return "TRANSIENT_SOURCE_FAILURE"
+    if isinstance(error, ValueError):
+        return "INVALID_REQUEST"
+    return "SOURCE_UNAVAILABLE"
+
+
+def _safe_error_detail(error: Exception) -> str:
+    """Keep an actionable bounded message without persisting credentials or headers."""
+    detail = re.sub(r"(?i)(bearer|api[_ -]?key)\s+\S+", r"\1 [redacted]", str(error))
+    return detail[:500]
+
+
+def _select_candidates_for_enqueue(
+    candidates: list[tuple[str, int]],
+    existing: dict[str, tuple[str, datetime | None, int, dict[str, Any]]],
+    *,
+    fresh_after: datetime,
+    enqueue_limit: int,
+    max_attempts: int,
+) -> tuple[list[tuple[str, int]], int]:
+    """Choose a bounded deterministic slice without filling Neon with the universe."""
+    selected: list[tuple[str, int]] = []
+    fresh_skipped = 0
+    for crd, order in candidates:
+        prior = existing.get(crd)
+        if prior and prior[0] in {"RUNNING", "QUEUED", "RETRY_PENDING"}:
+            continue
+        if (
+            prior
+            and prior[0] in {"SUCCESS", "UNCHANGED", "SKIPPED_FRESH"}
+            and prior[1]
+            and prior[1] >= fresh_after
+            and (prior[3] or {}).get("reconciliation_version") == VERSION
+        ):
+            fresh_skipped += 1
+            continue
+        if prior and prior[0] == "FAILED" and prior[2] >= max_attempts:
+            continue
+        selected.append((crd, order))
+        if len(selected) >= enqueue_limit:
+            break
+    return selected, fresh_skipped
+
+
+def candidate_rank(category, aum, fields, disclosed, retrieved_at, crd):
+    """Business ordering only; absence is never interpreted as a contact value."""
+    missing = sum(fields.get(key) in (None, "", []) for key in ("phone", "website", "business_address"))
+    return (
+        {"PRIORITY_A": 0, "PRIORITY_B": 1, "PRIORITY_C": 2}.get(category, 9),
+        0 if aum is not None and float(aum) < 200_000_000 else 1,
+        -missing, -int(bool(disclosed)),
+        retrieved_at.timestamp() if retrieved_at else float("-inf"), int(crd),
+    )
+
+
+def _candidate_representatives(
+    *, database_url: str, local_database: Path, include_national: bool = False,
+    selected_crds: Iterable[str] = (),
+) -> list[tuple[str, int]]:
+    """Return unique CRDs in deterministic business-priority order."""
+    import psycopg
+    selected = {str(value).strip() for value in selected_crds}
+    if any(not re.fullmatch(r"[0-9]+", value) for value in selected):
+        raise ValueError("Representative CRDs must contain digits only")
+    with psycopg.connect(database_url) as connection:
+        rows = connection.execute(
+            """SELECT f.firm_id,coalesce(s.priority_category,'PRIORITY_Z'),x.total_aum
+                 FROM firms f LEFT JOIN firm_scores s USING(firm_id,dataset_version)
+                 LEFT JOIN firm_facts x USING(firm_id,dataset_version)
+                WHERE f.dataset_version=(SELECT dataset_version FROM dataset_versions ORDER BY published_at DESC,dataset_version DESC LIMIT 1)"""
+        ).fetchall()
+        live = {str(row[0]): (row[1] or {}, row[2]) for row in connection.execute(
+            "SELECT DISTINCT ON (individual_crd) individual_crd,normalized_fields,retrieved_at FROM iapd_individual_live_enrichments ORDER BY individual_crd,retrieved_at DESC,enrichment_id DESC"
+        ).fetchall()}
+    firms = {str(row[0]): (str(row[1]), row[2]) for row in rows}
+    best: dict[str, tuple[Any, ...]] = {}
+    with duckdb.connect(str(local_database), read_only=True) as connection:
+        links = connection.execute(
+            "SELECT l.firm_id,l.individual_crd,l.employment_json,p.payload_json FROM iapd_current_links l JOIN iapd_people p USING(snapshot_id,individual_crd) ORDER BY l.firm_id,l.individual_crd"
+        ).fetchall()
+        for firm_id, individual_crd, employment_json, payload_json in links:
+            crd = str(individual_crd)
+            if selected and crd not in selected:
+                continue
+            firm = firms.get(str(firm_id))
+            if firm is None and not include_national:
+                continue
+            category, aum = firm or ("PRIORITY_Z", None)
+            employment = json.loads(employment_json) if isinstance(employment_json, str) else employment_json
+            person = json.loads(payload_json) if isinstance(payload_json, str) else payload_json
+            fields, retrieved = live.get(crd, ({}, None))
+            fields = dict(fields)
+            fields["business_address"] = fields.get("business_address") or employment.get("address_line_1")
+            disclosed = any(any(value is True for value in item.values()) for item in person.get("disclosures", []))
+            rank = candidate_rank(category, aum, fields, disclosed, retrieved, crd)
+            if crd not in best or rank < best[crd]:
+                best[crd] = rank
+        if include_national and not selected:
+            for (individual_crd,) in connection.execute("SELECT individual_crd FROM iapd_people ORDER BY individual_crd").fetchall():
+                crd = str(individual_crd)
+                best.setdefault(crd, candidate_rank("PRIORITY_Z", None, {}, False, None, crd))
+    return [(crd, index) for index, (crd, _) in enumerate(sorted(best.items(), key=lambda item: item[1]), 1)]
+
+
+def enqueue_live_jobs(
+    *, database_url: str, local_database: Path, batch_id: str,
+    include_national: bool = False, selected_crds: Iterable[str] = (),
+    max_attempts: int = 3, enqueue_limit: int = 25, freshness_days: int = 30,
+) -> dict[str, int]:
+    import psycopg
+    if not 1 <= max_attempts <= 10:
+        raise ValueError("max_attempts must be between 1 and 10")
+    candidates = _candidate_representatives(
+        database_url=database_url, local_database=local_database,
+        include_national=include_national, selected_crds=selected_crds,
+    )
+    if not 1 <= enqueue_limit <= 1_000:
+        raise ValueError("enqueue_limit must be between 1 and 1000")
+    now = datetime.now(timezone.utc)
+    fresh_after = now - timedelta(days=freshness_days)
+    with psycopg.connect(database_url) as connection:
+        existing = {str(row[0]): (str(row[1]), row[2], int(row[3]), row[4] or {}) for row in connection.execute(
+            "SELECT individual_crd,status,last_success_at,attempt_count,result_summary FROM iapd_live_jobs WHERE parser_version=%s",
+            (PARSER_VERSION,),
+        ).fetchall()}
+    selected, fresh_skipped = _select_candidates_for_enqueue(
+        candidates, existing, fresh_after=fresh_after,
+        enqueue_limit=enqueue_limit, max_attempts=max_attempts,
+    )
+    rows = [(
+        _stable_id(PARSER_VERSION, crd), batch_id, crd,
+        build_iapd_individual_url(crd), PARSER_VERSION, order, max_attempts, now, now,
+    ) for crd, order in selected]
+    with psycopg.connect(database_url) as connection:
+        with connection.cursor() as cursor:
+            cursor.executemany(
+                """INSERT INTO iapd_live_jobs
+                   (job_id,batch_id,individual_crd,source_url,parser_version,priority_order,status,max_attempts,created_at,updated_at)
+                   VALUES (%s,%s,%s,%s,%s,%s,'QUEUED',%s,%s,%s)
+                   ON CONFLICT (individual_crd,parser_version) DO UPDATE SET
+                     batch_id=EXCLUDED.batch_id,priority_order=EXCLUDED.priority_order,
+                     max_attempts=EXCLUDED.max_attempts,
+                     status='QUEUED',
+                     attempt_count=0,next_attempt_at=NULL,
+                     updated_at=EXCLUDED.updated_at""", rows,
+            )
+    return {"candidates": len(candidates), "queued": len(rows), "fresh_skipped": fresh_skipped}
+
+
+def _review_items(result: dict[str, Any]) -> list[tuple[str, dict[str, Any]]]:
+    reconciliation = result.get("reconciliation") or {}
+    effective = reconciliation.get("effective_fields") or {}
+    conflicts = reconciliation.get("conflicts") or {}
+    items = [(key.upper(), value) for key, value in conflicts.items()]
+    if len(effective.get("current_employers") or []) > 1:
+        items.append(("MULTIPLE_CURRENT_EMPLOYERS", {"current_employers": effective["current_employers"]}))
+    return items
+
+
+def _sync_review_queue(connection, *, individual_crd: str, capture_id: str,
+                       reconciliation: dict[str, Any], observed_at: datetime) -> list[tuple[str, dict[str, Any]]]:
+    result = {"reconciliation": reconciliation}
+    review_items = _review_items(result)
+    active_reasons = {reason for reason, _ in review_items}
+    open_reviews = connection.execute(
+        "SELECT review_id,reason_code FROM iapd_manual_review_queue WHERE individual_crd=%s AND status='OPEN'",
+        (individual_crd,),
+    ).fetchall()
+    for review in open_reviews:
+        if review["reason_code"] not in active_reasons:
+            connection.execute(
+                "UPDATE iapd_manual_review_queue SET status='RESOLVED',updated_at=%s WHERE review_id=%s",
+                (observed_at, review["review_id"]),
+            )
+    for reason, details in review_items:
+        review_id = _stable_id(individual_crd, capture_id, reason)
+        connection.execute(
+            """INSERT INTO iapd_manual_review_queue
+               (review_id,individual_crd,reason_code,status,monthly_snapshot_id,live_capture_id,details,created_at,updated_at)
+               VALUES (%s,%s,%s,'OPEN',%s,%s,%s,%s,%s) ON CONFLICT (review_id) DO NOTHING""",
+            (review_id, individual_crd, reason, reconciliation.get("snapshot_id"),
+             capture_id, json.dumps(details), observed_at, observed_at),
+        )
+    return review_items
+
+
+def _monthly_rows_from_local(local_database: Path, individual_crd: str) -> list[dict[str, Any]]:
+    with duckdb.connect(str(local_database), read_only=True) as connection:
+        snapshot = connection.execute(
+            "SELECT snapshot_id,CAST(snapshot_date AS VARCHAR),source_url FROM iapd_snapshot LIMIT 1"
+        ).fetchone()
+        rows = connection.execute(
+            """SELECT p.full_name,p.payload_json,l.employment_json
+                 FROM iapd_people p JOIN iapd_current_links l USING(snapshot_id,individual_crd)
+                WHERE p.individual_crd=? ORDER BY l.firm_id,l.employment_id""", (individual_crd,),
+        ).fetchall()
+    if not snapshot:
+        return []
+    result = []
+    for full_name, payload_json, employment_json in rows:
+        payload = json.loads(payload_json) if isinstance(payload_json, str) else payload_json
+        employment = json.loads(employment_json) if isinstance(employment_json, str) else employment_json
+        registrations = employment.get("registrations") or []
+        statuses = {row.get("status") for row in registrations if row.get("status")}
+        dates = sorted(str(row["status_date"]) for row in registrations if row.get("status_date"))
+        disclosure_rows = payload.get("disclosures") or []
+        has_disclosure = any(any(value is True for value in row.values()) for row in disclosure_rows)
+        result.append({
+            "snapshot_id": snapshot[0], "snapshot_date": snapshot[1], "source_url": snapshot[2],
+            "full_name": full_name, "employer_firm_crd": employment.get("employer_firm_crd"),
+            "employer_name": employment.get("employer_name"),
+            **{key: employment.get(key) for key in ("address_line_1","address_line_2","city","state","postal_code","country")},
+            "registration_status": next(iter(statuses)) if len(statuses) == 1 else None,
+            "registration_date": dates[-1] if dates else None,
+            "disclosure_summary": "disclosure flag reported" if has_disclosure else "0 disclosures reported",
+        })
+    return result
+
+
+def _process_job(database_url: str, local_database: Path, job: dict[str, Any], *, freshness_days: int) -> str:
+    import psycopg
+    from psycopg.rows import dict_row
+    now = datetime.now(timezone.utc)
+    with psycopg.connect(database_url, row_factory=dict_row) as connection:
+        previous = connection.execute(
+            """SELECT capture_id,content_hash,retrieved_at FROM iapd_live_captures
+                WHERE individual_crd=%s AND retrieval_status='SUCCESS'
+                ORDER BY retrieved_at DESC LIMIT 1""", (job["individual_crd"],),
+        ).fetchone()
+        if previous and previous["retrieved_at"] >= now - timedelta(days=freshness_days):
+            reconciliation = reconcile_iapd_individual(
+                individual_crd=job["individual_crd"], database_url=database_url,
+                live_capture_id=previous["capture_id"],
+                monthly_rows_override=_monthly_rows_from_local(local_database, job["individual_crd"]),
+            )
+            review_items = _sync_review_queue(
+                connection, individual_crd=job["individual_crd"],
+                capture_id=previous["capture_id"], reconciliation=reconciliation,
+                observed_at=now,
+            )
+            connection.execute(
+                """UPDATE iapd_live_jobs SET status='SKIPPED_FRESH',last_success_at=%s,
+                   last_content_hash=%s,failure_reason=NULL,result_summary=%s,updated_at=%s WHERE job_id=%s""",
+                (previous["retrieved_at"], previous["content_hash"],
+                 json.dumps({"capture_id": previous["capture_id"], "freshness": reconciliation["freshness"],
+                             "reconciliation_version": VERSION}),
+                 now, job["job_id"]),
+            )
+            return "conflicted" if review_items else "skipped"
+        connection.execute(
+            """UPDATE iapd_live_jobs SET status='RUNNING',attempt_count=attempt_count+1,
+               last_attempt_at=%s,next_attempt_at=NULL,failure_reason=NULL,updated_at=%s WHERE job_id=%s""",
+            (now, now, job["job_id"]),
+        )
+    try:
+        result = capture_iapd_live_page(
+            individual_crd=job["individual_crd"], database_url=database_url,
+            reconcile=False,
+            attempts=1,
+        )
+        capture_id = result["capture_id"]
+        result["reconciliation"] = reconcile_iapd_individual(
+            individual_crd=job["individual_crd"], database_url=database_url,
+            live_capture_id=capture_id,
+            monthly_rows_override=_monthly_rows_from_local(local_database, job["individual_crd"]),
+        )
+        with psycopg.connect(database_url, row_factory=dict_row) as connection:
+            capture = connection.execute(
+                "SELECT content_hash FROM iapd_live_captures WHERE capture_id=%s", (capture_id,),
+            ).fetchone()
+            unchanged = bool(previous and capture and previous["content_hash"] == capture["content_hash"])
+            status = "UNCHANGED" if unchanged else "SUCCESS"
+            completed = datetime.now(timezone.utc)
+            connection.execute(
+                """UPDATE iapd_live_jobs SET status=%s,last_success_at=%s,last_content_hash=%s,
+                   result_summary=%s,updated_at=%s WHERE job_id=%s""",
+                (status, completed, capture["content_hash"] if capture else None,
+                 json.dumps({"capture_id": capture_id, "freshness": result["reconciliation"]["freshness"],
+                             "reconciliation_version": VERSION}),
+                 completed, job["job_id"]),
+            )
+            review_items = _sync_review_queue(
+                connection, individual_crd=job["individual_crd"], capture_id=capture_id,
+                reconciliation=result["reconciliation"], observed_at=completed,
+            )
+        return "unchanged" if unchanged else ("conflicted" if review_items else "succeeded")
+    except Exception as error:
+        reason = _safe_reason(error)
+        transient = reason == "TRANSIENT_SOURCE_FAILURE"
+        with psycopg.connect(database_url, row_factory=dict_row) as connection:
+            current = connection.execute(
+                "SELECT attempt_count,max_attempts FROM iapd_live_jobs WHERE job_id=%s", (job["job_id"],),
+            ).fetchone()
+            retry = transient and current and current["attempt_count"] < current["max_attempts"]
+            delay = max(getattr(error, "retry_after", 0) or 0, min(3600, 30 * 2 ** max(0, int(current["attempt_count"]) - 1)) + random.uniform(0, 5))
+            next_attempt = datetime.now(timezone.utc) + timedelta(seconds=delay) if retry else None
+            connection.execute(
+                """UPDATE iapd_live_jobs SET status=%s,next_attempt_at=%s,failure_reason=%s,
+                   result_summary=%s,updated_at=now() WHERE job_id=%s""",
+                ("RETRY_PENDING" if retry else "FAILED", next_attempt, reason,
+                 json.dumps({"error_type": type(error).__name__, "detail": _safe_error_detail(error), "pause_batch": getattr(error, "pause_batch", False)}),
+                 job["job_id"]),
+            )
+            if reason == "CRD_MISMATCH":
+                review_id = _stable_id(job["individual_crd"], reason, job["attempt_count"])
+                connection.execute(
+                    """INSERT INTO iapd_manual_review_queue
+                       (review_id,individual_crd,reason_code,status,details,created_at,updated_at)
+                       VALUES (%s,%s,%s,'OPEN',%s,now(),now()) ON CONFLICT (review_id) DO NOTHING""",
+                    (review_id, job["individual_crd"], reason, json.dumps({"source_url": job["source_url"]})),
+                )
+        return "retry_pending" if retry else "failed"
+
+
+def run_live_batch(
+    *, database_url: str, local_database: Path, limit: int = 25, workers: int = 1,
+    freshness_days: int = 30, include_national: bool = False,
+    selected_crds: Iterable[str] = (), resume: bool = False, max_attempts: int = 3,
+    batch_id: str | None = None,
+) -> dict[str, Any]:
+    """Run one checkpointed batch. Large universes require repeated bounded runs."""
+    import psycopg
+    from psycopg.rows import dict_row
+    if not 1 <= limit <= 1_000:
+        raise ValueError("limit must be between 1 and 1000")
+    if not 1 <= workers <= 8:
+        raise ValueError("workers must be between 1 and 8")
+    if not 1 <= freshness_days <= 365:
+        raise ValueError("freshness_days must be between 1 and 365")
+    if resume and not batch_id:
+        raise ValueError("Resume requires an explicit batch_id; global queue reset is forbidden")
+    if not resume and batch_id:
+        raise ValueError("batch_id is only valid when resuming")
+    # A transaction advisory lock works with both pooled and direct PostgreSQL.
+    # Keep it held through HTTP calls; another runner must not duplicate claims.
+    with psycopg.connect(database_url) as guard:
+        if not guard.execute("SELECT pg_try_advisory_xact_lock(73492108)").fetchone()[0]:
+            raise RuntimeError("Another IAPD live worker is active")
+        return _run_locked(database_url=database_url, local_database=local_database,
+            limit=limit, freshness_days=freshness_days, include_national=include_national,
+            selected_crds=selected_crds, resume=resume, max_attempts=max_attempts,
+            batch_id=batch_id, heartbeat=lambda: guard.execute("SELECT 1"))
+
+
+def _run_locked(*, database_url, local_database, limit, freshness_days,
+                include_national, selected_crds, resume, max_attempts, batch_id,
+                heartbeat=lambda: None):
+    import psycopg
+    from psycopg.rows import dict_row
+    started = datetime.now(timezone.utc)
+    scope = "national" if include_national else "firm_universe"
+    if not resume:
+        batch_id = _stable_id("iapd-live-batch", scope, started.isoformat())
+        with psycopg.connect(database_url) as connection:
+            connection.execute(
+            """INSERT INTO iapd_live_batches
+               (batch_id,status,scope,options,counts,started_at,created_at,updated_at)
+               VALUES (%s,'RUNNING',%s,%s,'{}'::jsonb,%s,%s,%s)""",
+                (batch_id, scope, json.dumps({"limit":limit,"workers":1,"freshness_days":freshness_days,"resume":resume}), started, started, started),
+            )
+    if not resume:
+        enqueue_live_jobs(
+            database_url=database_url, local_database=local_database, batch_id=batch_id,
+            include_national=include_national, selected_crds=selected_crds,
+            max_attempts=max_attempts, enqueue_limit=limit,
+            freshness_days=freshness_days,
+        )
+    else:
+        with psycopg.connect(database_url) as connection:
+            batch = connection.execute("SELECT scope,options FROM iapd_live_batches WHERE batch_id=%s", (batch_id,)).fetchone()
+            if not batch:
+                raise ValueError("Unknown batch_id")
+            scope = batch[0]
+            freshness_days = int(batch[1]["freshness_days"])
+            limit = int(batch[1]["limit"])
+            connection.execute(
+                """UPDATE iapd_live_jobs SET status='QUEUED',updated_at=now()
+                   WHERE parser_version=%s AND batch_id=%s AND attempt_count<max_attempts
+                   AND status='RUNNING' AND updated_at < now()-interval '10 minutes'""", (PARSER_VERSION,batch_id),
+            )
+    counts: Counter[str] = Counter()
+    checkpoint = None
+    attempted = set()
+    paused = False
+    blocked_count = 0
+    next_start = time.monotonic() + 10  # also separates runs across processes
+    while True:
+        # Keep the advisory-lock transaction alive and fail closed if it is lost.
+        # Job writes are committed separately; a lost guard must stop new claims.
+        heartbeat()
+        with psycopg.connect(database_url, row_factory=dict_row) as connection:
+            job = connection.execute(
+                """SELECT * FROM iapd_live_jobs WHERE batch_id=%s AND parser_version=%s
+                   AND status IN ('QUEUED','RETRY_PENDING') AND attempt_count<max_attempts
+                   AND (next_attempt_at IS NULL OR next_attempt_at<=now())
+                   ORDER BY priority_order,individual_crd LIMIT 1""", (batch_id,PARSER_VERSION),
+            ).fetchone()
+        if not job:
+            break  # not-yet-due retries remain durable for explicit resume
+        while time.monotonic() < next_start:
+            time.sleep(min(1, next_start-time.monotonic()))
+        heartbeat()
+        next_start = time.monotonic() + 10
+        outcome = _process_job(database_url, local_database, dict(job), freshness_days=freshness_days)
+        counts[outcome] += 1
+        attempted.add(job["individual_crd"])
+        checkpoint = str(job["individual_crd"])
+        with psycopg.connect(database_url, row_factory=dict_row) as connection:
+            state = connection.execute("SELECT result_summary FROM iapd_live_jobs WHERE job_id=%s", (job["job_id"],)).fetchone()
+            detail = state["result_summary"] or {}
+            blocked_count = blocked_count + 1 if "blocked" in str(detail).lower() or "429" in str(detail) else 0
+            paused = bool(detail.get("pause_batch")) or blocked_count >= 2
+            connection.execute("UPDATE iapd_live_batches SET checkpoint_crd=%s,counts=%s,updated_at=now() WHERE batch_id=%s", (checkpoint,json.dumps(dict(counts)),batch_id))
+        if paused:
+            break
+    completed = datetime.now(timezone.utc)
+    heartbeat()
+    with psycopg.connect(database_url) as connection:
+        states = dict(connection.execute("SELECT status,count(*) FROM iapd_live_jobs WHERE batch_id=%s GROUP BY status", (batch_id,)).fetchall())
+        status = "PAUSED" if paused else "PARTIAL" if any(states.get(s) for s in ("FAILED","QUEUED","RUNNING","RETRY_PENDING")) else "SUCCESS"
+        connection.execute(
+            """UPDATE iapd_live_batches SET status=%s,counts=%s,checkpoint_crd=%s,
+               completed_at=%s,updated_at=%s WHERE batch_id=%s""",
+            (status, json.dumps(dict(counts)), checkpoint, completed, completed, batch_id),
+        )
+    return {"batch_id": batch_id, "scope": scope, "status": status.lower(), "attempted": len(attempted), "job_states": states, **dict(counts)}
+
+
+def _bundle_manifest_counts(manifest_path: Path | None) -> dict[str, Any] | None:
+    if manifest_path is None:
+        return None
+    manifest = json.loads(Path(manifest_path).read_text())
+    required = ("dataset_version", "firm_count", "available_bundle_count",
+                "unavailable_bundle_count", "representative_count")
+    if any(key not in manifest for key in required):
+        raise ValueError("IAPD bundle manifest is missing required aggregate fields")
+    return {key: manifest[key] for key in required}
+
+
+def quality_report(*, database_url: str,
+                   bundle_manifest: Path | None = None) -> dict[str, Any]:
+    """Report the compact Neon control plane plus local/R2 bundle coverage."""
+    import psycopg
+    with psycopg.connect(database_url) as connection:
+        available = {row[0] for row in connection.execute(
+            "SELECT relname FROM pg_class WHERE relkind IN ('r','p')"
+        ).fetchall()}
+        latest = None
+        if "iapd_feed_runs" in available:
+            latest = connection.execute(
+                """SELECT selected_date,status,result_counts,source_url
+                   FROM iapd_feed_runs
+                   WHERE status IN ('success','fallback_success')
+                   ORDER BY completed_at DESC NULLS LAST,started_at DESC LIMIT 1"""
+            ).fetchone()
+        if latest is None and "iapd_individual_snapshots" in available:
+            legacy = connection.execute(
+                """SELECT snapshot_date,status,individual_count,source_url
+                   FROM iapd_individual_snapshots ORDER BY snapshot_date DESC LIMIT 1"""
+            ).fetchone()
+            latest = legacy and (legacy[0], legacy[1],
+                                 {"unique_representatives": legacy[2]}, legacy[3])
+        coverage = None
+        if "iapd_firm_coverage" in available:
+            coverage = connection.execute(
+                """SELECT count(*)::int,
+                          count(*) FILTER (WHERE coalesce(representative_count,0)>0)::int,
+                          count(*) FILTER (WHERE coalesce(representative_count,0)=0)::int,
+                          coalesce(sum(representative_count),0)::bigint
+                   FROM iapd_firm_coverage
+                   WHERE dataset_version=(SELECT dataset_version FROM dataset_versions
+                     ORDER BY published_at DESC,dataset_version DESC LIMIT 1)"""
+            ).fetchone()
+        jobs = dict(connection.execute("SELECT status,count(*) FROM iapd_live_jobs GROUP BY status").fetchall())
+        freshness = dict(connection.execute("WITH latest AS (SELECT DISTINCT ON (individual_crd) individual_crd,freshness FROM iapd_individual_reconciliations ORDER BY individual_crd,created_at DESC) SELECT freshness,count(*) FROM latest GROUP BY freshness").fetchall())
+        reviews = dict(connection.execute("SELECT reason_code,count(*) FROM iapd_manual_review_queue WHERE status='OPEN' GROUP BY reason_code").fetchall())
+        issues = dict(connection.execute("SELECT issue_code,count(*) FROM iapd_import_issues GROUP BY issue_code").fetchall())
+        comparison = None
+        if "iapd_snapshot_comparisons" in available:
+            comparison = connection.execute(
+                """SELECT comparison_id,current_snapshot_date,previous_snapshot_date,
+                          status,counts,national_affected_firm_count,published_firm_count
+                   FROM iapd_snapshot_comparisons
+                   ORDER BY current_snapshot_date DESC,published_at DESC LIMIT 1"""
+            ).fetchone()
+    manifest = _bundle_manifest_counts(bundle_manifest)
+    feed_counts = (latest[2] or {}) if latest else {}
+    coverage_summary = {
+        "dashboard_firm_count": int(coverage[0]) if coverage else 0,
+        "dashboard_firms_with_links": int(coverage[1]) if coverage else 0,
+        "dashboard_firms_without_links": int(coverage[2]) if coverage else 0,
+        "dashboard_representative_links": int(coverage[3]) if coverage else 0,
+        "firm_bundle_count": int(manifest["available_bundle_count"] if manifest else (coverage[1] if coverage else 0)),
+        "bundle_manifest": manifest,
+    }
+    return {
+        "latest_feed": {
+            "date": str(latest[0]) if latest else None,
+            "status": str(latest[1]) if latest else "missing",
+            "representative_count": int(feed_counts.get("unique_representatives") or 0),
+            "source_url": latest[3] if latest else None,
+        },
+        "coverage": coverage_summary,
+        "open_conflict_count": sum(int(value) for value in reviews.values()),
+        "open_reviews": reviews,
+        "latest_comparison": ({
+            "comparison_id": comparison[0], "current_date": str(comparison[1]),
+            "previous_date": str(comparison[2]) if comparison[2] else None,
+            "status": comparison[3], "counts": comparison[4],
+            "national_affected_firms": int(comparison[5]),
+            "published_dashboard_firms": int(comparison[6]),
+        } if comparison else None),
+        "live_jobs": jobs, "freshness": freshness, "import_issues": issues,
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("command", choices=("run", "resume", "quality"))
+    parser.add_argument("--database-url", required=True)
+    parser.add_argument("--local-database", type=Path)
+    parser.add_argument("--limit", type=int, default=25)
+    parser.add_argument("--workers", type=int, default=1, help="Compatibility option; execution is serialized for rate safety")
+    parser.add_argument("--batch-id", help="Required for resume; never resumes unrelated jobs")
+    parser.add_argument("--freshness-days", type=int, default=30)
+    parser.add_argument("--bundle-manifest", type=Path)
+    parser.add_argument("--all", action="store_true", dest="include_national")
+    parser.add_argument("--crd", action="append", default=[])
+    args = parser.parse_args()
+    if args.command == "quality":
+        result = quality_report(
+            database_url=args.database_url, bundle_manifest=args.bundle_manifest,
+        )
+    else:
+        if not args.local_database:
+            parser.error("--local-database is required for run/resume")
+        result = run_live_batch(
+            database_url=args.database_url, local_database=args.local_database,
+            limit=args.limit, workers=args.workers, freshness_days=args.freshness_days,
+            include_national=args.include_national, selected_crds=args.crd,
+            resume=args.command == "resume",
+            batch_id=args.batch_id,
+        )
+    print(json.dumps(result, indent=2, default=str))
+
+
+if __name__ == "__main__":
+    main()

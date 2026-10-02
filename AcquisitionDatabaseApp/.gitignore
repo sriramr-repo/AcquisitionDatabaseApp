@@ -31,3 +31,19 @@ __pycache__/
 dist/
 build/
 *.egg-info/
+
+# Generated analytics data, databases and exports (never commit)
+data/*.duckdb
+data/*.db
+data/bronze/
+data/silver/
+data/gold/
+data/archive/
+data/exports/
+data/quality/
+data/profiling/
+data/schema_diff/
+src/data/
+sqlite:/
+*.egg-info/
+__pycache__/
