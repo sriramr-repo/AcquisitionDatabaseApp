@@ -15,8 +15,13 @@ dependencies = [
     "langchain-core>=0.3,<2",
     "langchain-openai>=0.3,<2",
     "langchain-ollama>=0.3,<2",
+    "langgraph>=1.0,<2",
+    "langsmith>=0.4,<1",
 ]
 requires-python = ">=3.12"
+
+[project.optional-dependencies]
+delta = ["deltalake>=0.25,<2", "pyarrow>=15"]
 
 [project.scripts]
 sec-pipeline = "src.cli:app"
