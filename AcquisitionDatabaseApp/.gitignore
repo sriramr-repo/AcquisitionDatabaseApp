@@ -46,3 +46,7 @@ data/schema_diff/
 data/schema_discovery_report.json
 src/data/
 sqlite:/
+
+# Runtime artifacts
+data/.production-refresh.lock
+*.tsbuildinfo
