@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.scm.ria.adv-custodian-batch</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>-lc</string>
+    <string>export PATH=/Users/sriramramanan/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/poppler/poppler/bin:/opt/homebrew/bin:/Library/Frameworks/Python.framework/Versions/3.14/bin:$PATH; set -a; source web/.env.local; set +a; python3 -m src.adv_ocr process-until-idle --dataset-version ia08032026_0 --limit 50 --workers 2 --requests-per-second 1</string>
+  </array>
+  <key>WorkingDirectory</key>
+  <string>/Users/sriramramanan/GitHub/AcquisitionDatabaseApp</string>
+  <key>ProcessType</key>
+  <string>Background</string>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <dict>
+    <key>SuccessfulExit</key>
+    <false/>
+  </dict>
+  <key>ThrottleInterval</key>
+  <integer>60</integer>
+  <key>StandardOutPath</key>
+  <string>/Users/sriramramanan/GitHub/AcquisitionDatabaseApp/data/exports/operations/adv-custodian-batch-ia08032026_0.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/sriramramanan/GitHub/AcquisitionDatabaseApp/data/exports/operations/adv-custodian-batch-ia08032026_0.log</string>
+</dict>
+</plist>
