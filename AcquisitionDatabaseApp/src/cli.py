@@ -276,23 +276,6 @@ def iapd_live_batch_command(
     typer.echo(json.dumps(result, indent=2, default=str))
 
 
-@app.command("delta-sync")
-def delta_sync_command(
-    target: Optional[str] = typer.Option(None, "--target", help="Local dir or s3://, abfss://, gs:// URI"),
-    version: Optional[list[str]] = typer.Option(None, "--version", help="Dataset version(s) to sync; default all"),
-    catalog: str = typer.Option("main", "--catalog"),
-    schema: str = typer.Option("acquisition_gold", "--schema"),
-    dry_run: bool = typer.Option(False, "--dry-run"),
-):
-    """Sync DuckDB gold tables into partitioned Delta tables for Databricks."""
-    import json
-    from src.delta_sync import sync_gold_to_delta
-    manifest = sync_gold_to_delta(
-        target=target, versions=version or None, catalog=catalog, schema=schema, dry_run=dry_run,
-    )
-    typer.echo(json.dumps(manifest, indent=2, default=str))
-
-
 @app.command("list-runs")
 def list_runs_command(limit: int = typer.Option(20, min=1, max=500)):
     """List persisted production runs."""
