@@ -156,3 +156,25 @@ Use a hosted PostgreSQL-compatible `DATABASE_URL`, `AUTH_SECRET`, server-side
 run the publisher from the protected production environment after a verified
 refresh. Vercel is not used for DuckDB, SQLite, persistent files, or SEC batch
 ingestion.
+
+## Virtual SDR
+
+The firm page includes an approval-gated **Prepare CEO Brief** workflow.
+Vercel creates an idempotent application record and submits the durable run to
+LangSmith Deployment; it does not execute the long-running graph inside a
+serverless request. The graph uses immutable SEC/Gold facts plus accepted,
+source-linked research, stores the structured artifact in PostgreSQL,
+optionally mirrors it to private Cloudflare R2, and pauses for approval through
+a LangGraph interrupt. V1 prepares an email and call brief but never sends
+outreach.
+
+Required server-only deployment settings are documented in `.env.example`.
+Configure the same `DATABASE_URL` and R2 credentials on the LangSmith
+deployment, then deploy the graph identified by `virtual_sdr` in the
+repository-level `langgraph.json`. Keep `LANGSMITH_HIDE_INPUTS=true` and
+`LANGSMITH_HIDE_OUTPUTS=true`; traces retain execution metadata and timing
+without copying evidence, contacts, or drafts into observability payloads.
+
+Apply the Drizzle migrations before enabling the button. If LangSmith is
+unavailable or unconfigured, the attempt is recorded as `UNAVAILABLE` and the
+rest of the dashboard continues normally.
