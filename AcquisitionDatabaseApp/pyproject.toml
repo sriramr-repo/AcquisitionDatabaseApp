@@ -6,11 +6,16 @@ dependencies = [
     "requests",
     "beautifulsoup4",
     "pandas",
+    "duckdb",
+    "psutil",
+    "rich",
     "lxml",
-    "typer[all]",
+    "typer",
+    "click",
     "SQLAlchemy",
     "pydantic-settings",
     "psycopg[binary]",
+    "pyarrow",
     "boto3>=1.35,<2",
     "langchain-core>=0.3,<2",
     "langchain-openai>=0.3,<2",
@@ -31,7 +36,7 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
-addopts = "--ignore=src/pipeline_test.py --ignore=scm-ria-intelligence" # The nested prototype has an independent environment and test suite.
+addopts = "--ignore=src/pipeline_test.py"
 
 [build-system]
 requires = ["setuptools>=61.0"]
