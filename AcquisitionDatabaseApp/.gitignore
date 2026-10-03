@@ -31,3 +31,17 @@ __pycache__/
 dist/
 build/
 *.egg-info/
+
+# Generated analytics data and databases (produced by the pipeline; never commit)
+data/*.duckdb
+data/*.db
+data/archive/
+data/bronze/
+data/silver/
+data/gold/
+data/exports/
+data/profiling/
+data/quality/
+data/schema_diff/
+data/schema_discovery_report.json
+src/data/
