@@ -23,6 +23,9 @@ RESEARCH_COLUMNS = (
     # Firm identity
     "firm_id", "name", "primary_business_name", "sec_number", "cik_number",
     "dataset_version", "source_dataset", "record_hash",
+    "canonical_population_source", "population_classification",
+    "is_registered", "is_sec_registered", "is_state_registered", "is_era_only",
+    "has_era_relationship", "is_dual_registered", "registration_review_required",
     # Business profile and geography
     "firm_type", "organization_type", "organization_type_other",
     "organization_state", "organization_country", "sec_region",

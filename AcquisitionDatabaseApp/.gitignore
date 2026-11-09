@@ -19,6 +19,7 @@ data/iapd/raw/
 .env.*
 !.env.example
 deploy/production-refresh.env
+deploy/recovery-evidence.env
 web/node_modules/
 web/.next/
 *.pem

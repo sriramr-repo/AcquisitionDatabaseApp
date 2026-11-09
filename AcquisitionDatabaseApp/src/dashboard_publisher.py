@@ -162,6 +162,29 @@ def _source_score_version(columns: list[str], rows: list[tuple[Any, ...]]) -> st
     return next(iter(versions), SCORE_VERSION)
 
 
+def _dataset_date(dataset_version: str) -> str | None:
+    if dataset_version.startswith("iapdfirm") and len(dataset_version) == 16:
+        value = dataset_version.removeprefix("iapdfirm")
+        return f"{value[:4]}-{value[4:6]}-{value[6:8]}"
+    return dataset_version[2:] if dataset_version.startswith("ia") else None
+
+
+def _firm_universe_counts(columns: list[str], rows: list[tuple[Any, ...]]) -> dict[str, int | None]:
+    index = {column: columns.index(column) for column in columns}
+    has_registration = "is_registered" in index
+    return {
+        "source_firm_count": len(rows),
+        "registered_firm_count": sum(_bool(row[index["is_registered"]]) is True for row in rows) if has_registration else None,
+        "era_only_firm_count": sum(_bool(row[index["is_era_only"]]) is True for row in rows) if "is_era_only" in index else None,
+        "dual_registered_firm_count": sum(_bool(row[index["is_dual_registered"]]) is True for row in rows) if "is_dual_registered" in index else None,
+        "acquisition_target_count": sum(
+            _bool(row[index["is_registered"]]) is True
+            and str(row[index["priority_category"]]) in {"PRIORITY_A", "PRIORITY_B", "PRIORITY_C"}
+            for row in rows
+        ) if has_registration and "priority_category" in index else None,
+    }
+
+
 def publish(dataset_version: str, database_url: str) -> dict[str, Any]:
     import psycopg
 
@@ -177,6 +200,7 @@ def publish(dataset_version: str, database_url: str) -> dict[str, Any]:
         if "priority_category" in index:
             key = str(row[index["priority_category"]])
             priorities[key] = priorities.get(key, 0) + 1
+    universe_counts = _firm_universe_counts(columns, rows)
     now = datetime.now(timezone.utc)
     counts = {"firms": 0, "facts": 0, "scores": 0, "research": 0, "sources": 0}
     with sqlite3.connect(settings.BASE_DIR / "research.db") as research_db:
@@ -197,19 +221,26 @@ def publish(dataset_version: str, database_url: str) -> dict[str, Any]:
         # round-trip per firm when the destination is remote PostgreSQL.
         with conn.transaction(), conn.pipeline():
             conn.execute("""INSERT INTO dataset_versions
-                (dataset_version,dataset_date,score_version,silver_rows,gold_rows,priority_counts,published_at,created_at,updated_at)
-                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                (dataset_version,dataset_date,score_version,silver_rows,gold_rows,source_firm_count,registered_firm_count,era_only_firm_count,dual_registered_firm_count,acquisition_target_count,priority_counts,published_at,created_at,updated_at)
+                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
                 ON CONFLICT (dataset_version) DO UPDATE SET dataset_date=EXCLUDED.dataset_date,
                 score_version=EXCLUDED.score_version,silver_rows=EXCLUDED.silver_rows,gold_rows=EXCLUDED.gold_rows,
-                priority_counts=EXCLUDED.priority_counts,published_at=EXCLUDED.published_at,updated_at=EXCLUDED.updated_at""",
-                (dataset_version, dataset_version[2:], score_version, len(rows), len(rows), json.dumps(priorities), now, now, now))
+                source_firm_count=EXCLUDED.source_firm_count,registered_firm_count=EXCLUDED.registered_firm_count,
+                era_only_firm_count=EXCLUDED.era_only_firm_count,dual_registered_firm_count=EXCLUDED.dual_registered_firm_count,
+                acquisition_target_count=EXCLUDED.acquisition_target_count,priority_counts=EXCLUDED.priority_counts,
+                published_at=EXCLUDED.published_at,updated_at=EXCLUDED.updated_at""",
+                (dataset_version, _dataset_date(dataset_version), score_version, len(rows), len(rows),
+                 universe_counts["source_firm_count"], universe_counts["registered_firm_count"],
+                 universe_counts["era_only_firm_count"], universe_counts["dual_registered_firm_count"],
+                 universe_counts["acquisition_target_count"],
+                 json.dumps(priorities), now, now, now))
             for row in rows:
                 firm_id = str(row[index["firm_id"]])
                 base = (firm_id, dataset_version, now, now)
                 def val(name: str) -> Any: return row[index[name]] if name in index else None
-                conn.execute("""INSERT INTO firms (firm_id,dataset_version,name,primary_business_name,sec_number,website_address,organization_state,sec_region,sec_current_status,created_at,updated_at)
-                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (firm_id,dataset_version) DO UPDATE SET name=EXCLUDED.name,primary_business_name=EXCLUDED.primary_business_name,sec_number=EXCLUDED.sec_number,website_address=EXCLUDED.website_address,organization_state=EXCLUDED.organization_state,sec_region=EXCLUDED.sec_region,sec_current_status=EXCLUDED.sec_current_status,updated_at=EXCLUDED.updated_at""",
-                    base[:2] + (val("name"), val("primary_business_name"), val("sec_number"), val("website_address"), val("organization_state"), val("sec_region"), val("sec_current_status"), now, now))
+                conn.execute("""INSERT INTO firms (firm_id,dataset_version,name,primary_business_name,sec_number,website_address,organization_state,sec_region,sec_current_status,canonical_population_source,population_classification,is_registered,is_sec_registered,is_state_registered,is_era_only,has_era_relationship,is_dual_registered,registration_review_required,created_at,updated_at)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (firm_id,dataset_version) DO UPDATE SET name=EXCLUDED.name,primary_business_name=EXCLUDED.primary_business_name,sec_number=EXCLUDED.sec_number,website_address=EXCLUDED.website_address,organization_state=EXCLUDED.organization_state,sec_region=EXCLUDED.sec_region,sec_current_status=EXCLUDED.sec_current_status,canonical_population_source=EXCLUDED.canonical_population_source,population_classification=EXCLUDED.population_classification,is_registered=EXCLUDED.is_registered,is_sec_registered=EXCLUDED.is_sec_registered,is_state_registered=EXCLUDED.is_state_registered,is_era_only=EXCLUDED.is_era_only,has_era_relationship=EXCLUDED.has_era_relationship,is_dual_registered=EXCLUDED.is_dual_registered,registration_review_required=EXCLUDED.registration_review_required,updated_at=EXCLUDED.updated_at""",
+                    base[:2] + (val("name"), val("primary_business_name"), val("sec_number"), val("website_address"), val("organization_state"), val("sec_region"), val("sec_current_status"),val("canonical_population_source"),val("population_classification"),_bool(val("is_registered")),_bool(val("is_sec_registered")),_bool(val("is_state_registered")),_bool(val("is_era_only")),_bool(val("has_era_relationship")),_bool(val("is_dual_registered")),_bool(val("registration_review_required")),now,now))
                 office = offices.get(firm_id, {})
                 conn.execute("""INSERT INTO firm_facts (firm_id,dataset_version,total_aum,discretionary_aum,non_discretionary_aum,total_account_count,average_account_size,individual_hnw_share,employee_count,advisory_employee_count,state_iar_count,has_item_11_disclosure,regulatory_review_flag,main_office_street_address_1,main_office_street_address_2,main_office_city,main_office_state,main_office_country,main_office_phone,main_office_postal_code,created_at,updated_at)
                     VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (firm_id,dataset_version) DO UPDATE SET total_aum=EXCLUDED.total_aum,discretionary_aum=EXCLUDED.discretionary_aum,non_discretionary_aum=EXCLUDED.non_discretionary_aum,total_account_count=EXCLUDED.total_account_count,average_account_size=EXCLUDED.average_account_size,individual_hnw_share=EXCLUDED.individual_hnw_share,employee_count=EXCLUDED.employee_count,advisory_employee_count=EXCLUDED.advisory_employee_count,state_iar_count=EXCLUDED.state_iar_count,has_item_11_disclosure=EXCLUDED.has_item_11_disclosure,regulatory_review_flag=EXCLUDED.regulatory_review_flag,main_office_street_address_1=EXCLUDED.main_office_street_address_1,main_office_street_address_2=EXCLUDED.main_office_street_address_2,main_office_city=EXCLUDED.main_office_city,main_office_state=EXCLUDED.main_office_state,main_office_country=EXCLUDED.main_office_country,main_office_phone=EXCLUDED.main_office_phone,main_office_postal_code=EXCLUDED.main_office_postal_code,updated_at=EXCLUDED.updated_at""",
@@ -218,9 +249,10 @@ def publish(dataset_version: str, database_url: str) -> dict[str, Any]:
                     VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (firm_id,dataset_version) DO UPDATE SET acquisition_score=EXCLUDED.acquisition_score,priority_category=EXCLUDED.priority_category,priority_readiness=EXCLUDED.priority_readiness,review_required=EXCLUDED.review_required,component_scores=EXCLUDED.component_scores,reason_codes=EXCLUDED.reason_codes,updated_at=EXCLUDED.updated_at""",
                     (firm_id,dataset_version,val("acquisition_score"),val("priority_category"),val("priority_readiness"),val("review_required"),json.dumps({k:val(k) for k in ("aum_fit_score","discretionary_fit_score","client_fit_score","account_practice_fit_score","practice_complexity_score","advisory_model_fit_score","regulatory_quality_score")}),json.dumps(_json(val("reason_codes"))),now,now))
                 counts["firms"] += 1; counts["facts"] += 1; counts["scores"] += 1
-                conn.execute("""INSERT INTO outreach_targets (firm_id,dataset_version,status,created_at,updated_at)
-                    VALUES (%s,%s,'NOT_RESEARCHED',%s,%s) ON CONFLICT (firm_id,dataset_version) DO NOTHING""",
-                    (firm_id, dataset_version, now, now))
+                if val("population_classification") != "ERA_ONLY":
+                    conn.execute("""INSERT INTO outreach_targets (firm_id,dataset_version,status,created_at,updated_at)
+                        VALUES (%s,%s,'NOT_RESEARCHED',%s,%s) ON CONFLICT (firm_id,dataset_version) DO NOTHING""",
+                        (firm_id, dataset_version, now, now))
             for item in research:
                 conn.execute("""INSERT INTO firm_research (firm_id,dataset_version,research_status,research_owner,founder_name,founder_role,ownership_type,ownership_summary,succession_readiness_assessment,investment_philosophy,primary_custodian,strategic_fit_assessment,transition_feasibility,integration_risks,created_at,updated_at)
                     VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (firm_id,dataset_version) DO NOTHING""",

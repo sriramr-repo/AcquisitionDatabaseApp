@@ -83,6 +83,8 @@ def _reason_codes(row: pd.Series) -> list[str]:
             codes.append("AMBIGUOUS_REGISTRATION_STATUS")
         if row.get("core_data_review_required"):
             codes.append("MISSING_CORE_DATA")
+    if row.get("hard_exclusion_reason") == "NOT_REGISTERED_ADVISER":
+        codes.append("NOT_REGISTERED_ADVISER")
     if row.get("hard_exclusion_reason") == "STRUCTURAL_DATA_QUALITY_FAILURE":
         codes.append("STRUCTURAL_DATA_QUALITY_FAILURE")
     return list(dict.fromkeys(codes))
@@ -116,6 +118,13 @@ def evaluate_eligibility(
         return result
 
     statuses = result.get("sec_current_status", pd.Series(index=result.index, dtype=object)).map(_status)
+    canonical_registration = result.get("is_registered", pd.Series([None] * len(result), index=result.index, dtype=object))
+    explicit_registered = canonical_registration.map(lambda value: value is True)
+    explicit_not_registered = canonical_registration.map(lambda value: value is False)
+    canonical_status_review = result.get(
+        "registration_review_required",
+        pd.Series([False] * len(result), index=result.index, dtype=object),
+    ).fillna(False).astype(bool)
     missing_id = result["firm_id"].map(_is_missing)
     missing_aum = result["total_aum"].map(_numeric).isna()
     numeric_aum = result["total_aum"].map(_numeric)
@@ -124,21 +133,23 @@ def evaluate_eligibility(
     # can guide prioritization and research without discarding other paths.
     outside_aum = numeric_aum.notna() & ~numeric_aum.between(MIN_TARGET_AUM, MAX_TARGET_AUM)
     explicit_non_current = statuses.isin(non_current)
-    ambiguous_status = statuses.notna() & ~statuses.isin(CURRENT_REGISTRATION_STATUSES | non_current)
-    missing_status = statuses.isna()
+    legacy_registration = ~(explicit_registered | explicit_not_registered)
+    ambiguous_status = legacy_registration & statuses.notna() & ~statuses.isin(CURRENT_REGISTRATION_STATUSES | non_current)
+    missing_status = legacy_registration & statuses.isna()
 
     structural_failure = missing_id
     missing_core = missing_aum
     hard_reason = pd.Series([None] * len(result), index=result.index, dtype=object)
     hard_reason.loc[structural_failure] = "STRUCTURAL_DATA_QUALITY_FAILURE"
-    hard_reason.loc[~structural_failure & missing_core] = "MISSING_CORE_DATA"
-    hard_reason.loc[~structural_failure & ~missing_core & explicit_non_current] = "NON_CURRENT_REGISTRATION"
+    hard_reason.loc[~structural_failure & explicit_not_registered] = "NOT_REGISTERED_ADVISER"
+    hard_reason.loc[~structural_failure & ~explicit_not_registered & missing_core] = "MISSING_CORE_DATA"
+    hard_reason.loc[~structural_failure & ~explicit_not_registered & ~missing_core & explicit_non_current] = "NON_CURRENT_REGISTRATION"
     # Outside-band AUM is intentionally not assigned to hard_reason. Missing
     # core data, structural failures, and confirmed non-current statuses
     # remain hard exclusions.
 
     hard_excluded = hard_reason.notna()
-    status_review = ~hard_excluded & (ambiguous_status | missing_status)
+    status_review = ~hard_excluded & (ambiguous_status | missing_status | canonical_status_review)
     core_review = pd.Series(False, index=result.index)
     review_required = ~hard_excluded & (status_review | core_review)
 

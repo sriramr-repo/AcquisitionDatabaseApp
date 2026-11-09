@@ -90,3 +90,32 @@ def test_missing_required_columns_is_structural_failure():
     output = evaluate_eligibility(pd.DataFrame([{"total_aum": 25_000_000}])).iloc[0]
     assert output.eligibility_status == "EXCLUDED"
     assert output.hard_exclusion_reason == "STRUCTURAL_DATA_QUALITY_FAILURE"
+
+
+def test_canonical_registration_controls_eligibility_without_sec_status():
+    state_registered = result(
+        sec_current_status=None,
+        is_registered=True,
+        registration_review_required=False,
+        total_aum=40_000_000,
+    )
+    assert state_registered.eligibility_status == "ELIGIBLE"
+
+    ambiguous = result(
+        sec_current_status=None,
+        is_registered=True,
+        registration_review_required=True,
+        total_aum=40_000_000,
+    )
+    assert ambiguous.eligibility_status == "REVIEW_REQUIRED"
+    assert "AMBIGUOUS_REGISTRATION_STATUS" in json.loads(ambiguous.reason_codes)
+
+    era = result(
+        sec_current_status="ACTIVE",
+        is_registered=False,
+        registration_review_required=False,
+        total_aum=None,
+    )
+    assert era.eligibility_status == "EXCLUDED"
+    assert era.hard_exclusion_reason == "NOT_REGISTERED_ADVISER"
+    assert json.loads(era.reason_codes) == ["NOT_REGISTERED_ADVISER"]

@@ -85,7 +85,7 @@ def test_fallback_discovery_is_recorded_as_warning(monkeypatch, tmp_path):
     monkeypatch.setattr(src.download, "get_discovery_status", lambda: {"discovery_source": "fallback", "fallback_used": True, "discovery_error": "SEC unavailable"})
     monkeypatch.setattr(production, "get_current_dataset", lambda: {"dataset_version": "fixture", "status": "success"})
     monkeypatch.setattr(production, "generate_monthly_report", lambda *_: None)
-    result = production.production_refresh()
+    result = production.production_refresh(pipeline_runner=lambda **_: {"status": "skipped", "dataset_version": "fixture"})
     assert result["status"] == "NO_CHANGE"
     repository = OperationsRepository()
     run = repository.get_run(result["run_id"])
@@ -107,17 +107,81 @@ def test_production_refresh_new_dataset_uses_staged_path(monkeypatch, tmp_path):
     monkeypatch.setattr(production, "save_change_intelligence", lambda *_: None)
     monkeypatch.setattr(production, "build_research_refresh_queue", lambda *_ , **__: [])
     monkeypatch.setattr(production, "save_research_refresh_queue", lambda *_: None)
+    import src.iapd_firms
+    from datetime import date
+    selection = src.iapd_firms.FirmFeedPair(
+        src.iapd_firms.FeedDefinition(
+            "sec", "IA_FIRM_SEC_Feed_11_07_2026.xml.gz",
+            "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_11_07_2026.xml.gz",
+            date(2026, 11, 7),
+        ),
+        src.iapd_firms.FeedDefinition(
+            "state", "IA_FIRM_STATE_Feed_11_07_2026.xml.gz",
+            "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_11_07_2026.xml.gz",
+            date(2026, 11, 7),
+        ),
+        "latest_manifest",
+    )
+    resolution_calls = []
+    monkeypatch.setattr(src.iapd_firms, "resolve_firm_feed_pair", lambda **kwargs: resolution_calls.append(kwargs) or selection)
     calls = {}
 
-    def staged(run_id, dataset_version, previous, url, operations):
-        calls.update({"run_id": run_id, "dataset_version": dataset_version, "previous": previous, "url": url})
+    def staged(run_id, dataset_version, previous, url, operations, *, feed_pair):
+        calls.update({"run_id": run_id, "dataset_version": dataset_version, "previous": previous, "url": url,
+                      "feed_pair": feed_pair})
         return {"status": "success", "dataset_version": dataset_version, "rows_loaded": 1}
 
     monkeypatch.setattr(production, "_run_staged_dataset", staged)
     result = production.production_refresh()
     assert result["status"] == "SUCCESS"
-    assert calls["dataset_version"] == "new"
+    assert calls["dataset_version"] == "iapdfirm20261107"
     assert calls["previous"] == "old"
+    assert calls["feed_pair"] is selection
+    assert len(resolution_calls) == 1
+
+
+def test_pinned_production_refresh_records_activation_selection(monkeypatch, tmp_path):
+    _patch_paths(monkeypatch, tmp_path)
+    activation = Path(__file__).resolve().parents[1] / "deploy/iapd-firm-activations/iapdfirm20261107.json"
+    monkeypatch.setattr(
+        production,
+        "get_current_dataset",
+        lambda: {"dataset_version": "iapdfirm20261107", "status": "success"},
+    )
+    monkeypatch.setattr(production, "generate_monthly_report", lambda *_: None)
+    result = production.production_refresh(firm_activation_manifest=activation)
+    assert result["status"] == "NO_CHANGE"
+    assert result["firm_feed_selection"]["discovery_mode"] == "pinned_activation_manifest"
+    manifest = json.loads((settings.RUN_MANIFEST_DIR / f"{result['run_id']}.json").read_text())
+    assert manifest["firm_feed_selection"]["activation_id"] == "iapdfirm20261107-shadow-approved-v1"
+
+
+def test_failed_firm_snapshot_is_quarantined_outside_active_data(monkeypatch, tmp_path):
+    _patch_paths(monkeypatch, tmp_path)
+    import src.iapd_firms
+    from src.staged_refresh import StageFailure
+
+    activation = Path(__file__).resolve().parents[1] / "deploy/iapd-firm-activations/iapdfirm20261107.json"
+    selection = src.iapd_firms.load_activation_manifest(activation)
+    monkeypatch.setattr(
+        src.iapd_firms,
+        "download_feed",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(src.iapd_firms.IAPDFirmError("corrupt fixture")),
+    )
+    with pytest.raises(StageFailure, match="corrupt fixture"):
+        production._run_staged_dataset(
+            "fixture-run",
+            selection.dataset_version,
+            None,
+            src.iapd_firms.MANIFEST_URL,
+            OperationsRepository(),
+            feed_pair=selection,
+        )
+    quarantine = settings.BASE_DIR / "quarantine/iapd-firms/iapdfirm20261107-fixture-run"
+    assert quarantine.is_dir()
+    report = json.loads((quarantine / "quarantine-report.json").read_text())
+    assert report["source_selection"]["activation_id"] == selection.activation_id
+    assert not (settings.BASE_DIR / "bronze/raw/iapdfirm20261107.zip").exists()
 
 
 def test_production_refresh_returns_busy_when_another_run_holds_lock(monkeypatch, tmp_path):

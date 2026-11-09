@@ -21,6 +21,11 @@ class SourceDefinition:
 
 
 SOURCE_DEFINITIONS: dict[str, SourceDefinition] = {
+    "iapd_firm_compilation": SourceDefinition(
+        "iapd_firm_compilation", "SEC/FINRA", "IAPD Investment Adviser Firm Data",
+        "https://adviserinfo.sec.gov/compilation", "monthly_sec_and_state_xml",
+        "Canonical SEC-registered, state-registered, and ERA firm population keyed by CRD.",
+    ),
     "historical_adv": SourceDefinition(
         "historical_adv", "SEC", "Historical Form ADV data",
         "https://www.sec.gov/foia-services/frequently-requested-documents/form-adv-data",

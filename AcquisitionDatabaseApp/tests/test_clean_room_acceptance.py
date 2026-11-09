@@ -134,6 +134,24 @@ def test_clean_room_success_promotion_change_queue_and_registry(tmp_path):
     assert {event["event_type"] for event in report["events"]} >= {"NEW_FIRM", "REMOVED_FIRM", "AUM_CHANGE", "STAFFING_CHANGE", "ITEM11_CHANGE"}
 
 
+def test_clean_room_promotes_additional_canonical_silver_tables(tmp_path):
+    baseline, new = _fixture_frames(tmp_path)
+    root = _seed_clean_room(tmp_path, baseline)
+    relationships = pd.DataFrame([{
+        "firm_id": str(firm_id), "relationship_type": "STATE_REGISTRATION",
+        "regulator_code": "CA", "status": "APPROVED",
+    } for firm_id in new.firm_id])
+    result = StagedRefresh(root).run(
+        dataset_version="next", previous_dataset_version="baseline",
+        source_zip=_zip_fixture(tmp_path), silver_frame=new,
+        additional_silver_frames={"firm_registrations": relationships},
+        previous_gold_frame=baseline,
+    )
+    assert result.status == "SUCCESS"
+    with duckdb.connect(str(root / "production" / "analytics.duckdb"), read_only=True) as connection:
+        assert connection.execute('select count(*) from silver_firm_registrations_next').fetchone()[0] == len(new)
+
+
 @pytest.mark.parametrize("stage,expected", [
     ("download", "FAILED_DOWNLOAD"), ("zip_validation", "FAILED_VALIDATION"),
     ("silver_normalization", "FAILED_SILVER"), ("quality", "FAILED_QUALITY"),

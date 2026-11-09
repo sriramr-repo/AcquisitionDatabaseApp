@@ -1,4 +1,8 @@
-# SEC IA Firm Roster — Architecture & Design Documentation
+# RIA Firm Universe — Architecture & Design Documentation
+
+The canonical population is now the complete IAPD SEC/state firm compilation.
+See [Canonical IAPD firm universe](docs/IAPD_FIRM_UNIVERSE.md). The SEC Form ADV
+roster remains an independent secondary fact and reconciliation source.
 
 ## 1. Entity Relationship Diagram (ERD)
 

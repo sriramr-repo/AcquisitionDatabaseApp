@@ -38,13 +38,35 @@ The first controlled run should be `NO_CHANGE` if the current dataset is already
 
 ## Scheduler installation on macOS
 
-Copy `deploy/launchd/com.scm.ria.production-refresh.plist.template`, replace the two absolute paths, and install it as `~/Library/LaunchAgents/com.scm.ria.production-refresh.plist`. Then load it with `launchctl bootstrap gui/$(id -u) <plist>`. Check output in `data/logs/launchd.out.log` and `launchd.err.log`.
+Copy `deploy/production-refresh.env.example` to the ignored
+`deploy/production-refresh.env`, set both database URLs and refresh-host
+credentials, and set its mode to `600`. Generate the credential-free target
+fingerprint with `deploy/production-refresh.sh --print-target-fingerprint`,
+verify the redacted identity against the database provider and Vercel's
+production `DATABASE_URL`, then save the approved fingerprint in the protected
+environment file. For the first canonical IAPD activation, also set
+`IAPD_FIRM_ACTIVATION_MANIFEST` to the absolute path of the reviewed
+`deploy/iapd-firm-activations/iapdfirm20261107.json`. Leave it empty only when
+an operator deliberately selects latest-manifest mode for a later refresh.
+
+Copy `deploy/launchd/com.scm.ria.production-refresh.plist.template`, replace
+the absolute paths, and install it as
+`~/Library/LaunchAgents/com.scm.ria.production-refresh.plist`. The launch agent
+contains paths and mode selection only; database and R2 credentials remain in
+the protected environment file. Then load it with
+`launchctl bootstrap gui/$(id -u) <plist>`. Check output in
+`data/logs/launchd.out.log` and `launchd.err.log`.
 
 On Linux, call `deploy/production-refresh.sh` from a systemd timer or cron entry with an explicit working directory and `SCM_ENV=PROD`.
 
 ## Rollback
 
 Stop the scheduler, inspect `list-runs`, identify the last successful backup, verify it, restore to an isolated directory, and validate the restored files. Production promotion is an explicit operator action after the isolated validation; the built-in restore function refuses to overwrite the active environment.
+
+Hosted PostgreSQL recovery additionally requires the provider snapshot and
+custom-dump evidence workflow in
+[Production recovery evidence](RECOVERY_EVIDENCE.md). Do not apply a production
+migration until both the database and local restore proofs pass.
 
 ## Health and ongoing operation
 

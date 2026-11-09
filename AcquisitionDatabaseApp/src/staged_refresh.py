@@ -80,10 +80,12 @@ class StagedRefresh:
 
     def run(self, *, dataset_version: str, previous_dataset_version: str | None,
             source_zip: Path, silver_frame: pd.DataFrame,
+            additional_silver_frames: dict[str, pd.DataFrame] | None = None,
+            source_url: str = "fixture://sec",
             previous_gold_frame: pd.DataFrame | None = None,
             fail_stage: str | None = None, run_id: str | None = None) -> StagedRefreshResult:
         started = time.perf_counter()
-        run_id = run_id or self.repository.start_run(dataset_version=dataset_version, source_url="fixture://sec",
+        run_id = run_id or self.repository.start_run(dataset_version=dataset_version, source_url=source_url,
                                                       trigger_type="clean-room", previous_dataset_version=previous_dataset_version)
         stage = self.root / "staging" / dataset_version
         stage.mkdir(parents=True, exist_ok=True)
@@ -99,6 +101,17 @@ class StagedRefresh:
                 connection.register("_silver_fixture", silver_frame)
                 connection.execute(f'CREATE TABLE "silver_firms_{dataset_version}" AS SELECT * FROM _silver_fixture')
                 connection.unregister("_silver_fixture")
+                for suffix, frame in (additional_silver_frames or {}).items():
+                    safe_suffix = str(suffix).replace("-", "_")
+                    if not safe_suffix.replace("_", "").isalnum():
+                        raise ValueError(f"invalid Silver table suffix: {suffix}")
+                    self._validate_additional_silver(safe_suffix, frame, silver_frame)
+                    compatible = _duckdb_compatible_frame(frame)
+                    connection.register("_additional_silver", compatible)
+                    connection.execute(
+                        f'CREATE TABLE "silver_{safe_suffix}_{dataset_version}" AS SELECT * FROM _additional_silver'
+                    )
+                    connection.unregister("_additional_silver")
                 self._stage(run_id, "quality", fail_stage, lambda: self._quality(silver_frame))
                 gold_frame = None
                 def build_gold():
@@ -120,7 +133,10 @@ class StagedRefresh:
                 raise StageFailure("reporting", "controlled acceptance failure")
             self._write_report(stage, dataset_version, len(silver_frame), len(gold_frame) if gold_frame is not None else 0)
             self.repository.record_stage(run_id, "reporting", rows_processed=1)
-            self._stage(run_id, "promotion", fail_stage, lambda: self._promote(stage, dataset_version, previous_dataset_version))
+            self._stage(run_id, "promotion", fail_stage, lambda: self._promote(
+                stage, dataset_version, previous_dataset_version,
+                source_url=source_url, source_file=source_zip.name, source_hash=_sha256(source_zip),
+            ))
             promoted = True
             self.repository.update_run(run_id, status="SUCCESS", completed_at=utc_now(),
                                        execution_duration_seconds=time.perf_counter()-started,
@@ -179,6 +195,22 @@ class StagedRefresh:
             raise ValueError("quality gate: null firm_id")
 
     @staticmethod
+    def _validate_additional_silver(suffix: str, frame: pd.DataFrame, firms: pd.DataFrame) -> None:
+        if "firm_id" not in frame.columns or frame["firm_id"].isna().any():
+            raise ValueError(f"{suffix} requires non-null firm_id")
+        firm_ids = set(firms["firm_id"].astype(str))
+        linked_ids = set(frame["firm_id"].astype(str))
+        if linked_ids - firm_ids:
+            raise ValueError(f"{suffix} contains orphan firm IDs")
+        if suffix == "firm_registrations":
+            required = {"relationship_type", "regulator_code", "status"}
+            if not required.issubset(frame.columns):
+                raise ValueError("firm_registrations is missing required relationship fields")
+            classified = set(frame.loc[frame["relationship_type"] != "STATE_NOTICE_FILE", "firm_id"].astype(str))
+            if classified != firm_ids:
+                raise ValueError("every canonical firm requires a registration or ERA relationship")
+
+    @staticmethod
     def _validate_gold(frame: pd.DataFrame | None, expected_rows: int) -> None:
         if frame is None or len(frame) != expected_rows or frame["firm_id"].duplicated().any():
             raise ValueError("Gold/Silver row or uniqueness invariant failed")
@@ -228,14 +260,18 @@ class StagedRefresh:
         path = stage / "exports" / "reports" / "monthly_report.json"; path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps({"report_type":"clean_room_monthly","dataset_version":version,"silver_rows":silver_rows,"gold_v1_rows":gold_rows}, indent=2) + "\n")
 
-    def _promote(self, stage: Path, version: str, previous: str | None) -> None:
+    def _promote(self, stage: Path, version: str, previous: str | None, *,
+                 source_url: str, source_file: str, source_hash: str) -> None:
         target = self.production_root
         target.mkdir(parents=True, exist_ok=True)
         source_db = stage / "analytics.duckdb"; destination_db = target / "analytics.duckdb"
         if destination_db.exists():
             connection = duckdb.connect(str(destination_db)); connection.execute(f"ATTACH '{source_db}' AS staged")
             try:
-                for table in [f"silver_firms_{version}", gold_v1_table_name(version)]:
+                staged_tables = [row[0] for row in connection.execute(
+                    "SELECT table_name FROM information_schema.tables WHERE table_catalog='staged' AND table_schema='main'"
+                ).fetchall()]
+                for table in [name for name in staged_tables if name.startswith("silver_") or name == gold_v1_table_name(version)]:
                     connection.execute(f'CREATE OR REPLACE TABLE "{table}" AS SELECT * FROM staged."{table}"')
             finally:
                 connection.execute("DETACH staged"); connection.close()
@@ -247,8 +283,8 @@ class StagedRefresh:
         registry = DatasetRegistry(registry_db)
         registry.init_schema()
         registry.register({"dataset_version": version, "dataset_name": version,
-                           "source_url": "fixture://sec", "download_timestamp": utc_now(),
-                           "file_name": f"{version}.zip", "status": "success",
+                           "source_url": source_url, "download_timestamp": utc_now(),
+                           "file_name": source_file, "sha256_checksum": source_hash, "status": "success",
                            "notes": "staged clean-room promotion"})
         bronze_source = stage / "bronze" / "raw" / f"{version}.zip"
         bronze_target = target / "bronze" / "raw" / bronze_source.name

@@ -27,12 +27,13 @@ export type IapdBundleResult = {
 };
 
 function config() {
+  const onVercel = Boolean(process.env.VERCEL_ENV);
   const values = {
     accountId: process.env.CLOUDFLARE_R2_ACCOUNT_ID,
-    accessKeyId: process.env.CLOUDFLARE_R2_ACCESS_KEY_ID,
-    secretAccessKey: process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.CLOUDFLARE_R2_READ_ACCESS_KEY_ID || (!onVercel ? process.env.CLOUDFLARE_R2_ACCESS_KEY_ID : undefined),
+    secretAccessKey: process.env.CLOUDFLARE_R2_READ_SECRET_ACCESS_KEY || (!onVercel ? process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY : undefined),
     bucket: process.env.CLOUDFLARE_R2_BUCKET,
-    sessionToken: process.env.CLOUDFLARE_R2_SESSION_TOKEN || "",
+    sessionToken: process.env.CLOUDFLARE_R2_READ_SESSION_TOKEN || (!onVercel ? process.env.CLOUDFLARE_R2_SESSION_TOKEN : "") || "",
   };
   return [values.accountId, values.accessKeyId, values.secretAccessKey, values.bucket].every(Boolean)
     ? values as Record<keyof typeof values, string>
@@ -109,7 +110,13 @@ async function activeManifest(datasetVersion: string, configuration: NonNullable
   const cacheKey = `manifest:${datasetVersion}`;
   const cached = cacheGet(cacheKey);
   if (cached) return cached;
-  const maximum = Number(process.env.IAPD_R2_MAX_MANIFEST_BYTES || 10_000_000);
+  // The canonical 43k-firm manifest is larger than 10 MB because each entry
+  // carries its object key and integrity hash. Keep a bounded read while
+  // leaving enough headroom for normal universe growth.
+  const maximum = Math.min(
+    64_000_000,
+    Math.max(10_000_000, Number(process.env.IAPD_R2_MAX_MANIFEST_BYTES || 25_000_000)),
+  );
   const { bytes, metadata } = await objectBytes(
     storageClient(configuration), configuration.bucket,
     `iapd/${datasetVersion}/manifest.json`, maximum,

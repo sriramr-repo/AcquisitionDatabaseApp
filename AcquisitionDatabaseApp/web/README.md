@@ -71,6 +71,12 @@ transient failures retry with bounded backoff while provenance failures stop saf
 
 ## Local-first IAPD and Cloudflare R2
 
+The canonical firm population is built from the same-date IAPD SEC and state
+firm compilations before this publisher runs. Apply migration
+`0022_iapd_firm_universe.sql` before publishing `iapdfirmYYYYMMDD`. Dashboard
+counts distinguish all source firms, registered firms, ERA-only firms, dual
+registrations, and registered Priority A/B/C acquisition targets.
+
 The complete IAPD feed is normalized on the protected production machine. The
 local store retains every person and national current-employment link in
 versioned DuckDB and Parquet artifacts under `data/iapd/local/`. Neon retains
@@ -151,11 +157,21 @@ secrets file.
 
 ## Deployment
 
-Use a hosted PostgreSQL-compatible `DATABASE_URL`, `AUTH_SECRET`, server-side
-`FIRECRAWL_API_KEY`, and the Cloudflare R2 variables above. Run Drizzle migrations during deployment and
-run the publisher from the protected production environment after a verified
-refresh. Vercel is not used for DuckDB, SQLite, persistent files, or SEC batch
-ingestion.
+Use a pooled hosted PostgreSQL `DATABASE_URL`, `AUTH_SECRET`, server-side
+`FIRECRAWL_API_KEY`, and separately scoped read-only Cloudflare R2 credentials.
+Set `SCM_PRODUCTION_DATABASE_FINGERPRINT` and `SCM_NEON_PROJECT_ID` in both
+production and preview, and `SCM_MUTATIONS_ENABLED=true` only in production.
+The Vercel-managed Neon integration must create an isolated copy-on-write
+database branch for every preview deployment; the preflight verifies the
+injected project ID and rejects any preview pointed at the production database.
+`npm run vercel:preflight` blocks localhost/direct database URLs, mismatched
+fingerprints, mutable previews, client-exposed secrets, refresh-host variables,
+and R2 write-credential names. Vercel's build command is build-only and never
+runs migrations, refresh jobs, or R2 publication.
+
+Run Drizzle migrations as a separate approved operator step and run the
+publisher from the protected production environment after a verified refresh.
+Vercel is not used for DuckDB, SQLite, persistent files, or SEC batch ingestion.
 
 ## Virtual SDR
 

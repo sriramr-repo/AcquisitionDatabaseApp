@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "activation_id": "iapdfirm20261107-shadow-approved-v1",
+  "dataset_version": "iapdfirm20261107",
+  "snapshot_date": "2026-11-07",
+  "parser_version": "iapd-firm-v1",
+  "manifest_url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/CompilationReports.manifest.json",
+  "feeds": {
+    "sec": {
+      "name": "IA_FIRM_SEC_Feed_11_07_2026.xml.gz",
+      "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_11_07_2026.xml.gz",
+      "sha256": "a69e3a1ec95a73bb94a604387d6a3e001f287da463e8014ae7b25d2c33d2db04"
+    },
+    "state": {
+      "name": "IA_FIRM_STATE_Feed_11_07_2026.xml.gz",
+      "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_11_07_2026.xml.gz",
+      "sha256": "c61f83ce691c5600a0d3ab3426abcbaea562a1fa85d1744680c8c7d39d163375"
+    }
+  },
+  "schemas": {
+    "archive_url": "https://iard.com/sites/iard/files/standalonefiles/firm_compilation.zip",
+    "sec": {
+      "name": "IAPDSECBulkFeed.xsd",
+      "sha256": "523490a4c7e34f126b0fcae91f10208beac4e09132218005fc71e767d9ea1a86"
+    },
+    "state": {
+      "name": "IAPDStateBulkFeed.xsd",
+      "sha256": "a696f24c7334eec4e4b3c4c5b278bdf5a7f46f9e3853b30606370307bd6725e5"
+    }
+  },
+  "expected_counts": {
+    "sec_feed_rows": 24087,
+    "sec_registered_firms": 17268,
+    "sec_era_firms": 6819,
+    "state_feed_rows": 22043,
+    "state_registered_firms": 16587,
+    "state_era_firms": 5466,
+    "unique_firms": 43918,
+    "registered_firms": 33615,
+    "era_only_firms": 10303,
+    "dual_registered_firms": 240,
+    "registered_with_era_firms": 15,
+    "cross_feed_overlap": 2212,
+    "relationship_rows": 188781,
+    "office_rows": 43918,
+    "duplicate_crds": 0,
+    "unclassified_firms": 0,
+    "identity_conflicts": 0
+  },
+  "shadow_report": {
+    "report_id": "stage5-reconciliation-20261107",
+    "verified_at": "2026-11-08T21:42:55Z"
+  }
+}
