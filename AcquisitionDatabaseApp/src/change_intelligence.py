@@ -41,6 +41,7 @@ def compare_gold_versions(previous_version: str, current_version: str,
     events: list[dict[str, Any]] = []
     for firm_id in sorted(set(new.index) - set(old.index), key=str):
         row = new.loc[firm_id]
+        events.append({"event_type": "NEW_FIRM", "firm_id": str(firm_id), "details": {"name": row.get("name")}})
         if row.get("priority_category") == "PRIORITY_A":
             events.append({"event_type": "NEW_PRIORITY_A", "firm_id": str(firm_id), "details": {"name": row.get("name")}})
     for firm_id in sorted(set(old.index) - set(new.index), key=str):
@@ -78,6 +79,19 @@ def compare_gold_versions(previous_version: str, current_version: str,
             if not old_band and new_band: add("ENTERED_TARGET_AUM_BAND", {"old": aum_old, "new": aum_new})
             if old_band and not new_band: add("EXITED_TARGET_AUM_BAND", {"old": aum_old, "new": aum_new})
         if changed("has_item_11_disclosure") and bool(after.get("has_item_11_disclosure")): add("NEW_REGULATORY_DISCLOSURE", {})
+        registration_fields = ("is_sec_registered", "is_state_registered")
+        if all(field in old.columns and field in new.columns for field in registration_fields):
+            old_registration = tuple(before.get(field) for field in registration_fields)
+            new_registration = tuple(after.get(field) for field in registration_fields)
+            if not any(pd.isna(value) for value in old_registration + new_registration) and old_registration != new_registration:
+                add("REGISTRATION_TRANSITION", {
+                    "old": {"sec": bool(old_registration[0]), "state": bool(old_registration[1])},
+                    "new": {"sec": bool(new_registration[0]), "state": bool(new_registration[1])},
+                })
+        if "has_era_relationship" in old.columns and "has_era_relationship" in new.columns:
+            old_era, new_era = before.get("has_era_relationship"), after.get("has_era_relationship")
+            if not pd.isna(old_era) and not pd.isna(new_era) and bool(old_era) != bool(new_era):
+                add("ADDED_ERA_RELATIONSHIP" if bool(new_era) else "REMOVED_ERA_RELATIONSHIP", {})
         for column in ("registration_status", "organization_type", "total_account_count", "individual_hnw_client_aum"):
             if changed(column): add(f"{column.upper()}_CHANGE", {"old": before.get(column), "new": after.get(column)})
         for column in ("employee_count", "advisory_employee_count"):

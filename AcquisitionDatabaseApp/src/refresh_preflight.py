@@ -3,9 +3,12 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import hmac
 import json
 import os
 from pathlib import Path
+import re
+from typing import Mapping
 from urllib.parse import urlsplit
 
 
@@ -17,6 +20,8 @@ REQUIRED_TABLES = (
     "iapd_manual_review_queue", "iapd_snapshot_comparisons",
     "iapd_firm_change_summaries",
 )
+DATABASE_URL_KEYS = ("DATABASE_URL", "PUBLISHER_DATABASE_URL")
+FINGERPRINT_PATTERN = re.compile(r"[0-9a-f]{64}")
 
 
 def database_identity(url: str) -> dict:
@@ -27,6 +32,37 @@ def database_identity(url: str) -> dict:
     if host in {"localhost", "127.0.0.1", "::1"}:
         raise ValueError("Production refresh refuses a localhost database target")
     return {"host": host, "port": parsed.port or 5432, "database": parsed.path.lstrip("/"), "schema": "public"}
+
+
+def database_fingerprint(identity: Mapping[str, object]) -> str:
+    """Return a credential-free identifier for an approved database target."""
+    payload = json.dumps(dict(identity), sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def required_database_urls(environ: Mapping[str, str]) -> tuple[str, str]:
+    missing = [key for key in DATABASE_URL_KEYS if not environ.get(key, "").strip()]
+    if missing:
+        raise ValueError("Production refresh requires explicit " + " and ".join(missing))
+    return environ["DATABASE_URL"], environ["PUBLISHER_DATABASE_URL"]
+
+
+def matching_database_identity(migration_url: str, publisher_url: str) -> dict:
+    migration = database_identity(migration_url)
+    publisher = database_identity(publisher_url)
+    if migration != publisher:
+        raise ValueError("Migration and publisher database identities differ; publication blocked")
+    return migration
+
+
+def validate_approved_fingerprint(identity: Mapping[str, object], expected: str) -> str:
+    normalized = expected.strip().lower()
+    if not FINGERPRINT_PATTERN.fullmatch(normalized):
+        raise ValueError("SCM_PRODUCTION_DATABASE_FINGERPRINT must be a 64-character SHA-256 value")
+    actual = database_fingerprint(identity)
+    if not hmac.compare_digest(actual, normalized):
+        raise ValueError("Database target does not match the approved production fingerprint")
+    return actual
 
 
 def expected_ledger(root: Path = ROOT) -> list[tuple[str, int]]:
@@ -40,12 +76,10 @@ def validate_ledger(actual, expected):
         raise ValueError("Drizzle ledger hashes/order/timestamps differ from local migrations; publication blocked")
 
 
-def preflight(*, migration_url: str, publisher_url: str, root: Path = ROOT) -> dict:
+def preflight(*, migration_url: str, publisher_url: str, expected_fingerprint: str, root: Path = ROOT) -> dict:
     import psycopg
-    migration = database_identity(migration_url)
-    publisher = database_identity(publisher_url)
-    if migration != publisher:
-        raise ValueError("Migration and publisher database identities differ; publication blocked")
+    migration = matching_database_identity(migration_url, publisher_url)
+    fingerprint = validate_approved_fingerprint(migration, expected_fingerprint)
     expected = expected_ledger(root)
     checks = []
     for name, url in (("DATABASE_URL", migration_url), ("PUBLISHER_DATABASE_URL", publisher_url)):
@@ -60,7 +94,13 @@ def preflight(*, migration_url: str, publisher_url: str, root: Path = ROOT) -> d
             if missing:
                 raise ValueError("Missing production tables: " + ", ".join(missing))
             checks.append({"env_var": name, **migration, "ledger_rows": len(ledger)})
-    return {"status": "passed", "read_only": True, "targets": checks, "required_tables": list(REQUIRED_TABLES)}
+    return {
+        "status": "passed",
+        "read_only": True,
+        "database_target": {**migration, "fingerprint": fingerprint},
+        "targets": checks,
+        "required_tables": list(REQUIRED_TABLES),
+    }
 
 
 def discover_sources() -> dict:
@@ -85,11 +125,20 @@ def discover_sources() -> dict:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--print-target-fingerprint", action="store_true")
     args = parser.parse_args()
     try:
-        migration = os.environ.get("DATABASE_URL", "")
-        publisher = os.environ.get("PUBLISHER_DATABASE_URL") or migration
-        result = preflight(migration_url=migration, publisher_url=publisher)
+        migration, publisher = required_database_urls(os.environ)
+        identity = matching_database_identity(migration, publisher)
+        if args.print_target_fingerprint:
+            print(json.dumps({"database_target": {**identity, "fingerprint": database_fingerprint(identity)}}, indent=2))
+            return
+        approved_fingerprint = os.environ.get("SCM_PRODUCTION_DATABASE_FINGERPRINT", "")
+        result = preflight(
+            migration_url=migration,
+            publisher_url=publisher,
+            expected_fingerprint=approved_fingerprint,
+        )
         result["mode"] = "dry_run" if args.dry_run else "preflight"
         result["stages"] = ["SEC refresh", "dashboard publication", "ADV publication", "IAPD discovery/import", "snapshot comparison", "compact publication", "R2 bundles", "bounded live batch"]
         result["iapd_live_limit"] = int(os.getenv("IAPD_LIVE_BATCH_SIZE", "25"))

@@ -13,7 +13,7 @@ const Definition = ({children,text}:{children:React.ReactNode;text:string}) =>
   <span className="column-definition" tabIndex={0}><span>{children}</span><span className="definition-banner">{text}</span></span>;
 
 type TargetParams = {
-  q?:string; priority?:string; sellerIntent?:string; state?:string; aum?:string;
+  q?:string; priority?:string; registration?:string; sellerIntent?:string; state?:string; aum?:string;
   representatives?:string; iapdFreshness?:string; iapdConflict?:string;
   iapdDisclosure?:string; sort?:string; page?:string;
 };
@@ -24,13 +24,13 @@ export default async function Targets({searchParams}:{searchParams:Promise<Targe
   const [sortField="score", direction="desc"] = (p.sort || "score_desc").split("_");
   const sortOrder = direction === "asc" ? "asc" : "desc";
   const d = await targetData({
-    search:p.q, priority:p.priority, sellerIntent:p.sellerIntent, state:p.state,
+    search:p.q, priority:p.priority, registration:p.registration, sellerIntent:p.sellerIntent, state:p.state,
     aum:p.aum, representatives:p.representatives, iapdFreshness:p.iapdFreshness,
     iapdConflict:p.iapdConflict, iapdDisclosure:p.iapdDisclosure,
     sortField, sortOrder, page,
   });
   const filters:Record<string,string|undefined> = {
-    q:p.q, priority:p.priority, sellerIntent:p.sellerIntent, state:p.state,
+    q:p.q, priority:p.priority, registration:p.registration, sellerIntent:p.sellerIntent, state:p.state,
     aum:p.aum, representatives:p.representatives, iapdFreshness:p.iapdFreshness,
     iapdConflict:p.iapdConflict, iapdDisclosure:p.iapdDisclosure,
   };
@@ -52,6 +52,7 @@ export default async function Targets({searchParams}:{searchParams:Promise<Targe
     <form className="toolbar target-filters">
       <input name="q" defaultValue={p.q} placeholder="Search name or CRD" />
       <select name="priority" defaultValue={p.priority || ""}><option value="">All priorities</option><option value="PRIORITY_A">A</option><option value="PRIORITY_B">B</option><option value="PRIORITY_C">C</option></select>
+      <select name="registration" defaultValue={p.registration || "registered"}><option value="registered">Registered firms</option><option value="sec">SEC only</option><option value="state">State only</option><option value="dual">SEC + state</option><option value="era">ERA only</option><option value="all">All source firms</option></select>
       <select name="aum" defaultValue={p.aum || ""}><option value="">All AUM</option><option value="under200">Under $200M</option><option value="unknown">AUM unknown</option></select>
       <input name="state" defaultValue={p.state} placeholder="State" maxLength={2} aria-label="State" />
       <select name="representatives" defaultValue={p.representatives || ""}><option value="">All rep counts</option><option value="any">Has representatives</option><option value="none">No representatives</option><option value="1to3">1–3 representatives</option><option value="4plus">4+ representatives</option></select>

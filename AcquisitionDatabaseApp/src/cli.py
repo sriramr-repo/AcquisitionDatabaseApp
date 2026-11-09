@@ -1,4 +1,5 @@
 import typer
+from pathlib import Path
 from typing import Optional
 from src.pipeline import run_pipeline
 from src.metadata import list_datasets, get_current_dataset
@@ -143,12 +144,23 @@ def production_health_check_command():
 
 
 @app.command("production-refresh")
-def production_refresh_command(force: bool = typer.Option(False, "--force")):
+def production_refresh_command(
+    force: bool = typer.Option(False, "--force"),
+    firm_activation_manifest: Optional[str] = typer.Option(
+        None,
+        "--firm-activation-manifest",
+        help="Reviewed local activation manifest for a pinned IAPD firm snapshot.",
+    ),
+):
     """Run the controlled monthly production refresh."""
     from src.production import production_refresh
     import json
     try:
-        result = production_refresh(trigger_type="cli", force=force)
+        result = production_refresh(
+            trigger_type="cli",
+            force=force,
+            firm_activation_manifest=Path(firm_activation_manifest) if firm_activation_manifest else None,
+        )
     except Exception as exc:
         typer.echo(f"Production refresh failed: {exc}", err=True)
         raise typer.Exit(code=1)
@@ -169,6 +181,25 @@ def iapd_refresh_command(
     import json
     run_date = date_type.fromisoformat(date) if date else None
     result = monthly_refresh_with_recovery(database_url=database_url, run_date=run_date, force=force) if discover_latest else run_iapd_monthly(database_url=database_url, run_date=run_date, force=force)
+    typer.echo(json.dumps(result, indent=2, default=str))
+
+
+@app.command("iapd-firm-inspect")
+def iapd_firm_inspect_command(
+    sec_source_gz: str = typer.Option(..., "--sec-source-gz"),
+    state_source_gz: str = typer.Option(..., "--state-source-gz"),
+    snapshot_date: str = typer.Option(..., "--snapshot-date"),
+    report_path: str = typer.Option(..., "--report-path"),
+):
+    """Inspect a same-date IAPD firm snapshot without publishing it."""
+    from datetime import date as date_type
+    from pathlib import Path
+    from src.iapd_firms import inspect_to_report
+    import json
+    result = inspect_to_report(
+        Path(sec_source_gz), Path(state_source_gz), Path(report_path),
+        snapshot_date=date_type.fromisoformat(snapshot_date),
+    )
     typer.echo(json.dumps(result, indent=2, default=str))
 
 
@@ -323,6 +354,52 @@ def verify_backup_command(path: str):
     from src.backup import verify_backup
     import json
     result = verify_backup(path)
+    typer.echo(json.dumps(result, indent=2, default=str))
+    if not result.get("valid"):
+        raise typer.Exit(code=1)
+
+
+@app.command("recovery-evidence-create")
+def recovery_evidence_create_command(
+    provider_snapshot_id: str = typer.Option(..., "--provider-snapshot-id"),
+    provider_snapshot_created_at: str = typer.Option(..., "--provider-snapshot-created-at"),
+    operator: str = typer.Option(..., "--operator"),
+    restore_owner: str = typer.Option(..., "--restore-owner"),
+    output_dir: Optional[str] = typer.Option(None, "--output-dir"),
+):
+    """Create database, provider, and local restore evidence for an activation gate."""
+    import json
+    import os
+    from src.recovery_evidence import create_recovery_evidence
+
+    try:
+        result = create_recovery_evidence(
+            source_url=os.environ.get("DATABASE_URL", ""),
+            restore_url=os.environ.get("RECOVERY_RESTORE_DATABASE_URL", ""),
+            approved_source_fingerprint=os.environ.get("SCM_PRODUCTION_DATABASE_FINGERPRINT", ""),
+            provider_snapshot_id=provider_snapshot_id,
+            provider_snapshot_created_at=provider_snapshot_created_at,
+            operator=operator,
+            restore_owner=restore_owner,
+            output_dir=Path(output_dir) if output_dir else None,
+        )
+    except Exception as exc:
+        typer.echo(f"Recovery evidence creation failed: {type(exc).__name__}", err=True)
+        raise typer.Exit(code=1)
+    typer.echo(json.dumps(result, indent=2, default=str))
+
+
+@app.command("recovery-evidence-verify")
+def recovery_evidence_verify_command(path: str):
+    """Re-verify recovery artifacts and restore proofs without changing them."""
+    import json
+    from src.recovery_evidence import verify_recovery_evidence
+
+    try:
+        result = verify_recovery_evidence(Path(path))
+    except Exception as exc:
+        typer.echo(f"Recovery evidence verification failed: {type(exc).__name__}", err=True)
+        raise typer.Exit(code=1)
     typer.echo(json.dumps(result, indent=2, default=str))
     if not result.get("valid"):
         raise typer.Exit(code=1)

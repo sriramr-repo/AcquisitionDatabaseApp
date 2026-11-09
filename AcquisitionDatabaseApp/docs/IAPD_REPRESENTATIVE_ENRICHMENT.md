@@ -197,15 +197,17 @@ Explorer exposes AUM, state, representative count,
 freshness, conflict, and representative-disclosure filters. `NULL` enrichment
 is displayed as unknown and is never counted as zero.
 
-Required server-side settings are `PUBLISHER_DATABASE_URL` and
+Required refresh-host settings are `DATABASE_URL`, `PUBLISHER_DATABASE_URL`,
+`SCM_PRODUCTION_DATABASE_FINGERPRINT`, and
 `FIRECRAWL_API_KEY`; R2 publication additionally requires the four
 `CLOUDFLARE_R2_*` values documented below. Rollback means retaining the prior
 local dataset directory and active R2 manifest. No failed run deletes either.
 
-The scheduler reads `deploy/production-refresh.env` first. If that protected
-file does not define `PUBLISHER_DATABASE_URL`, it may reuse `DATABASE_URL` and
-`FIRECRAWL_API_KEY` from the protected `web/.env.local` file. Both files must
-have permission mode `600`; otherwise the job stops before loading secrets.
+The scheduler reads only `deploy/production-refresh.env` (or the explicit
+`SCM_REFRESH_ENV_FILE`). The file must have permission mode `600` and must
+define both database URLs; the job never falls back to Vercel configuration or
+`web/.env.local`. Both URLs must resolve to the same non-local identity and
+match the approved credential-free production fingerprint.
 
 If the SEC download endpoint is temporarily blocked or you already have the
 monthly ZIP and extracted XML, use the manual import path:

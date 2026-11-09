@@ -12,9 +12,10 @@ export async function dashboardData(): Promise<any>{
     db.execute(sql`select o.status, count(*)::int as count from outreach_targets o where o.dataset_version=(select dataset_version from dataset_versions order by published_at desc limit 1) group by o.status order by o.status`),
   ]); return {dataset: dataset.rows[0] || null, counts: counts.rows, research: research.rows, outreach: outreach.rows};
 }
-export async function targetData(params: {search?:string; priority?:string; sellerIntent?:string; state?:string; aum?:string; representatives?:string; iapdFreshness?:string; iapdConflict?:string; iapdDisclosure?:string; sortField?:string; sortOrder?:string; page?:number; pageSize?:number}): Promise<any>{
+export async function targetData(params: {search?:string; priority?:string; registration?:string; sellerIntent?:string; state?:string; aum?:string; representatives?:string; iapdFreshness?:string; iapdConflict?:string; iapdDisclosure?:string; sortField?:string; sortOrder?:string; page?:number; pageSize?:number}): Promise<any>{
   const search = params.search ? `%${params.search}%` : null; const priority = params.priority || null;
   const sellerIntent = params.sellerIntent || null;
+  const registration = params.registration || "registered";
   const state = params.state?.trim().toUpperCase() || null; const aum = params.aum || null;
   const representatives = params.representatives || null; const iapdFreshness = params.iapdFreshness || null;
   const iapdConflict = params.iapdConflict === "1"; const iapdDisclosure = params.iapdDisclosure === "1";
@@ -34,6 +35,7 @@ export async function targetData(params: {search?:string; priority?:string; sell
       count(*) filter (where freshness in ('partial','missing'))::int partial_count
       from reconciliation_links group by 1),
     base as (select f.firm_id,f.dataset_version,f.name,coalesce(x.main_office_state,f.organization_state) organization_state,
+      f.population_classification,f.is_registered,f.is_sec_registered,f.is_state_registered,f.is_era_only,f.is_dual_registered,f.registration_review_required,
       s.priority_category,s.acquisition_score,s.review_required,x.total_aum,x.discretionary_aum,x.individual_hnw_share,
       x.total_account_count,x.average_account_size,x.employee_count,x.advisory_employee_count,r.research_status,
       o.status outreach_status,coalesce(si.status,'UNKNOWN') seller_intent_status,
@@ -51,6 +53,12 @@ export async function targetData(params: {search?:string; priority?:string; sell
       left join latest_summary sm on sm.firm_id=f.firm_id left join reconciliation_by_firm rb on rb.firm_id=f.firm_id)
     select * from base where (${search}::text is null or name ilike ${search} or firm_id ilike ${search})
       and (${priority}::text is null or priority_category=${priority})
+      and ((${registration}='all')
+        or (${registration}='registered' and (is_registered is true or is_registered is null))
+        or (${registration}='sec' and is_sec_registered is true and coalesce(is_state_registered,false) is false)
+        or (${registration}='state' and is_state_registered is true and coalesce(is_sec_registered,false) is false)
+        or (${registration}='dual' and is_dual_registered is true)
+        or (${registration}='era' and is_era_only is true))
       and (${sellerIntent}::text is null or seller_intent_status=${sellerIntent})
       and (${state}::text is null or upper(organization_state)=${state})
       and (${aum}::text is null or (${aum}='under200' and total_aum<200000000) or (${aum}='unknown' and total_aum is null))
@@ -60,7 +68,7 @@ export async function targetData(params: {search?:string; priority?:string; sell
       and (not ${iapdDisclosure} or representative_with_disclosure_count>0)`;
   const rows = await db.execute(sql`${targetBase} order by ${sortColumn} ${sortOrder} nulls last, firm_id limit ${size} offset ${offset}`);
   const total = await db.execute(sql`select count(*)::int count from (${targetBase}) filtered`);
-  const universe = await db.execute(sql`select count(*)::int count from firms where dataset_version=(select dataset_version from dataset_versions order by published_at desc,dataset_version desc limit 1)`);
+  const universe = await db.execute(sql`select count(*)::int count from firms where dataset_version=(select dataset_version from dataset_versions order by published_at desc,dataset_version desc limit 1) and (${registration}='all' or (${registration}='registered' and (is_registered is true or is_registered is null)) or (${registration}='sec' and is_sec_registered is true and coalesce(is_state_registered,false) is false) or (${registration}='state' and is_state_registered is true and coalesce(is_sec_registered,false) is false) or (${registration}='dual' and is_dual_registered is true) or (${registration}='era' and is_era_only is true))`);
   const coverage = rows.rows.length ? await db.execute(sql`select f.firm_id,
       x.main_office_street_address_1,x.main_office_street_address_2,x.main_office_city,x.main_office_state,x.main_office_country,x.main_office_phone,
       to_jsonb(x)->>'main_office_postal_code' as main_office_postal_code,

@@ -15,8 +15,10 @@
   <key>StandardErrorPath</key><string>/ABSOLUTE/PATH/TO/AcquisitionDatabaseApp/data/logs/launchd.err.log</string>
   <key>EnvironmentVariables</key>
   <dict>
+    <key>SCM_ENV</key><string>PROD</string>
+    <key>SCM_DATA_DIR</key><string>/ABSOLUTE/PATH/TO/AcquisitionDatabaseApp/data</string>
     <key>SCM_PYTHON</key><string>/ABSOLUTE/PATH/TO/python3</string>
-    <key>PUBLISHER_DATABASE_URL</key><string>postgres://scm:scm@localhost:5432/scm_dashboard</string>
+    <key>SCM_REFRESH_ENV_FILE</key><string>/ABSOLUTE/PATH/TO/AcquisitionDatabaseApp/deploy/production-refresh.env</string>
   </dict>
   <key>RunAtLoad</key><false/>
 </dict>

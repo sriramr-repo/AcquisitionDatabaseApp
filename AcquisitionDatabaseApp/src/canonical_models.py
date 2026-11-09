@@ -186,6 +186,16 @@ class Firm(BaseModel):
     record_hash: str
     last_seen_version: str
     current_status: str
+    canonical_population_source: Optional[str] = None
+    population_classification: Optional[str] = None
+    is_registered: Optional[bool] = None
+    is_sec_registered: Optional[bool] = None
+    is_state_registered: Optional[bool] = None
+    is_era_only: Optional[bool] = None
+    has_era_relationship: Optional[bool] = None
+    is_dual_registered: Optional[bool] = None
+    registration_review_required: Optional[bool] = None
+
 
     @validator(
         "sec_number", "cik_number", "additional_crd_numbers", "primary_business_name",
@@ -326,6 +336,20 @@ class Firm(BaseModel):
         if isinstance(v, datetime): return v
         try: return datetime.strptime(str(v).strip(), "%m/%d/%Y")
         except ValueError: return None
+
+
+class FirmRegistrationRelationship(BaseModel):
+    """One source-preserving registration, ERA, or notice-file relationship."""
+
+    firm_id: str
+    relationship_type: str
+    regulator_code: Optional[str] = None
+    status: Optional[str] = None
+    effective_date: Optional[datetime] = None
+    snapshot_date: datetime
+    dataset_version: str
+    source_feed: str
+    source_hash: str
 
 
 class FirmOffice(BaseModel):

@@ -10,6 +10,12 @@ The Gold V1 materialization stack currently emits score version `SCM_ACQUISITION
 
 The scheduler calls `deploy/production-refresh.sh`, which sets `SCM_ENV=PROD` and invokes `python3 -m src.cli production-refresh`.
 
+For the first canonical activation, the protected refresh environment sets
+`IAPD_FIRM_ACTIVATION_MANIFEST` to the reviewed November 7 manifest. Pinned
+mode does not rediscover a newer feed during execution. Later routine runs may
+use latest-manifest mode by leaving that setting empty, but the resolved pair
+is still discovered only once per run.
+
 1. Discover the latest SEC dataset.
 2. Create a persisted run record.
 3. Return `NO_CHANGE` when the latest version is already successful.
@@ -31,7 +37,7 @@ SCM_ENV=PROD python3 -m src.cli production-health-check
 
 Discovery provenance is recorded on the `dataset_discovery` stage. `details_json.discovery_source=primary` means the SEC index was read successfully; `discovery_source=fallback` and `fallback_used=true` mean the primary request failed or contained no IA ZIP link. Fallback use remains a successful `NO_CHANGE` when the fallback version is already current, but it increments the run warning count and emits `DISCOVERY_FALLBACK_USED` with severity `WARNING`.
 
-The deployed launchd job is `com.scm.ria.production-refresh`, installed at `~/Library/LaunchAgents/com.scm.ria.production-refresh.plist`. It runs at 06:00 on day 4 of each month and invokes `deploy/production-refresh.sh` with the validated absolute Python interpreter. The wrapper publishes the firm dashboard dataset and then runs the IAPD individual-representative snapshot job; the IAPD job skips safely unless the run date is the fourth. A host-local advisory lock at `data/.production-refresh.lock` returns `BUSY` for overlapping runs; OS file-lock release handles stale processes. Wrapper logs rotate at 10 MB, retaining one `.1` generation.
+The deployed launchd job is `com.scm.ria.production-refresh`, installed at `~/Library/LaunchAgents/com.scm.ria.production-refresh.plist`. It runs at 06:00 on day 4 of each month and invokes `deploy/production-refresh.sh` with the validated absolute Python interpreter. The launch agent contains no database credentials. The wrapper requires a mode-`600` `SCM_REFRESH_ENV_FILE` with explicit, matching `DATABASE_URL` and `PUBLISHER_DATABASE_URL` values and an approved `SCM_PRODUCTION_DATABASE_FINGERPRINT`; it never loads `web/.env.local`. The wrapper publishes the firm dashboard dataset and then runs the IAPD individual-representative snapshot job; the IAPD job skips safely unless the run date is the fourth. A host-local advisory lock at `data/.production-refresh.lock` returns `BUSY` for overlapping runs; OS file-lock release handles stale processes. Wrapper logs rotate at 10 MB, retaining one `.1` generation.
 
 ## Backups and recovery
 
@@ -56,6 +62,13 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.scm.ria.production-r
 
 Restoration is deliberately isolated: `restore_backup()` refuses the active environment and requires an explicit non-production target directory. Verify the isolated copy before any operator-led promotion. Always preserve the current state and make a pre-restore backup before a manual production recovery.
 
+Before the canonical firm migration, complete the three-artifact recovery gate
+documented in [Production recovery evidence](RECOVERY_EVIDENCE.md). The gate
+requires a provider snapshot reference, custom PostgreSQL dump and isolated
+database restore, plus a local backup and isolated filesystem restore. The
+evidence report must return `valid: true`; a dump catalog without a tested
+restore is insufficient.
+
 ## Failures and alerts
 
 Failures remain visible in `pipeline_runs` with a `FAILED_*` status and are written to `operational_alerts`. The local notifier is intentionally provider-neutral; email/Slack can be added behind `AlertNotifier` without changing pipeline code. Do not retry a failed refresh with `--force` until the failed run and its backup have been inspected.
@@ -63,6 +76,9 @@ Failures remain visible in `pipeline_runs` with a `FAILED_*` status and are writ
 Typical checks:
 
 - `FAILED_DOWNLOAD` / `FAILED_VALIDATION`: inspect SEC response, ZIP validation, and the pre-run backup.
+- Failed canonical firm downloads or validation artifacts are retained under
+  `data/quarantine/iapd-firms/<dataset>-<run-id>/`; they are diagnostic only
+  and must never be copied into an active Bronze path.
 - `FAILED_SILVER` / `FAILED_GOLD`: do not promote; inspect stage details and schema drift.
 - `FAILED_EXPORT` / `FAILED_REPORTING`: preserve the successfully built data and rerun the export/report stage only after diagnosis.
 - `FAILED_BACKUP`: stop; no new dataset should be promoted without a valid pre-run backup.
