@@ -162,6 +162,13 @@
       "when": 1794160800000,
       "tag": "0022_iapd_firm_universe",
       "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1794529528284,
+      "tag": "0023_analyst_preferences",
+      "breakpoints": true
     }
   ]
 }
