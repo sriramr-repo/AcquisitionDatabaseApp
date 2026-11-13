@@ -27,13 +27,52 @@ function normalize(value: unknown): ColumnPreferences {
 export default function TargetColumnControls({ onChange }: { onChange: (preferences: ColumnPreferences) => void }) {
   const [preferences, setPreferences] = useState<ColumnPreferences>(defaultPreferences);
   const [open, setOpen] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [syncStatus, setSyncStatus] = useState("Loading saved columns…");
 
   useEffect(() => {
-    try { setPreferences(normalize(JSON.parse(localStorage.getItem(storageKey) || "null"))); }
-    catch { setPreferences(defaultPreferences()); }
+    let cancelled = false;
+    async function load() {
+      let local: ColumnPreferences | null = null;
+      try {
+        const cached = localStorage.getItem(storageKey);
+        if (cached) local = normalize(JSON.parse(cached));
+      } catch { /* Ignore unreadable browser storage. */ }
+      try {
+        const response = await fetch("/api/preferences/target-explorer-columns", { cache: "no-store" });
+        if (!response.ok) throw new Error("Preference service unavailable");
+        const saved = await response.json();
+        if (cancelled) return;
+        if (saved) { setPreferences(normalize(saved)); setSyncStatus("Synced to your account"); }
+        else if (local) {
+          setPreferences(local);
+          const migrated = await fetch("/api/preferences/target-explorer-columns", {
+            method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(local),
+          }).catch(() => null);
+          setSyncStatus(migrated?.ok ? "Synced to your account" : "Saved in this browser only");
+        } else { setPreferences(defaultPreferences()); setSyncStatus("Ready to sync"); }
+      } catch {
+        if (!cancelled) { setPreferences(local || defaultPreferences()); setSyncStatus("Saved in this browser only"); }
+      } finally {
+        if (!cancelled) setLoaded(true);
+      }
+    }
+    void load();
+    return () => { cancelled = true; };
   }, []);
 
-  useEffect(() => { onChange(preferences); }, [preferences, onChange]);
+  useEffect(() => {
+    if (!loaded) return;
+    onChange(preferences);
+    try { localStorage.setItem(storageKey, JSON.stringify(preferences)); } catch { /* The server is the durable store. */ }
+    const timeout = window.setTimeout(() => {
+      void fetch("/api/preferences/target-explorer-columns", {
+        method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(preferences),
+      }).then(response => setSyncStatus(response.ok ? "Synced to your account" : "Saved in this browser only"))
+        .catch(() => setSyncStatus("Saved in this browser only"));
+    }, 250);
+    return () => window.clearTimeout(timeout);
+  }, [preferences, onChange, loaded]);
 
   function save(next: ColumnPreferences) {
     setPreferences(next);
@@ -52,6 +91,7 @@ export default function TargetColumnControls({ onChange }: { onChange: (preferen
   const labels = useMemo(() => new Map(targetColumns), []);
 
   return <div className="column-controls">
+    <span className="column-sync-status" aria-live="polite">{syncStatus}</span>
     <button type="button" className="column-controls-trigger secondary" aria-expanded={open} onClick={() => setOpen(value => !value)}>Columns</button>
     {open ? <section className="column-controls-menu" aria-label="Target Explorer columns">
       <div className="column-controls-heading"><b>Choose and reorder columns</b><button className="column-reset secondary" type="button" onClick={() => save(defaultPreferences())}>Reset</button></div>

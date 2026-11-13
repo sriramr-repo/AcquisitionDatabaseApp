@@ -69,18 +69,18 @@ export default async function Firm({ params }: { params: Promise<{ firmId: strin
   const displayedRepresentatives = data.representatives.slice(0, 200);
 
   return <>
-    <div className="top"><div><h2>{data.firm.name || firmId}</h2><p className="muted">CRD {firmId} · {data.firm.organization_state || "Unknown"} · <a href={data.firm.website_address || "#"} target="_blank" rel="noopener noreferrer">{data.firm.website_address || "Website unavailable"}</a></p></div><span className="badge good">{scores.priority_category || "Unavailable"}</span></div>
-    <div className="grid">
+    <div className="top firm-heading"><div><p className="eyebrow">Firm profile · CRD {firmId}</p><h2>{data.firm.name || firmId}</h2><p className="muted">{data.firm.organization_state || "Unknown"} · <a href={data.firm.website_address || "#"} target="_blank" rel="noopener noreferrer">{data.firm.website_address || "Website unavailable"}</a></p></div><span className="badge good">{scores.priority_category || "Unavailable"}</span></div>
+    <div className="grid firm-metrics">
       <div className="card"><div className="muted">Acquisition score</div><div className="metric">{val(scores.acquisition_score)}</div></div>
       <div className="card"><div className="muted">AUM</div><div className="metric">{money(data.facts?.total_aum)}</div></div>
-      <div className="card"><div className="muted">Research</div><div className="metric" style={{ fontSize: 18 }}>{data.research?.research_status || "NOT_STARTED"}</div></div>
-      <div className="card"><div className="muted">Outreach</div><div className="metric" style={{ fontSize: 18 }}>{data.outreach?.status || "NOT_RESEARCHED"}</div></div>
-      <div className="card"><div className="muted">Seller intent</div><div className="metric" style={{ fontSize: 18 }}><SellerIntentStatus status={data.sellerIntent?.status} /></div><small className="muted">Hover for the discrete definition.</small></div>
+      <div className="card"><div className="muted">Research</div><div className="metric metric-text">{data.research?.research_status || "NOT_STARTED"}</div></div>
+      <div className="card"><div className="muted">Outreach</div><div className="metric metric-text">{data.outreach?.status || "NOT_RESEARCHED"}</div></div>
+      <div className="card"><div className="muted">Seller intent</div><div className="metric metric-text"><SellerIntentStatus status={data.sellerIntent?.status} /></div><small className="muted">Hover for the discrete definition.</small></div>
     </div>
     {outreachAllowed(data.firm)
       ? <VirtualSdrControls key={data.sdr.runs[0]?.latest_artifact_id || "no-sdr-artifact"} firmId={firmId} datasetVersion={String(data.firm.dataset_version)} initialData={JSON.parse(JSON.stringify(data.sdr))} sources={[...data.sources.map((source: any) => ({source_id: source.source_id,source_url: source.source_url,source_title: source.source_title})),...data.iapdPrincipals.map((principal: any) => ({source_id: `iapd-principal:${principal.principal_id}`,source_url: principal.source_url,source_title: `${principal.full_legal_name} · Form ADV`})),...data.contacts.filter((contact: any) => contact.verification_status === "VERIFIED").map((contact: any) => ({source_id: `contact:${contact.contact_id}`,source_url: contact.profile_url,source_title: contact.contact_name || "Verified contact"}))]} />
       : <div className="panel"><h3>Outreach unavailable</h3><p className="muted">{ERA_OUTREACH_BLOCKED}.</p></div>}
-    <div className="detail-grid">
+    <div className="detail-grid firm-detail-grid">
       <div>
         <div className="panel"><h3>Why this firm</h3>{Object.entries(components).map(([key, value]) => <div className="score-row" key={key}><span><b>{label(key)}</b><small className="score-meaning muted">{scoreMeaning[key]}</small></span><b>{val(value)}</b></div>)}<h4>Reason codes</h4>{reasons.length ? reasons.map((reason: string) => <div className="score-row" key={reason}><span>{label(reason)}</span><small className="score-meaning muted">{reasonMeaning[reason] || "SEC-derived screening signal."}</small></div>) : <p className="muted">No reason codes recorded.</p>}</div>
         <div className="panel"><h3>Business profile</h3><div className="score-row"><span>SEC#</span><b>{data.firm.sec_number || "Unavailable"}</b></div><div className="score-row"><span>Discretionary AUM</span><b>{money(data.facts?.discretionary_aum)}</b></div><div className="score-row"><span>Accounts</span><b>{val(data.facts?.total_account_count)}</b></div><div className="score-row"><span>Employees / advisory</span><b>{val(data.facts?.employee_count)} / {val(data.facts?.advisory_employee_count)}</b></div><div className="score-row"><span>Regulatory review</span><b>{data.facts?.regulatory_review_flag ? "Required" : "None recorded"}</b></div></div>

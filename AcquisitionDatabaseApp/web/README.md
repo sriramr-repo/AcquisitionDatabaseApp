@@ -173,6 +173,13 @@ Run Drizzle migrations as a separate approved operator step and run the
 publisher from the protected production environment after a verified refresh.
 Vercel is not used for DuckDB, SQLite, persistent files, or SEC batch ingestion.
 
+Target Explorer column preferences are stored per authenticated analyst in
+PostgreSQL. The credential login accepts analyst records in the existing `users`
+table; add accounts with `npm run auth:create-analyst` using the intended
+environment's `DATABASE_URL`. Existing `AUTH_DEV_EMAIL` credentials remain
+available during rollout. Apply the migration for `analyst_preferences` before
+using cross-device preferences in a deployment; its build does not run migrations.
+
 ## Virtual SDR
 
 The firm page includes an approval-gated **Prepare CEO Brief** workflow.

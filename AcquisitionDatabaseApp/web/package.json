@@ -10,10 +10,12 @@
     "vercel:preflight": "node --experimental-strip-types scripts/vercel-preflight.ts",
     "vercel:build": "npm run vercel:preflight && npm run build",
     "test:deployment": "node --test tests/deployment-policy.test.cjs",
+    "test:preferences": "node --experimental-strip-types --test tests/target-column-preferences.test.mjs",
     "start": "next start",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
+    "auth:create-analyst": "node scripts/create-analyst.mjs",
     "publisher:sync": "python3 -m src.dashboard_publisher publish --dataset-version ia07012026 --database-url \"$DATABASE_URL\""
   },
   "dependencies": {

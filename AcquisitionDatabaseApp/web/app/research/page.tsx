@@ -52,15 +52,15 @@ export default async function Research({ searchParams }: { searchParams: Promise
   ]);
   const total = Number(rows.rows[0]?.total_count || progress.total_firms || 0);
   return <>
-    <div className="top"><div><h2>Priority A research operations</h2><p className="muted">Bounded evidence extraction with mandatory analyst review.</p></div><span className="badge good">Review-gated</span></div>
-    <div className="grid">
+    <div className="top research-heading"><div><p className="eyebrow">Evidence workflow</p><h2>Priority A research operations</h2><p className="muted">Bounded evidence extraction with mandatory analyst review.</p></div><span className="badge good">Review-gated</span></div>
+    <div className="grid research-metrics">
       <div className="card"><div className="muted">Priority A firms</div><div className="metric">{count(progress.total_firms)}</div></div>
       <div className="card"><div className="muted">Evidence available</div><div className="metric">{count(progress.firms_with_evidence)}</div></div>
       <div className="card"><div className="muted">Queued / running</div><div className="metric">{count(Number(progress.queued || 0) + Number(progress.running || 0))}</div></div>
       <div className="card"><div className="muted">Awaiting review</div><div className="metric">{count(progress.review_required)}</div></div>
     </div>
-    <div className="panel">
-      <h3>Controlled batch queue</h3>
+    <div className="panel research-queue">
+      <div className="panel-heading"><div><p className="eyebrow">Analyst controlled</p><h3>Controlled batch queue</h3></div><span className="badge">{count(progress.queueable)} eligible</span></div>
       <p className="muted">Only firms with captured evidence are selected. Repeated requests are idempotent, and no observation is accepted automatically.</p>
       <ResearchBatchControls queueable={Number(progress.queueable || 0)} />
       <div className="grid research-progress-grid">
