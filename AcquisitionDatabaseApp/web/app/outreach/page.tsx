@@ -4,13 +4,15 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { sql } from "drizzle-orm";
 import { auth } from "../../auth";
+import { analystIdentity } from "../../lib/analyst-shortlist";
 import { db } from "../../lib/db";
 import Pagination from "../components/Pagination";
 import OutreachShortlistControl from "./OutreachShortlistControl";
 
 export default async function Outreach({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
   const session = await auth();
-  if (!session?.user?.id) redirect("/login");
+  const analystId = analystIdentity(session);
+  if (!analystId) redirect(`/login?callbackUrl=${encodeURIComponent("/outreach")}`);
 
   const params = await searchParams;
   const page = Math.max(1, Number(params.page) || 1);
@@ -26,7 +28,7 @@ export default async function Outreach({ searchParams }: { searchParams: Promise
       join firms f on f.firm_id = mine.firm_id and f.dataset_version = a.dataset_version
       left join firm_scores s using (firm_id, dataset_version)
       left join outreach_targets o using (firm_id, dataset_version)
-      where mine.analyst_id = ${session.user.id}
+      where mine.analyst_id = ${analystId}
     )
     select *, count(*) over()::int as total_count from shortlist
     order by acquisition_score desc nulls last, firm_id limit ${pageSize} offset ${offset}`);

@@ -30,6 +30,11 @@ export default function OutreachShortlistControl({
         ? { method: "DELETE" }
         : { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ datasetVersion }) });
       const result = await response.json().catch(() => null);
+      if (response.status === 401) {
+        const callbackUrl = window.location.pathname + window.location.search;
+        window.location.assign(`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`);
+        return;
+      }
       if (!response.ok) throw new Error(result?.error || "Unable to update your Outreach shortlist");
       setShortlisted(Boolean(result?.isShortlisted));
       if (refreshOnRemove && !result?.isShortlisted) router.refresh();

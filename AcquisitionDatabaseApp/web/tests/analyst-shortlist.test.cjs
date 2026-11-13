@@ -10,7 +10,7 @@ require.extensions[".ts"] = (module, filename) => module._compile(
   filename,
 );
 
-const { parseShortlistAddRequest, shortlistRequestMatchesActiveDataset } = require("../lib/analyst-shortlist.ts");
+const { analystIdentity, parseShortlistAddRequest, shortlistRequestMatchesActiveDataset } = require("../lib/analyst-shortlist.ts");
 
 test("shortlist additions require a non-empty dataset version", () => {
   assert.equal(parseShortlistAddRequest(null), null);
@@ -23,4 +23,11 @@ test("stale Target Explorer rows cannot add to the active shortlist", () => {
   const request = parseShortlistAddRequest({ datasetVersion: "ia07012026" });
   assert.equal(shortlistRequestMatchesActiveDataset(request, "ia07012026"), true);
   assert.equal(shortlistRequestMatchesActiveDataset(request, "ia08012026"), false);
+});
+
+test("shortlist identity uses the analyst id and falls back to their signed-in email", () => {
+  assert.equal(analystIdentity({ user: { id: " analyst-1 ", email: "a@example.com" } }), "analyst-1");
+  assert.equal(analystIdentity({ user: { email: " Analyst@Example.com " } }), "analyst@example.com");
+  assert.equal(analystIdentity({ user: { id: "undefined", email: "a@example.com" } }), "a@example.com");
+  assert.equal(analystIdentity(null), null);
 });

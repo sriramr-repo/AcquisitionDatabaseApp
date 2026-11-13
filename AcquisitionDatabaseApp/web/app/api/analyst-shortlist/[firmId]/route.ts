@@ -1,12 +1,13 @@
 import { auth } from "../../../../auth";
 import { db } from "../../../../lib/db";
 import { outreachEligibilityResponse, requireOutreachEligible } from "../../../../lib/outreach-eligibility";
-import { parseShortlistAddRequest, shortlistRequestMatchesActiveDataset } from "../../../../lib/analyst-shortlist";
+import { analystIdentity, parseShortlistAddRequest, shortlistRequestMatchesActiveDataset } from "../../../../lib/analyst-shortlist";
 import { sql } from "drizzle-orm";
 
 export async function PUT(request: Request, { params }: { params: Promise<{ firmId: string }> }) {
   const session = await auth();
-  if (!session?.user?.id) return Response.json({ error: "Unauthorized" }, { status: 401 });
+  const analystId = analystIdentity(session);
+  if (!analystId) return Response.json({ error: "Please sign in to update your Outreach shortlist." }, { status: 401 });
 
   const { firmId } = await params;
   const body = await request.json().catch(() => null);
@@ -27,14 +28,15 @@ export async function PUT(request: Request, { params }: { params: Promise<{ firm
   }
 
   await db.execute(sql`insert into analyst_outreach_shortlists (analyst_id, firm_id, added_at)
-    values (${session.user.id}, ${firmId}, now()) on conflict (analyst_id, firm_id) do nothing`);
+    values (${analystId}, ${firmId}, now()) on conflict (analyst_id, firm_id) do nothing`);
   return Response.json({ firmId, isShortlisted: true });
 }
 
 export async function DELETE(_: Request, { params }: { params: Promise<{ firmId: string }> }) {
   const session = await auth();
-  if (!session?.user?.id) return Response.json({ error: "Unauthorized" }, { status: 401 });
+  const analystId = analystIdentity(session);
+  if (!analystId) return Response.json({ error: "Please sign in to update your Outreach shortlist." }, { status: 401 });
   const { firmId } = await params;
-  await db.execute(sql`delete from analyst_outreach_shortlists where analyst_id = ${session.user.id} and firm_id = ${firmId}`);
+  await db.execute(sql`delete from analyst_outreach_shortlists where analyst_id = ${analystId} and firm_id = ${firmId}`);
   return Response.json({ firmId, isShortlisted: false });
 }
