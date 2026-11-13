@@ -11,7 +11,16 @@ const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 try {
   const email = (await prompt.question("Analyst email: ")).trim().toLowerCase();
   const name = (await prompt.question("Analyst name: ")).trim() || email;
-  const password = await prompt.question("Temporary password (input is visible): ");
+  if (!stdin.isTTY) throw new Error("Run this command in an interactive terminal so the password can be hidden");
+  let hideInput = false;
+  prompt._writeToOutput = (chunk) => {
+    if (!hideInput || chunk.includes("\n")) stdout.write(chunk);
+    else stdout.write("*");
+  };
+  hideInput = true;
+  const password = await prompt.question("Temporary password: ");
+  hideInput = false;
+  stdout.write("\n");
   if (!email || !password || password.length < 12) throw new Error("Enter an email and a password of at least 12 characters");
   const passwordHash = await bcrypt.hash(password, 12);
   await pool.query(
