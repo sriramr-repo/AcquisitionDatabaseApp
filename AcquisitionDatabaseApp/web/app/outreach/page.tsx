@@ -26,8 +26,8 @@ export default async function Outreach({ searchParams }: { searchParams: Promise
       from analyst_outreach_shortlists mine
       join active a on true
       join firms f on f.firm_id = mine.firm_id and f.dataset_version = a.dataset_version
-      left join firm_scores s using (firm_id, dataset_version)
-      left join outreach_targets o using (firm_id, dataset_version)
+      left join firm_scores s on s.firm_id = f.firm_id and s.dataset_version = f.dataset_version
+      left join outreach_targets o on o.firm_id = f.firm_id and o.dataset_version = f.dataset_version
       where mine.analyst_id = ${analystId}
     )
     select *, count(*) over()::int as total_count from shortlist
