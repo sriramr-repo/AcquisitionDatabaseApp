@@ -12,7 +12,7 @@ export async function dashboardData(): Promise<any>{
     db.execute(sql`select o.status, count(*)::int as count from outreach_targets o where o.dataset_version=(select dataset_version from dataset_versions order by published_at desc limit 1) group by o.status order by o.status`),
   ]); return {dataset: dataset.rows[0] || null, counts: counts.rows, research: research.rows, outreach: outreach.rows};
 }
-export async function targetData(params: {search?:string; priority?:string; registration?:string; sellerIntent?:string; state?:string; aum?:string; representatives?:string; iapdFreshness?:string; iapdConflict?:string; iapdDisclosure?:string; sortField?:string; sortOrder?:string; page?:number; pageSize?:number}): Promise<any>{
+export async function targetData(params: {analystId?:string; search?:string; priority?:string; registration?:string; sellerIntent?:string; state?:string; aum?:string; representatives?:string; iapdFreshness?:string; iapdConflict?:string; iapdDisclosure?:string; sortField?:string; sortOrder?:string; page?:number; pageSize?:number}): Promise<any>{
   const search = params.search ? `%${params.search}%` : null; const priority = params.priority || null;
   const sellerIntent = params.sellerIntent || null;
   const registration = params.registration || "registered";
@@ -38,6 +38,7 @@ export async function targetData(params: {search?:string; priority?:string; regi
       f.population_classification,f.is_registered,f.is_sec_registered,f.is_state_registered,f.is_era_only,f.is_dual_registered,f.registration_review_required,
       s.priority_category,s.acquisition_score,s.review_required,x.total_aum,x.discretionary_aum,x.individual_hnw_share,
       x.total_account_count,x.average_account_size,x.employee_count,x.advisory_employee_count,r.research_status,
+      (shortlist.analyst_id is not null) is_shortlisted,
       o.status outreach_status,coalesce(si.status,'UNKNOWN') seller_intent_status,
       sm.representative_count,sm.active_representative_count,sm.representative_with_disclosure_count,
       coalesce(rb.conflict_count,0)::int iapd_conflict_count,
@@ -50,6 +51,7 @@ export async function targetData(params: {search?:string; priority?:string; regi
       from firms f join active a using(dataset_version) join firm_scores s using(firm_id,dataset_version)
       left join firm_facts x using(firm_id,dataset_version) left join firm_research r using(firm_id,dataset_version)
       left join outreach_targets o using(firm_id,dataset_version) left join seller_intent_current si using(firm_id,dataset_version)
+      left join analyst_outreach_shortlists shortlist on shortlist.firm_id=f.firm_id and shortlist.analyst_id=${params.analystId || null}
       left join latest_summary sm on sm.firm_id=f.firm_id left join reconciliation_by_firm rb on rb.firm_id=f.firm_id)
     select * from base where (${search}::text is null or name ilike ${search} or firm_id ilike ${search})
       and (${priority}::text is null or priority_category=${priority})

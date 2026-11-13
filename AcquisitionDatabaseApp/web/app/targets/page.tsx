@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import { targetData } from "../../lib/queries";
+import { auth } from "../../auth";
 import Pagination from "../components/Pagination";
 import SellerIntentStatus from "../components/SellerIntentStatus";
 import TargetExplorerTable from "./TargetExplorerTable";
@@ -20,10 +21,12 @@ type TargetParams = {
 
 export default async function Targets({searchParams}:{searchParams:Promise<TargetParams>}) {
   const p = await searchParams;
+  const session = await auth();
   const page = Math.max(1, Number(p.page) || 1);
   const [sortField="score", direction="desc"] = (p.sort || "score_desc").split("_");
   const sortOrder = direction === "asc" ? "asc" : "desc";
   const d = await targetData({
+    analystId:session?.user?.id,
     search:p.q, priority:p.priority, registration:p.registration, sellerIntent:p.sellerIntent, state:p.state,
     aum:p.aum, representatives:p.representatives, iapdFreshness:p.iapdFreshness,
     iapdConflict:p.iapdConflict, iapdDisclosure:p.iapdDisclosure,

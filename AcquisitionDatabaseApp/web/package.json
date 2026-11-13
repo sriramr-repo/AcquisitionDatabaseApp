@@ -11,6 +11,7 @@
     "vercel:build": "npm run vercel:preflight && npm run build",
     "test:deployment": "node --test tests/deployment-policy.test.cjs",
     "test:preferences": "node --experimental-strip-types --test tests/target-column-preferences.test.mjs",
+    "test:shortlist": "node --test tests/analyst-shortlist.test.cjs tests/outreach-policy.test.cjs",
     "start": "next start",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",

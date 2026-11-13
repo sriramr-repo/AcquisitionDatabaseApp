@@ -207,6 +207,19 @@ small { line-height: 1.35; }
 .column-controls-menu li span { display: flex; gap: 5px; }
 .column-controls-menu button:disabled { opacity: .4; }
 .target-table .definition-banner { min-width: 230px; }
+.target-outreach-cell { display: grid; justify-items: start; gap: 6px; }
+.shortlist-control { display: grid; justify-items: start; gap: 4px; }
+.shortlist-toggle { min-height: 30px; border-color: #c9d7e4; background: #edf3f8; color: var(--ink); font-size: 11px; padding: 5px 9px; white-space: nowrap; }
+.shortlist-toggle:hover { border-color: #b6c9da; background: #e2ebf3; color: var(--ink); }
+.shortlist-toggle.is-shortlisted { border-color: #c9e8d8; background: var(--good-soft); color: var(--good); }
+.shortlist-toggle.is-shortlisted:hover { border-color: #acd9c0; background: #d4eddf; color: #0f6846; }
+.shortlist-control.compact { display: flex; align-items: center; }
+.shortlist-error { max-width: 210px; color: var(--danger); font-size: 11px; }
+.outreach-heading { align-items: center; }
+.outreach-heading .eyebrow { margin-bottom: 5px; }
+.outreach-empty { padding: 28px; }
+.outreach-empty .button-link { margin-top: 8px; }
+.outreach-table { margin-top: 16px; }
 .adv-indicators { display: grid; gap: 3px; margin-top: 8px; font-size: 10px; line-height: 1.3; }
 .adv-indicators a { display: flex; justify-content: space-between; gap: 3px 5px; flex-wrap: wrap; border-radius: 4px; background: #f1f6fa; padding: 3px 5px; }
 .adv-indicators b { font-weight: 600; }
@@ -218,4 +231,4 @@ small { line-height: 1.35; }
 
 @media (max-width: 1180px) { .main { padding: 30px 26px 44px; } .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .overview-metrics, .firm-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); } .research-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } .research-progress-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 900px) { .shell { grid-template-columns: 1fr; } .nav { position: static; min-height: auto; padding: 18px; } .nav h1 { margin-bottom: 16px; } .nav h1::before { display: inline-block; width: 4px; height: 18px; margin: 0 8px -3px 0; } .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); } .main { padding: 24px 16px 36px; } .top { align-items: flex-start; flex-direction: column; margin-bottom: 20px; } .detail-grid, .sdr-brief, .adv-fact-grid, .intent-entry form { grid-template-columns: 1fr; } .intent-entry label { grid-column: 1 !important; } .sdr-next-action { grid-template-columns: 1fr; } .sdr-next-action > * { grid-column: 1 !important; } .research-progress-grid, .change-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } .adv-category-table { overflow-x: auto; } .intent-definitions > div { grid-template-columns: 1fr; } }
-@media (max-width: 560px) { body { font-size: 13px; } h2 { font-size: 25px; } .nav-links { grid-template-columns: 1fr; } .grid, .research-progress-grid, .research-metrics, .overview-metrics, .firm-metrics, .change-metrics { grid-template-columns: 1fr; } .overview-heading { align-items: flex-start; } .overview-funnel .panel-heading { align-items: flex-start; flex-direction: column; } .column-sync-status { margin-right: 4px; } .toolbar { align-items: stretch; } .toolbar input, .toolbar select, .toolbar button, .toolbar .button-link { width: 100%; } .filter-check { min-height: 38px; } .panel, .card { border-radius: 10px; } .pagination { align-items: flex-start; flex-direction: column; } }
+@media (max-width: 560px) { body { font-size: 13px; } h2 { font-size: 25px; } .nav-links { grid-template-columns: 1fr; } .grid, .research-progress-grid, .research-metrics, .overview-metrics, .firm-metrics, .change-metrics { grid-template-columns: 1fr; } .overview-heading, .outreach-heading { align-items: flex-start; } .overview-funnel .panel-heading { align-items: flex-start; flex-direction: column; } .column-sync-status { margin-right: 4px; } .toolbar { align-items: stretch; } .toolbar input, .toolbar select, .toolbar button, .toolbar .button-link { width: 100%; } .filter-check { min-height: 38px; } .panel, .card { border-radius: 10px; } .pagination { align-items: flex-start; flex-direction: column; } }

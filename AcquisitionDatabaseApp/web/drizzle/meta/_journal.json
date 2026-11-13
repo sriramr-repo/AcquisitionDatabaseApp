@@ -169,6 +169,13 @@
       "when": 1794529528284,
       "tag": "0023_analyst_preferences",
       "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1794536035716,
+      "tag": "0024_analyst_outreach_shortlists",
+      "breakpoints": true
     }
   ]
 }
