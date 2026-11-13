@@ -4,7 +4,7 @@ import Link from "next/link";
 import { targetData } from "../../lib/queries";
 import Pagination from "../components/Pagination";
 import SellerIntentStatus from "../components/SellerIntentStatus";
-import AdvIndicators from "../components/AdvIndicators";
+import TargetExplorerTable from "./TargetExplorerTable";
 
 const money = (value:any) => value == null ? "Unknown" : `$${(Number(value) / 1e6).toFixed(1)}M`;
 const pct = (value:any) => value == null ? "Unknown" : `${(Number(value) * 100).toFixed(1)}%`;
@@ -62,24 +62,8 @@ export default async function Targets({searchParams}:{searchParams:Promise<Targe
       <label className="filter-check"><input type="checkbox" name="iapdDisclosure" value="1" defaultChecked={p.iapdDisclosure === "1"} /> Rep disclosures</label>
       <button>Apply</button><Link className="button-link secondary" href="/targets">Reset</Link>
     </form>
-    <div className="panel table-wrap target-table"><table><thead><tr>
-      <th>Firm <small>{sortLabel("state","State")}</small></th><th>{sortLabel("priority","Priority")}</th><th>{sortLabel("score","Score")}</th><th>{sortLabel("aum","AUM")}</th>
-      <th>Disc. AUM</th><th>Ind./HNW</th><th>{sortLabel("accounts","Accts.")}</th><th>{sortLabel("employees","Empl.")}</th>
-      <th>{sortLabel("representatives","Reps")}</th>
-      <th><Definition text="Monthly confirmed uses the latest compilation baseline. Partial may be incomplete or stale. Conflict preserves disagreeing monthly and live evidence.">IAPD</Definition></th>
-      <th><Definition text="NOT_STARTED means external research has not yet been recorded for the firm.">Research</Definition></th>
-      <th><Definition text="Evidence-backed willingness or process status. UNKNOWN means no verified seller-intent evidence.">Seller intent</Definition></th>
-      <th><Definition text="Outreach tracks preparation and activity; it does not send messages.">Outreach</Definition></th>
-    </tr></thead><tbody>{d.rows.map((r:any) => <tr key={`${r.firm_id}:${r.dataset_version}`}>
-      <td><Link href={`/firms/${r.firm_id}`}>{r.name || r.firm_id}</Link><br/><small className="muted">CRD {r.firm_id} · {r.organization_state || "Unknown"}</small><AdvIndicators row={r} /></td>
-      <td><span className={`badge ${r.priority_category === "PRIORITY_A" ? "good" : ""}`}>{priority(r.priority_category)}</span></td>
-      <td>{r.acquisition_score == null ? "Unknown" : Number(r.acquisition_score).toFixed(1)}</td><td>{money(r.total_aum)}</td>
-      <td>{pct(r.discretionary_aum != null && r.total_aum != null && Number(r.total_aum) !== 0 ? Number(r.discretionary_aum) / Number(r.total_aum) : null)}</td><td>{pct(r.individual_hnw_share)}</td>
-      <td>{r.total_account_count == null ? "Unknown" : Number(r.total_account_count).toLocaleString()}</td><td>{r.employee_count == null ? "Unknown" : r.employee_count}</td>
-      <td>{r.representative_count == null ? "Unknown" : r.representative_count}{Number(r.representative_with_disclosure_count) > 0 ? <small className="flag-line">Disclosure flag</small> : null}</td>
-      <td><span className={`badge ${r.iapd_freshness === "conflict" ? "warn" : r.iapd_freshness === "monthly_confirmed" ? "good" : ""}`}>{String(r.iapd_freshness || "missing").replaceAll("_"," ")}</span>{r.iapd_snapshot_date ? <small className="flag-line">{r.iapd_snapshot_date}</small> : null}</td>
-      <td>{r.research_status || "NOT_STARTED"}</td><td><SellerIntentStatus status={r.seller_intent_status} compact /></td><td>{r.outreach_status || "NOT_RESEARCHED"}</td>
-    </tr>)}</tbody></table>
+    <TargetExplorerTable rows={d.rows} sortField={sortField} sortOrder={sortOrder} filters={filters} />
+    <div className="panel table-wrap target-table target-table-pagination">
       <Pagination path="/targets" page={d.page} pageSize={d.pageSize} total={d.total} params={paginationParams} />
     </div>
   </>;
