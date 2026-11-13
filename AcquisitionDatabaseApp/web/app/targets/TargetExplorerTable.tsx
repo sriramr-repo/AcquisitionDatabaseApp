@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useState } from "react";
 import SellerIntentStatus from "../components/SellerIntentStatus";
+import OutreachShortlistControl from "../outreach/OutreachShortlistControl";
 import TargetColumnControls, { targetColumns, type TargetColumn } from "./TargetColumnControls";
 
 type Preferences = { order: TargetColumn[]; hidden: TargetColumn[] };
@@ -46,7 +47,7 @@ export default function TargetExplorerTable({ rows, sortField, sortOrder, filter
       case "iapd": return <><span className={`badge ${row.iapd_freshness === "conflict" ? "warn" : row.iapd_freshness === "monthly_confirmed" ? "good" : ""}`}>{String(row.iapd_freshness || "missing").replaceAll("_", " ")}</span>{row.iapd_snapshot_date ? <small className="flag-line">{row.iapd_snapshot_date}</small> : null}</>;
       case "research": return row.research_status || "NOT_STARTED";
       case "sellerIntent": return <SellerIntentStatus status={row.seller_intent_status} compact />;
-      case "outreach": return row.outreach_status || "NOT_RESEARCHED";
+      case "outreach": return <div className="target-outreach-cell"><span className="badge">{row.outreach_status || "NOT_RESEARCHED"}</span><OutreachShortlistControl firmId={row.firm_id} datasetVersion={row.dataset_version} initiallyShortlisted={Boolean(row.is_shortlisted)} /></div>;
     }
   };
   const visible = preferences.order.filter(key => !preferences.hidden.includes(key));
